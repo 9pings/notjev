@@ -1,0 +1,25 @@
+{
+  "name": "notjev",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Read a decision out of the next-token distribution instead of making a model write it: one chat/completions request, max_tokens 1, logprobs on, a verdict AND a calibrated-ish probability. Server-agnostic, zero runtime dependency.",
+  "keywords": ["llm", "logprobs", "classification", "decision", "abstention", "calibration", "vllm", "llama.cpp", "ollama", "openai"],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "bin": { "notjev": "bin/notjev.js" },
+  "exports": {
+    ".": { "types": "./index.d.ts", "require": "./index.js", "default": "./index.js" },
+    "./readout": "./lib/readout.js",
+    "./metrics": "./lib/metrics.js",
+    "./client": "./lib/client.js",
+    "./server": "./lib/server.js",
+    "./replay": "./lib/replay.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["index.js", "index.d.ts", "lib/", "bin/", "README.md"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "lint": "node --check index.js && node --check lib/readout.js && node --check lib/metrics.js && node --check lib/client.js && node --check lib/server.js && node --check lib/replay.js && node --check bin/notjev.js"
+  }
+}

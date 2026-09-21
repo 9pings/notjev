@@ -1,0 +1,35 @@
+{
+ "note": "Three real states of the 2026-09-20 campaign (wiseways.me WIP/data/jev-bench/teacher.jsonl, rows 1-3). sha256 = the sha of the EXACT user turn rendered by renderTurn, recorded from the campaign jobs. If one byte of the envelope moves, these fail — and the published numbers no longer apply.",
+ "rows": [
+  {
+   "id": "6de65241650a7f88",
+   "question": "verdict",
+   "options": [
+    "MEME",
+    "AUTRE"
+   ],
+   "state": "Deux FAITS ont été rapprochés par un indice mécanique (donné plus bas). Sont-ils LA MÊME\nnouvelle, rapportée deux fois — ou deux nouvelles distinctes ?\n\nA : « Thibaut de Montbrial identifie un plan d'ensemble de conquête théorisé par des islamistes »\n    Thibaut de Montbrial affirme que la haine d'un noyau dur d'islamistes en France s'inscrit dans un plan de conquête théorisé et nourri par la propagande sur les réseaux sociaux.\nB : « Thibault de Montbrial défend la nécessité d'un choc d'autorité et d'un choc économique »\n    Thibault de Montbrial analyse la situation française comme nécessitant une reprise en main de l'autorité et un redressement économique pour répondre à la perte de repères de certains individus.\nIndice mécanique : même jour + acteur commun wpp|>thibaut-de-montbrial.\n\nMEME : c'est le même fait (une republication, une reformulation, la même annonce vue par deux\nsources). AUTRE : deux faits distincts — même proches, même liés, même dans la même affaire.\nEn cas de doute, AUTRE : une fusion à tort détruit de l'information, un doublon se re-fusionne.\n",
+   "sha256": "529f1b43e1b2626c4ba3be09d73077a1642bd9850d62ecc9df607c0bb6f4c6ad"
+  },
+  {
+   "id": "a6c701ce0af216a6",
+   "question": "verdict",
+   "options": [
+    "MEME",
+    "AUTRE"
+   ],
+   "state": "Deux FAITS ont été rapprochés par un indice mécanique (donné plus bas). Sont-ils LA MÊME\nnouvelle, rapportée deux fois — ou deux nouvelles distinctes ?\n\nA : « Thibaut de Montbrial identifie un plan d'ensemble de conquête théorisé par des islamistes »\n    Thibaut de Montbrial affirme que la haine d'un noyau dur d'islamistes en France s'inscrit dans un plan de conquête théorisé et nourri par la propagande sur les réseaux sociaux.\nB : « Thibault de Montbrial recommande de soutenir les forces de l'ordre et de changer leur état d'esprit »\n    Thibault de Montbrial préconise de soutenir politiquement les policiers et gendarmes, d'appliquer la force légitime sans retenue excessive et de ne pas les soumettre à l'opprobre public, afin de protéger efficacement les citoyens.\nIndice mécanique : même jour + acteur commun wpp|>thibaut-de-montbrial.\n\nMEME : c'est le même fait (une republication, une reformulation, la même annonce vue par deux\nsources). AUTRE : deux faits distincts — même proches, même liés, même dans la même affaire.\nEn cas de doute, AUTRE : une fusion à tort détruit de l'information, un doublon se re-fusionne.\n",
+   "sha256": "994c26f54b61cc5261fc9bdd10e8aa741ae46eb64c4b6b57f060d091c80e24d7"
+  },
+  {
+   "id": "44a229d1a044d2ac",
+   "question": "verdict",
+   "options": [
+    "MEME",
+    "AUTRE"
+   ],
+   "state": "Deux FAITS ont été rapprochés par un indice mécanique (donné plus bas). Sont-ils LA MÊME\nnouvelle, rapportée deux fois — ou deux nouvelles distinctes ?\n\nA : « Thibaut de Montbrial note l'absence de couverture médiatique sur la menace terroriste islamiste »\n    Thibaut de Montbrial souligne que les médias ont déserté le sujet du terrorisme islamiste en France alors que plusieurs attentats d'ampleur ont été déjoués récemment.\nB : « Thibault de Montbrial propose une interdiction du voile pour les mineurs »\n    Thibault de Montbrial suggère d'interdire le port du voile aux mineurs en France afin de permettre aux jeunes filles de s'émanciper plus facilement et de prendre conscience des valeurs républicaines.\nIndice mécanique : même jour + acteur commun wpp|>thibaut-de-montbrial.\n\nMEME : c'est le même fait (une republication, une reformulation, la même annonce vue par deux\nsources). AUTRE : deux faits distincts — même proches, même liés, même dans la même affaire.\nEn cas de doute, AUTRE : une fusion à tort détruit de l'information, un doublon se re-fusionne.\n",
+   "sha256": "61b94f40f06ce50436fb9b2e1e05c4119b357ae3350ed149a1331e4a983677cc"
+  }
+ ]
+}
