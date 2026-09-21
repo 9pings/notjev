@@ -1,0 +1,389 @@
+# notjev
+
+**Read the decision out of the distribution, instead of making the model write it.**
+
+A closed question — "same or other?", "which of these 12 categories?", "1 to 5?" — does not need a
+generated answer. The server already exposes the distribution of the next token. Present the options
+as `A.`, `B.`, … ask for **one** token with `logprobs: true`, keep the mass of the letter tokens,
+renormalise, and you get a verdict **and a probability** — therefore a margin, therefore an
+abstention you can tune.
+
+One HTTP request. `max_tokens: 1`. ~70 ms on a local 27B. No runtime dependency, no Python, no
+tokenizer, no model download: it works against anything that speaks OpenAI `chat/completions` with
+logprobs (vLLM, llama.cpp, Ollama, OpenAI, …).
+
+```
+                 state + question + A./B./C. menu
+                                  |
+                        one chat/completions call
+                     max_tokens 1 · logprobs · top 20
+                                  |
+   top_logprobs:  " A" -0.39   "B" -1.14   "Based" -8.33   "The" -8.39  …
+                                  |
+       keep A/B → renormalise → p1 0.68  p2 0.32  margin 0.36  coverage 0.98
+                                  |
+                  margin >= theta ? verdict : UNDECIDED
+```
+
+## Why not just ask it to answer
+
+Because a generated answer gives you a word and nothing else. This gives you:
+
+* a **probability** on the verdict (`p1`) and a **margin** (`p1 - p2`);
+* an **abstention** that is a threshold you sweep, not a "cannot tell" option in the menu
+  (an offered door gets taken: measured at 1/1000 when offered, while the margin is tunable at will);
+* a **coverage** number that tells you when the model wanted to say something else entirely;
+* a decision object small enough to **record and replay offline** — re-tune theta on last week's run
+  without touching a GPU.
+
+## Install
+
+```sh
+npm install notjev      # or: git clone … && npm link
+```
+
+Node >= 20 (native `fetch`). No dependencies.
+
+## Quickstart
+
+```js
+const { createClient } = require('notjev');
+
+// NOTJEV_BASE_URL, NOTJEV_MODEL, NOTJEV_API_KEY, NOTJEV_THETA
+const jev = createClient();
+
+(async () => {
+  const r = await jev.decide({
+    state   : 'A: "Sarah Knafo"\nB: "Sarah Knafot" (seen in an audio transcript)\n',
+    question: 'verdict',
+    options : ['SAME', 'OTHER'],
+    theta   : 0.5,
+  });
+
+  console.log(r.choice, r.p1.toFixed(3), r.margin.toFixed(3), r.band, r.coverage.toFixed(3));
+  // SAME 0.684 0.368 med 0.997
+  if (r.undecided) console.log('no verdict:', r.explain());
+})();
+```
+
+Explicit configuration, when you do not want env vars:
+
+```js
+const { createClient } = require('notjev');
+
+const jev = createClient({
+  baseUrl    : process.env.NOTJEV_BASE_URL,   // e.g. 'http://127.0.0.1:8000'
+  model      : process.env.NOTJEV_MODEL,      // e.g. 'Qwen3-27B'
+  apiKey     : process.env.NOTJEV_API_KEY,    // optional
+  theta      : 0.5,                           // margin under which nothing is decided
+  topLogprobs: 20,
+  timeoutMs  : 60000,
+  retries    : 2,
+});
+
+(async () => {
+  console.log(jev.prompt({ state: 'x\n', question: 'verdict', options: ['SAME', 'OTHER'] }));
+})();
+```
+
+`jev.prompt(q)` builds the exact string **without sending anything**. Read it before theorising
+about the model: it is the first rung of every diagnosis.
+
+## The three question forms
+
+```js
+const { createClient } = require('notjev');
+const jev = createClient();
+
+(async () => {
+  // 1. a closed list — the codes come back as `choice`, in YOUR order
+  const a = await jev.decide({
+    state   : 'The minister announced a plan on Tuesday.\n',
+    question: 'event type',
+    options : [
+      { id: 'ANNOUNCE', description: 'someone makes something public' },
+      { id: 'MEET',     description: 'two parties meet' },
+      { id: 'VOTE',     description: 'a ballot is held' },
+    ],
+    theta: 0.3,
+  });
+  console.log(a.choice, a.value, a.byOption);
+
+  // 2. a boolean — YOU provide the two options, in your language, or not at all
+  const b = await jev.noul('The minister announced a plan.\n', 'is this about policy?',
+    { yes: 'YES', no: 'NO' });
+  console.log(b.value, b.p1.toFixed(3));   // true 0.97
+
+  // 3. a scale — read on the digits, with the expectation over the whole distribution
+  const c = await jev.score('The minister announced a plan.\n', 'how concrete is it?', { min: 1, max: 5 });
+  console.log(c.value, c.expectation && c.expectation.toFixed(2));
+})();
+```
+
+N questions on one state — one request each, so each one is still one token. The server's prefix
+cache makes the shared state nearly free:
+
+```js
+const { createClient } = require('notjev');
+const jev = createClient();
+
+(async () => {
+  const rows = await jev.decideMany('The minister announced a plan on Tuesday.\n', [
+    { id: 'kind',   question: 'event type', options: ['ANNOUNCE', 'MEET', 'VOTE'] },
+    { id: 'policy', question: 'is this about policy?', noul: { yes: 'YES', no: 'NO' } },
+    { id: 'depth',  question: 'how concrete is it?', score: 5 },
+  ], { concurrency: 1 });
+
+  for (const r of rows) console.log(r.id, r.choice, r.p1.toFixed(3), r.band, r.undecided);
+})();
+```
+
+## What comes back
+
+| field | what it is |
+|---|---|
+| `choice` | the code, or **`null`** — `null` is not a fallback, it is the absence of a verdict |
+| `value` | the re-typed answer: the code, a boolean (`noul`), an integer (`score`) |
+| `expectation` | `score` only: the mean grade under the whole distribution |
+| `top` | what the model would have said without the margin — readable, never applied |
+| `p1`, `p2`, `margin` | on the distribution **renormalised over the options** |
+| `band` | `low` < 0.5 <= `med` < 0.75 <= `high` < 0.9 <= `certain` |
+| `prior` | the **middle of the band** — what stays true across engines, unlike the raw float |
+| `coverage` | the option mass **before** renormalisation. Low = the model meant something else |
+| `exactMass` / `spacedMass` | `"A"` vs `" A"`, counted apart so the matching rule is auditable |
+| `degraded` | `true` when no option letter appeared at all. Then `choice` is `null`, always |
+| `undecided` | `margin < theta`, or degraded |
+| `probabilities`, `byOption` | sums to 1 over the options |
+| `prompt`, `request`, `raw`, `readoutRaw` | the exact string, the exact body, the server response, and the distribution as a one-line JSON for your logs |
+| `ms`, `usage`, `model` | the call itself |
+
+## theta, bands, coverage — how to actually use them
+
+* **theta is not a constant, it is a curve.** Record a set of questions with a truth column, then
+  read `coverage x precision` and pick the point you can afford. `0.5` is a default, not an answer.
+* **Never write `p1` as if it were a measurement.** Between two engines serving the same weights,
+  2.3-10.4 % of verdicts differ — but 0-0.1 % among those at `p1 >= 0.9`. Store `band`/`prior`.
+* **`coverage` is your smoke alarm.** A run whose mean coverage drifts down is a run whose prompt no
+  longer fits the model: the mass went somewhere outside your menu.
+* **`degraded` is never "it hesitates".** It means the answer was not in your codomain at all.
+
+## Measure it on your own questions
+
+Record the responses while you run, replay them for free afterwards:
+
+```js
+const fs = require('fs');
+const { createClient } = require('notjev');
+const jev = createClient();
+
+const questions = [
+  { id: 'q1', options: ['SAME', 'OTHER'], gold: 'SAME',  state: 'A: "Sarah Knafo" / B: "Sarah Knafot"\n' },
+  { id: 'q2', options: ['SAME', 'OTHER'], gold: 'OTHER', state: 'A: "Paris, France" / B: "Paris, Texas"\n' },
+];
+
+(async () => {
+  const results = [];
+  for (const q of questions) {
+    const r = await jev.decide({ state: q.state, question: 'verdict', options: q.options, theta: 0 });
+    results.push({ id: q.id, options: q.options, gold: q.gold, ms: r.ms, resp: r.raw });
+  }
+  fs.writeFileSync('run.json', JSON.stringify({ model: jev.model, results }, null, 1));
+  console.log('recorded', results.length);
+})();
+```
+
+```js
+const fs = require('fs');
+const { replay, report } = require('notjev');
+
+const { rows } = replay(JSON.parse(fs.readFileSync('run.json', 'utf8')), { theta: 0, truth: 'gold' });
+const rep = report(rows, { positive: 'SAME' });
+
+console.log('accuracy', rep.accuracy.accuracy, 'null arm', rep.accuracy.nullArm.accuracy);
+console.log('ECE', rep.ece.ece);
+for (const s of rep.sweep) console.log('theta', s.theta, 'coverage', s.coverage, 'precision', s.precision);
+```
+
+`report` never gives you an accuracy alone: the **null arm** (always answer the majority class) and
+the **oracle arm** come with it. A bar the null arm already clears measures nothing.
+
+## CLI
+
+```bash
+notjev prompt --state 'A: "Sarah Knafo" / B: "Sarah Knafot"' --question verdict \
+  --option SAME --option OTHER
+
+notjev decide --state 'A: "Sarah Knafo" / B: "Sarah Knafot"' --question verdict \
+  --option 'SAME=one and the same entity' --option 'OTHER=two distinct entities' \
+  --theta 0.5 --json
+
+notjev noul --state 'The minister announced a plan.' --question 'is this about policy?' \
+  --yes YES --no NO
+```
+
+`--state` takes a file path, a literal string, or `-` for stdin. Exit codes: **0** a verdict,
+**3** UNDECIDED, **4** DEGRADED, **1** an error — so a shell can tell "it said SAME" from "it said
+nothing".
+
+Replay a recording, with no server at all:
+
+```bash
+notjev replay run.json --truth gold --theta 0 --positive SAME
+```
+
+## As a service
+
+```bash
+notjev serve --port 8787 &
+until curl -sf localhost:8787/health >/dev/null; do sleep 0.2; done
+
+curl -s localhost:8787/v1/decide -H 'content-type: application/json' -d '{
+  "state": "The minister announced a plan on Tuesday.\n",
+  "theta": 0.5,
+  "questions": [
+    { "id": "kind",   "question": "event type",          "options": ["ANNOUNCE", "MEET", "VOTE"] },
+    { "id": "policy", "question": "is this about policy?", "noul": { "yes": "YES", "no": "NO" } },
+    { "id": "depth",  "question": "how concrete is it?",   "score": 5 }
+  ]
+}'
+
+kill %1
+```
+
+One state, N questions, typed answers — the shape is deliberately close to a "system one" service,
+and it claims compatibility with none of them.
+
+## Server quickstarts
+
+**vLLM** — logprobs are on by default; a thinking model needs the template switch, which this
+library sends by default (`chat_template_kwargs: {enable_thinking: false}`).
+
+```sh
+vllm serve <model> --max-model-len 32768 --max-num-seqs 4
+export NOTJEV_BASE_URL=http://127.0.0.1:8000 NOTJEV_MODEL=<model>
+```
+
+**llama.cpp** — `llama-server` returns chat logprobs since PR #10783; check your build.
+
+```sh
+llama-server -m model.gguf --port 8080
+export NOTJEV_BASE_URL=http://127.0.0.1:8080 NOTJEV_MODEL=whatever
+```
+
+**Ollama** — logprobs on `/v1/chat/completions` landed in 0.12.11; older versions silently return
+none, which this library reports as `degraded: true` rather than as a hesitation.
+
+```sh
+export NOTJEV_BASE_URL=http://127.0.0.1:11434 NOTJEV_MODEL=qwen3:8b
+```
+
+**OpenAI** — remove the template switch, it rejects unknown body fields:
+
+```sh
+export NOTJEV_BASE_URL=https://api.openai.com NOTJEV_MODEL=gpt-4.1-mini NOTJEV_API_KEY=sk-…
+notjev decide --no-template-kwargs --state 'x' --question q --option A1 --option B1
+```
+
+(in code: `createClient({ templateKwargs: null })`; some models also want
+`extra: { max_completion_tokens: 1 }` instead of `max_tokens`.)
+
+## What is measured, and where
+
+These numbers come from the **wiseways.me** project, campaign of **2026-09-20**, 27B model served
+by vLLM (NVFP4) and by llama.cpp (GGUF), on that project's own judge questions — they are quoted
+here as provenance, not as a promise about your questions:
+
+| measurement | value |
+|---|---|
+| agreement with the generating (grammar-constrained) arm, n = 1224 | **0.947** (vLLM), 0.935 (GGUF) |
+| null arm on the same set ("always the majority class") | 0.693 |
+| raw ECE, 10 buckets | **0.090** |
+| latency | **70 ms**/question (vLLM), 290 ms (GGUF) |
+| flips when the two options are swapped | 6.5 % |
+| verdicts that differ between engines | 2.3-10.4 % overall, **0-0.1 % at p1 >= 0.9** |
+| cost of permuting the menu | 5.6 % of flips (2 options), 17.7 % (near-identical labels) |
+| space variants (`" A"` vs `"A"`) | <= 0.08 % of coverage |
+| abstention at theta = 0.5 on an entity-matching bench | precision 0.927, correct abstention 0.716 |
+| the same bench at theta = 0 | 100 % of new entities wrongly merged |
+
+The exact string this library sends is fingerprinted against that campaign
+(`test/fixtures/campaign-turns.json`): if one byte of the envelope moves, `npm test` fails and the
+numbers above stop applying. That test is the point of the fixture.
+
+## Limits
+
+* **26 options maximum.** One letter, one token. Beyond that, split the question.
+* **One letter must be one token** on your tokenizer. It is on every tokenizer used here, but check
+  before you trust a new model family.
+* **The probabilities are not calibrated.** They are *ordered*, which is enough for a margin and for
+  bands; they are not a frequency until you measure the ECE on your own questions.
+* **`top_logprobs` is capped** (20 on most servers). With 26 options and a flat model, the tail can
+  fall outside the top-k: `coverage` tells you when that happens.
+* **No native boolean.** `noul` is two options that you name; the library has no idea what "yes"
+  means in any language, and that is deliberate.
+* **The prompt weighs more than the engine** (0.833 vs 0.733 on layout alone, same model). Changing
+  `instruction`, the option order, or adding descriptions is a new experiment, not a setting.
+* **A thinking model must have thinking off**, or the first token is `<think>` and coverage is 0.
+
+## What this is not
+
+* not a classifier — there is no training, no head, no threshold learned on your data;
+* not a calibrated probability service — it gives you the tools to measure your own calibration;
+* not a guardrail or a judge with an opinion — the codomain, the wording and the order are yours;
+* not a way to make a small model right; it is a way to know **how sure** a model is, cheaply, and
+  to **not act** when it is not sure.
+
+## Decisions taken in this implementation
+
+Design calls that the source material did not settle, resolved here in favour of long-term
+flexibility, and written down so they can be argued with:
+
+1. **`lib/readout.js` is a faithful port** of the module that runs in production at wiseways.me
+   (same constants, same layout, same refusals, same band/snap arithmetic — 8018 differential
+   comparisons, 0 divergence). Only the parts tied to that host were dropped (its calibration store
+   and the key helper), and the measurement helpers moved to `lib/metrics.js`.
+2. **A degraded readout never decides.** `readout.decide` only knows the margin, and an empty
+   distribution has margin 0 — at `theta: 0` it would return the first option. The client layer
+   therefore forces `undecided` when `degraded`. `top` stays readable; the verdict does not exist.
+3. **Options may carry a description** (`{ id, description }` renders `id: description`) and the
+   returned `choice` is always the `id`. A description changes the prompt, hence the measurement —
+   the README says so rather than the library forbidding it.
+4. **`chat_template_kwargs` is sent by default** (that is the measured body) and removed on request
+   with `templateKwargs: null`, instead of being opt-in. Being faithful to the measured call is the
+   default; adapting to a stricter server is one word.
+5. **Metric rows are `{ p1, margin, choice, expected }`**, with `correct` derived when absent. The
+   source harness used its own field names; the library keeps one language-neutral shape.
+6. **`replay` and `notjev replay` ship with the library**, not as an example. Re-reading a recorded
+   run offline is the main reason the reading is pure; leaving it out would have made the purity
+   decorative.
+7. **`prompt` / `body` are public.** Reading the exact string costs nothing and is the first rung of
+   every diagnosis.
+8. **Exit codes 3 and 4** for UNDECIDED and DEGRADED, so a shell cannot mistake an abstention for a
+   verdict.
+9. **No license field yet** — the package is `private: true` and the owner picks the licence before
+   any publication.
+
+## En français, en bref
+
+La lecture de décision : on présente les options `A.`, `B.`, …, on demande **un** token avec
+`logprobs`, on garde la masse des lettres, on renormalise. On obtient un verdict **et** une
+probabilité, donc une marge (`p1 - p2`), donc une abstention réglable (`theta`) — et un `coverage`
+qui dit quand le modèle voulait répondre autre chose. `UNDECIDED` n'écrit rien : la question reste
+pendante et se re-pose quand l'état change. Le point `p1` n'est pas portable d'un moteur à l'autre,
+la **bande** l'est : on range `p1` dans `low/med/high/certain` et on écrit le milieu de bande
+(`prior`). Aucune liste de mots d'une langue ne vit dans la bibliothèque : les options, leurs
+descriptions et la question viennent de l'appelant, toujours — `noul()` prend donc ses deux options
+en argument. Les chiffres cités viennent de la campagne du 20/09/2026 de wiseways.me (27B, vLLM),
+et l'empreinte sha256 de la chaîne envoyée est testée contre cette campagne : si un octet de
+l'enveloppe bouge, `npm test` tombe et les chiffres ne s'appliquent plus.
+
+## Tests
+
+```sh
+npm test      # node --test: the pure reading, the client against a real socket, the CLI, the README
+npm run lint  # node --check on every file
+```
+
+Every negative control in the suite is **named**: it states which sabotage it detects (a trimmed
+state, a permuted menu, a token outside the codomain, a margin under theta, a retried 400, a
+recording without logprobs). A green suite that cannot fail proves nothing.
