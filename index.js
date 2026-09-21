@@ -13,6 +13,7 @@ const { createClient, readResponse, formOf, optionOf } = require('./lib/client')
 const { createServer } = require('./lib/server');
 const { replay, report } = require('./lib/replay');
 const logits = require('./lib/logits');
+const tokenizer = require('./lib/tokenizer');
 
 module.exports = {
 	// the client (does I/O)
@@ -28,6 +29,7 @@ module.exports = {
 	readout,
 	metrics,
 	logits,
+	tokenizer,
 	// the pieces most callers reach for directly
 	renderTurn  : readout.renderTurn,
 	chatParams  : readout.chatParams,

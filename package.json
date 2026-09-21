@@ -16,6 +16,7 @@
     "./server": "./lib/server.js",
     "./replay": "./lib/replay.js",
     "./logits": "./lib/logits.js",
+    "./tokenizer": "./lib/tokenizer.js",
     "./errors": "./lib/errors.js",
     "./package.json": "./package.json"
   },
