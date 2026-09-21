@@ -375,8 +375,8 @@ flexibility, and written down so they can be argued with:
    every diagnosis.
 8. **Exit codes 3 and 4** for UNDECIDED and DEGRADED, so a shell cannot mistake an abstention for a
    verdict.
-9. **No license field yet** — the package is `private: true` and the owner picks the licence before
-   any publication.
+9. **Apache-2.0, revisable** — the owner settled the licence on 21/09; the package stays
+   `private: true` until publication.
 
 ## En français, en bref
 
