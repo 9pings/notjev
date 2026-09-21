@@ -18,6 +18,7 @@ const packed = require('./lib/packed');
 const chatml = require('./lib/chatml');
 const calibration = require('./lib/calibration');
 const harness = require('./lib/harness');
+const set = require('./lib/set');
 const backends = {
 	'llama-server'  : require('./lib/backends/llama-server'),
 	'node-llama-cpp': require('./lib/backends/node-llama-cpp'),
@@ -42,6 +43,7 @@ module.exports = {
 	chatml,
 	calibration,
 	harness,
+	set,
 	backends,
 	// the pieces most callers reach for directly
 	renderTurn  : readout.renderTurn,
