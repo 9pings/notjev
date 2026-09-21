@@ -1,0 +1,2395 @@
+{
+ "arm": "readout PACKED (prompt_logprobs)",
+ "backend": "vLLM Qwen3.8-27B-NVFP4",
+ "url": "http://172.22.0.8:8000",
+ "wallSec": 7.725,
+ "secPerObject": 0.32187499999999997,
+ "secPerQuestion": 0.08583333333333333,
+ "promptTokens": 16239,
+ "nQuestions": 90,
+ "positionsManquantes": 0,
+ "results": [
+  {
+   "id": "Agfa Agfatronic 160 A",
+   "nQuestions": 4,
+   "nTokens": 803,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "portée moyenne",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.003536601274823019,
+      0.9806134514456589,
+      0.01584994727951799
+     ],
+     "rawProbs": [
+      0.0035357637989980816,
+      0.9803812397838467,
+      0.015846193973266698
+     ],
+     "coverage": 0.9997631975561115,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.980369260430391
+     }
+    },
+    {
+     "question": 1,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage lent",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.0021639372781225834,
+      0.00855853795856274,
+      0.9892775247633147
+     ],
+     "rawProbs": [
+      0.002160688954150558,
+      0.008545690588032478,
+      0.9877925030248554
+     ],
+     "coverage": 0.9984988825670384,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9877476593562611
+     }
+    },
+    {
+     "question": 2,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.025954036144541087,
+      0.9740459638554589
+     ],
+     "rawProbs": [
+      0.022055810831087524,
+      0.827746921516826
+     ],
+     "coverage": 0.8498027323479136,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.8276381954970885
+     }
+    },
+    {
+     "question": 3,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0006263169212014669,
+      0.9993736830787986
+     ],
+     "rawProbs": [
+      0.0006153389832353181,
+      0.9818568925747279
+     ],
+     "coverage": 0.9824722315579631,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9818298564666655
+     }
+    }
+   ]
+  },
+  {
+   "id": "Bauer E 250",
+   "nQuestions": 4,
+   "nTokens": 791,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "portée moyenne",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.005100755151738252,
+      0.9720392407839968,
+      0.02286000406426494
+     ],
+     "rawProbs": [
+      0.005099675945326947,
+      0.9718335788869858,
+      0.0228551673955336
+     ],
+     "coverage": 0.9997884222278464,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9718263763541033
+     }
+    },
+    {
+     "question": 1,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage lent",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.0018996693604398957,
+      0.014036763473710098,
+      0.9840635671658501
+     ],
+     "rawProbs": [
+      0.001893491337030546,
+      0.013991113712157907,
+      0.9808632377396646
+     ],
+     "coverage": 0.996747842788853,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9808526607836661
+     }
+    },
+    {
+     "question": 2,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.10668250220443738,
+      0.8933174977955626
+     ],
+     "rawProbs": [
+      0.0946673724750424,
+      0.7927075064308704
+     ],
+     "coverage": 0.8873748789059128,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.7926402760714506
+     }
+    },
+    {
+     "question": 3,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0012447560412653083,
+      0.9987552439587347
+     ],
+     "rawProbs": [
+      0.001130045179266601,
+      0.9067146583643271
+     ],
+     "coverage": 0.9078447035435937,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.906650905577848
+     }
+    }
+   ]
+  },
+  {
+   "id": "Braun F 650",
+   "nQuestions": 3,
+   "nTokens": 599,
+   "rows": [
+    {
+     "question": 0,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage lent",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.013817055600357857,
+      0.13114237437718684,
+      0.8550405700224553
+     ],
+     "rawProbs": [
+      0.013770714405696109,
+      0.13070253433635645,
+      0.8521728388179809
+     ],
+     "coverage": 0.9966460875600335,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.851963741664143
+     }
+    },
+    {
+     "question": 1,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "raccordable au secteur",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.001324978723524063,
+      0.9986750212764759
+     ],
+     "rawProbs": [
+      0.00131828709173584,
+      0.9936313436688057
+     ],
+     "coverage": 0.9949496307605415,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9935983409972271
+     }
+    },
+    {
+     "question": 2,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0005883821020532662,
+      0.9994116178979467
+     ],
+     "rawProbs": [
+      0.0005648558398564827,
+      0.959450477538429
+     ],
+     "coverage": 0.9600153333782855,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9594069205330835
+     }
+    }
+   ]
+  },
+  {
+   "id": "Canon FT QL",
+   "nQuestions": 5,
+   "nTokens": 784,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond standard",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.9859368350753023,
+      0.014063164924697714
+     ],
+     "rawProbs": [
+      0.9853206074154625,
+      0.014054375202168658
+     ],
+     "coverage": 0.9993749826176311,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9852878807728351
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher courant",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.9324444672345202,
+      0.06755553276547972
+     ],
+     "rawProbs": [
+      0.9309704171608861,
+      0.06744873794654248
+     ],
+     "coverage": 0.9984191551074286,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9307688209798357
+     }
+    },
+    {
+     "question": 2,
+     "division": "type de fixation native",
+     "champ": "monture des objectifs",
+     "oracle": "à baïonnette",
+     "poles": [
+      "à baïonnette",
+      "à vis"
+     ],
+     "probabilities": [
+      0.9989014129988336,
+      0.0010985870011663403
+     ],
+     "rawProbs": [
+      0.8874807882013719,
+      0.0009760471303928604
+     ],
+     "coverage": 0.8884568353317648,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8873642160510068
+     }
+    },
+    {
+     "question": 3,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "manuelle seulement",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.9992445943222787,
+      0.0007554056777212007
+     ],
+     "rawProbs": [
+      0.4596173535666938,
+      0.0003474600317442338
+     ],
+     "coverage": 0.45996481359843805,
+     "degraded": false,
+     "topToken": {
+      "text": "_",
+      "p": 0.5208146931967677
+     }
+    },
+    {
+     "question": 4,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.998830546029508,
+      0.0011694539704919188
+     ],
+     "rawProbs": [
+      0.8504755494458756,
+      0.0009957564994977563
+     ],
+     "coverage": 0.8514713059453733,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8504344496862712
+     }
+    }
+   ]
+  },
+  {
+   "id": "Fujifilm Auto-Strobo AZ",
+   "nQuestions": 3,
+   "nTokens": 651,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "faible portée",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.9657699330719344,
+      0.029162401430928367,
+      0.005067665497137326
+     ],
+     "rawProbs": [
+      0.964900513775015,
+      0.029136148434556954,
+      0.005063103410430475
+     ],
+     "coverage": 0.9990997656200024,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9648567093684136
+     }
+    },
+    {
+     "question": 1,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage moyen",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.0013239560795789533,
+      0.9980506513511298,
+      0.0006253925692912188
+     ],
+     "rawProbs": [
+      0.0013200187866821865,
+      0.9950825636624294,
+      0.0006235327238184414
+     ],
+     "coverage": 0.99702611517293,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9949039184608715
+     }
+    },
+    {
+     "question": 2,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0006263341248810552,
+      0.9993736658751189
+     ],
+     "rawProbs": [
+      0.0006173280338933409,
+      0.9850036199075515
+     ],
+     "coverage": 0.9856209479414448,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9850036199075515
+     }
+    }
+   ]
+  },
+  {
+   "id": "Fujifilm Fujica AX-3",
+   "nQuestions": 5,
+   "nTokens": 805,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond étendu",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.017985777299623817,
+      0.9820142227003762
+     ],
+     "rawProbs": [
+      0.01797183428287919,
+      0.9812529411320305
+     ],
+     "coverage": 0.9992247754149097,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9812290964539944
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.03732384365060586,
+      0.9626761563493941
+     ],
+     "rawProbs": [
+      0.03728690655188079,
+      0.961723455321059
+     ],
+     "coverage": 0.9990103618729398,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9616418905441522
+     }
+    },
+    {
+     "question": 2,
+     "division": "type de fixation native",
+     "champ": "monture des objectifs",
+     "oracle": "à baïonnette",
+     "poles": [
+      "à baïonnette",
+      "à vis"
+     ],
+     "probabilities": [
+      0.9953906235695259,
+      0.00460937643047406
+     ],
+     "rawProbs": [
+      0.89518643897969,
+      0.00414535879182388
+     ],
+     "coverage": 0.8993317977715138,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8951482615268787
+     }
+    },
+    {
+     "question": 3,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "motorisable",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.02297569032240576,
+      0.9770243096775942
+     ],
+     "rawProbs": [
+      0.017336351132292625,
+      0.7372155639144695
+     ],
+     "coverage": 0.7545519150467621,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.7371603861090041
+     }
+    },
+    {
+     "question": 4,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "avec stigmomètre",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.0027994765456354734,
+      0.9972005234543645
+     ],
+     "rawProbs": [
+      0.0023657708641218055,
+      0.8427103801792447
+     ],
+     "coverage": 0.8450761510433665,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.8422727565729395
+     }
+    }
+   ]
+  },
+  {
+   "id": "Gomz Almaz 103",
+   "nQuestions": 3,
+   "nTokens": 483,
+   "rows": [
+    {
+     "question": 0,
+     "division": "type de fixation native",
+     "champ": "monture des objectifs",
+     "oracle": "à baïonnette",
+     "poles": [
+      "à baïonnette",
+      "à vis"
+     ],
+     "probabilities": [
+      0.9993333366168009,
+      0.0006666633831991483
+     ],
+     "rawProbs": [
+      0.9980404667964459,
+      0.000665800899244203
+     ],
+     "coverage": 0.99870626769569,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9979822897622299
+     }
+    },
+    {
+     "question": 1,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "motorisable",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.7310328272729962,
+      0.2689671727270038
+     ],
+     "rawProbs": [
+      0.7232964363840052,
+      0.2661207407927703
+     ],
+     "coverage": 0.9894171771767755,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.7230382407880966
+     }
+    },
+    {
+     "question": 2,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.9914230114625824,
+      0.008576988537417557
+     ],
+     "rawProbs": [
+      0.9578853886014971,
+      0.008286848200219405
+     ],
+     "coverage": 0.9661722368017165,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9578295522309097
+     }
+    }
+   ]
+  },
+  {
+   "id": "Hanimex CBX 350",
+   "nQuestions": 3,
+   "nTokens": 596,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "grande portée",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.0013178936293471082,
+      0.005212370416716067,
+      0.9934697359539368
+     ],
+     "rawProbs": [
+      0.0013172666270710343,
+      0.005209890574608749,
+      0.9929970818855184
+     ],
+     "coverage": 0.9995242390871981,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9928296102274188
+     }
+    },
+    {
+     "question": 1,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.9796702610868989,
+      0.020329738913101122
+     ],
+     "rawProbs": [
+      0.9721836923113247,
+      0.020174380529155142
+     ],
+     "coverage": 0.9923580728404798,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9720559942845406
+     }
+    },
+    {
+     "question": 2,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0021824643760836007,
+      0.9978175356239164
+     ],
+     "rawProbs": [
+      0.002112721994429683,
+      0.9659314841707727
+     ],
+     "coverage": 0.9680442061652024,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9658195140605134
+     }
+    }
+   ]
+  },
+  {
+   "id": "Kako Elite III",
+   "nQuestions": 3,
+   "nTokens": 601,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "grande portée",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.003145519651607913,
+      0.008550408910026615,
+      0.9883040714383655
+     ],
+     "rawProbs": [
+      0.0031444405404815958,
+      0.00854747558186106,
+      0.987965020967284
+     ],
+     "coverage": 0.9996569370896267,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9879536803439473
+     }
+    },
+    {
+     "question": 1,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.9046521733320699,
+      0.09534782666793007
+     ],
+     "rawProbs": [
+      0.8950692136861942,
+      0.09433780933506358
+     ],
+     "coverage": 0.9894070230212577,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8950522743697705
+     }
+    },
+    {
+     "question": 2,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0013249541815151796,
+      0.9986750458184848
+     ],
+     "rawProbs": [
+      0.0013066535282874007,
+      0.9848810550860205
+     ],
+     "coverage": 0.9861877086143079,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.984830390606392
+     }
+    }
+   ]
+  },
+  {
+   "id": "Kako Kakonet Special",
+   "nQuestions": 3,
+   "nTokens": 580,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "portée moyenne",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.005126017062360714,
+      0.9769824253841993,
+      0.017891557553439952
+     ],
+     "rawProbs": [
+      0.005122111520884255,
+      0.976238056932497,
+      0.01787792587425252
+     ],
+     "coverage": 0.9992380943276338,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9761015573490973
+     }
+    },
+    {
+     "question": 1,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.98409493321649,
+      0.015905066783510002
+     ],
+     "rawProbs": [
+      0.9790675542146546,
+      0.01582381364819626
+     ],
+     "coverage": 0.9948913678628509,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9789845184613905
+     }
+    },
+    {
+     "question": 2,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0019263669146823105,
+      0.9980736330853177
+     ],
+     "rawProbs": [
+      0.0018813020384541804,
+      0.9747249841863267
+     ],
+     "coverage": 0.9766062862247809,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9745387100593376
+     }
+    }
+   ]
+  },
+  {
+   "id": "King Regula Variant FP",
+   "nQuestions": 4,
+   "nTokens": 786,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "portée moyenne",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.0014800428179370204,
+      0.9844777018989769,
+      0.014042255283086126
+     ],
+     "rawProbs": [
+      0.0014774439434003222,
+      0.9827490127013369,
+      0.014017597848010094
+     ],
+     "coverage": 0.9982440544927472,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9827096401538802
+     }
+    },
+    {
+     "question": 1,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage lent",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.00048630199767250095,
+      0.003171087364677574,
+      0.99634261063765
+     ],
+     "rawProbs": [
+      0.00048512614489578656,
+      0.0031634198414084817,
+      0.9939335063549525
+     ],
+     "coverage": 0.9975820523412567,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9939169062511304
+     }
+    },
+    {
+     "question": 2,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.9940891147091956,
+      0.0059108852908043305
+     ],
+     "rawProbs": [
+      0.9332563666768673,
+      0.005549171848595798
+     ],
+     "coverage": 0.9388055385254631,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9332272472816063
+     }
+    },
+    {
+     "question": 3,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0010321990199206664,
+      0.9989678009800793
+     ],
+     "rawProbs": [
+      0.0009974977375355183,
+      0.9653837119754759
+     ],
+     "coverage": 0.9663812097130114,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9653535901681959
+     }
+    }
+   ]
+  },
+  {
+   "id": "Konica Autoreflex T3",
+   "nQuestions": 4,
+   "nTokens": 657,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond étendu",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.0675583580245708,
+      0.9324416419754292
+     ],
+     "rawProbs": [
+      0.0675001809200122,
+      0.9316386805582753
+     ],
+     "coverage": 0.9991388614782875,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9314100848114962
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.05340165209126963,
+      0.9465983479087303
+     ],
+     "rawProbs": [
+      0.053320971084945254,
+      0.9451681953890342
+     ],
+     "coverage": 0.9984891664739795,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9451368024024842
+     }
+    },
+    {
+     "question": 2,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "manuelle seulement",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.993308778922389,
+      0.006691221077610954
+     ],
+     "rawProbs": [
+      0.8821940586514034,
+      0.005942719529968682
+     ],
+     "coverage": 0.8881367781813722,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8819775951083476
+     }
+    },
+    {
+     "question": 3,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "avec stigmomètre",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.020330949241371257,
+      0.9796690507586288
+     ],
+     "rawProbs": [
+      0.01651449863640596,
+      0.7957691995000669
+     ],
+     "coverage": 0.8122836981364728,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.795713247511315
+     }
+    }
+   ]
+  },
+  {
+   "id": "Mamiya ZE-2 quartz",
+   "nQuestions": 3,
+   "nTokens": 490,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond étendu",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.04209018957103092,
+      0.957909810428969
+     ],
+     "rawProbs": [
+      0.0420571582860032,
+      0.9571580677473228
+     ],
+     "coverage": 0.999215226033326,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9571056539850329
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.06008476804594664,
+      0.9399152319540534
+     ],
+     "rawProbs": [
+      0.05993474443506092,
+      0.9375683896242901
+     ],
+     "coverage": 0.9975031340593511,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9375372490485002
+     }
+    },
+    {
+     "question": 2,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "manuelle seulement",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.9820146438633701,
+      0.017985356136629927
+     ],
+     "rawProbs": [
+      0.9571538736466677,
+      0.01753003725826855
+     ],
+     "coverage": 0.9746839109049362,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9571076185755696
+     }
+    }
+   ]
+  },
+  {
+   "id": "Metz Mecablitz 185",
+   "nQuestions": 4,
+   "nTokens": 793,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "portée moyenne",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.003099872082184622,
+      0.9739949992030443,
+      0.022905128714771135
+     ],
+     "rawProbs": [
+      0.003098822985763295,
+      0.973665367966347,
+      0.022897376882460765
+     ],
+     "coverage": 0.9996615678345709,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9736211656515128
+     }
+    },
+    {
+     "question": 1,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage moyen",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.0004040968951200091,
+      0.9986852566943222,
+      0.000910646410557788
+     ],
+     "rawProbs": [
+      0.00040358937686112026,
+      0.9974309758305582,
+      0.0009095027005062361
+     ],
+     "coverage": 0.9987440679079256,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9973910150517209
+     }
+    },
+    {
+     "question": 2,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.004608929809744146,
+      0.9953910701902559
+     ],
+     "rawProbs": [
+      0.00398082158858458,
+      0.8597384696378457
+     ],
+     "coverage": 0.8637192912264303,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.8596182592419994
+     }
+    },
+    {
+     "question": 3,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.001032204232537422,
+      0.9989677957674626
+     ],
+     "rawProbs": [
+      0.001001270050420636,
+      0.9690296781460019
+     ],
+     "coverage": 0.9700309481964225,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9690046118288093
+     }
+    }
+   ]
+  },
+  {
+   "id": "Minolta Autocord CdS I",
+   "nQuestions": 4,
+   "nTokens": 727,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond étendu",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.015911567285727714,
+      0.9840884327142723
+     ],
+     "rawProbs": [
+      0.015881027294160334,
+      0.9821996148563603
+     ],
+     "coverage": 0.9980806421505206,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9819089260163266
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.5926665999540698,
+      0.40733340004593027
+     ],
+     "rawProbs": [
+      0.5908743256010303,
+      0.40610158909843413
+     ],
+     "coverage": 0.9969759146994643,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.5907463752358368
+     }
+    },
+    {
+     "question": 2,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "manuelle seulement",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.9953905897731207,
+      0.004609410226879286
+     ],
+     "rawProbs": [
+      0.9426851888487208,
+      0.004365344413389854
+     ],
+     "coverage": 0.9470505332621106,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9426518590328268
+     }
+    },
+    {
+     "question": 3,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.9840936115537341,
+      0.01590638844626583
+     ],
+     "rawProbs": [
+      0.8014785613236346,
+      0.01295469168592597
+     ],
+     "coverage": 0.8144332530095606,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8014785613236346
+     }
+    }
+   ]
+  },
+  {
+   "id": "Minolta SRT 303",
+   "nQuestions": 4,
+   "nTokens": 651,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond étendu",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.0124312449312337,
+      0.9875687550687663
+     ],
+     "rawProbs": [
+      0.012416765814615361,
+      0.9864184983364463
+     ],
+     "coverage": 0.9988352641510617,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9863857352508215
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.5621726058485427,
+      0.4378273941514574
+     ],
+     "rawProbs": [
+      0.5601860250282709,
+      0.4362802189693831
+     ],
+     "coverage": 0.9964662439976539,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.5600485724988749
+     }
+    },
+    {
+     "question": 2,
+     "division": "type de fixation native",
+     "champ": "monture des objectifs",
+     "oracle": "à baïonnette",
+     "poles": [
+      "à baïonnette",
+      "à vis"
+     ],
+     "probabilities": [
+      0.9984988743809853,
+      0.0015011256190147573
+     ],
+     "rawProbs": [
+      0.9411214015481577,
+      0.0014148653370719489
+     ],
+     "coverage": 0.9425362668852296,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9410859810706261
+     }
+    },
+    {
+     "question": 3,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.9964065710979697,
+      0.003593428902030395
+     ],
+     "rawProbs": [
+      0.7622750805864394,
+      0.0027490598570204887
+     ],
+     "coverage": 0.7650241404434599,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.762238243145718
+     }
+    }
+   ]
+  },
+  {
+   "id": "Nikon EM",
+   "nQuestions": 4,
+   "nTokens": 665,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond standard",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.9840936738941399,
+      0.01590632610585999
+     ],
+     "rawProbs": [
+      0.9838201011272935,
+      0.01590190423245649
+     ],
+     "coverage": 0.99972200535975,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9838159466187353
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher courant",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.7981888729942999,
+      0.20181112700570017
+     ],
+     "rawProbs": [
+      0.7971306779242735,
+      0.20154357687201718
+     ],
+     "coverage": 0.9986742547962907,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.7971203095406691
+     }
+    },
+    {
+     "question": 2,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "manuelle seulement",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.9940889304870477,
+      0.005911069512952324
+     ],
+     "rawProbs": [
+      0.9574247370837565,
+      0.005693056225411742
+     ],
+     "coverage": 0.9631177933091682,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9574247370837565
+     }
+    },
+    {
+     "question": 3,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.9902915232319998,
+      0.009708476768000213
+     ],
+     "rawProbs": [
+      0.8381325402910205,
+      0.008216762544188806
+     ],
+     "coverage": 0.8463493028352093,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8381325402910205
+     }
+    }
+   ]
+  },
+  {
+   "id": "Olympus OM-1",
+   "nQuestions": 4,
+   "nTokens": 640,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond standard",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.9820137898405122,
+      0.017986210159487682
+     ],
+     "rawProbs": [
+      0.9817296597648554,
+      0.01798100613556636
+     ],
+     "coverage": 0.9997106659004218,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9817296597648554
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher courant",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.9241454247172686,
+      0.07585457528273142
+     ],
+     "rawProbs": [
+      0.9228344557456223,
+      0.07574696992983634
+     ],
+     "coverage": 0.9985814256754586,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9227869830859223
+     }
+    },
+    {
+     "question": 2,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "manuelle seulement",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.9859363710455459,
+      0.014063628954454134
+     ],
+     "rawProbs": [
+      0.9670928641416955,
+      0.013794840727263146
+     ],
+     "coverage": 0.9808877048689586,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9670928641416955
+     }
+    },
+    {
+     "question": 3,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.9956690649156583,
+      0.00433093508434169
+     ],
+     "rawProbs": [
+      0.8067327502802742,
+      0.0035091048773040535
+     ],
+     "coverage": 0.8102418551575783,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8066267844948252
+     }
+    }
+   ]
+  },
+  {
+   "id": "Polaroid Combiflash 5000",
+   "nQuestions": 4,
+   "nTokens": 792,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "faible portée",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.7361205347336326,
+      0.16425423546760604,
+      0.09962522979876133
+     ],
+     "rawProbs": [
+      0.7356425985166255,
+      0.16414759118284203,
+      0.09956054677036882
+     ],
+     "coverage": 0.9993507364698364,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.7353959006899357
+     }
+    },
+    {
+     "question": 1,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage lent",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.008441907514285077,
+      0.015771559586579796,
+      0.9757865328991351
+     ],
+     "rawProbs": [
+      0.008429131519431204,
+      0.015747690885841874,
+      0.9743097761706704
+     ],
+     "coverage": 0.9984865985759435,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9742753282202996
+     }
+    },
+    {
+     "question": 2,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.9959300987531722,
+      0.0040699012468277925
+     ],
+     "rawProbs": [
+      0.877822518485365,
+      0.003587250718649616
+     ],
+     "coverage": 0.8814097692040146,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8777713491020239
+     }
+    },
+    {
+     "question": 3,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0019267024744677465,
+      0.9980732975255322
+     ],
+     "rawProbs": [
+      0.0018865563522668517,
+      0.9772767432578687
+     ],
+     "coverage": 0.9791632996101356,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9772604213395425
+     }
+    }
+   ]
+  },
+  {
+   "id": "Sunpak 7 R",
+   "nQuestions": 3,
+   "nTokens": 576,
+   "rows": [
+    {
+     "question": 0,
+     "division": "durée de recharge",
+     "champ": "temps de recyclage (s)",
+     "oracle": "recyclage lent",
+     "poles": [
+      "recyclage rapide",
+      "recyclage moyen",
+      "recyclage lent"
+     ],
+     "probabilities": [
+      0.0009010171031991647,
+      0.010976635418214363,
+      0.9881223474785864
+     ],
+     "rawProbs": [
+      0.000900577746483354,
+      0.010971282957677405,
+      0.9876405162371308
+     ],
+     "coverage": 0.9995123769412916,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9876033449542383
+     }
+    },
+    {
+     "question": 1,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.9902917582210221,
+      0.009708241778977958
+     ],
+     "rawProbs": [
+      0.9848627639970805,
+      0.009655019091719223
+     ],
+     "coverage": 0.9945177830887997,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9848388315860793
+     }
+    },
+    {
+     "question": 2,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0024723710536271883,
+      0.9975276289463728
+     ],
+     "rawProbs": [
+      0.0023991541850446447,
+      0.9679868166120459
+     ],
+     "coverage": 0.9703859707970905,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9678877917396913
+     }
+    }
+   ]
+  },
+  {
+   "id": "Sunpak auto 4205 G",
+   "nQuestions": 3,
+   "nTokens": 676,
+   "rows": [
+    {
+     "question": 0,
+     "division": "portée nominale",
+     "champ": "nombre-guide pour 100 ISO",
+     "oracle": "grande portée",
+     "poles": [
+      "faible portée",
+      "portée moyenne",
+      "grande portée"
+     ],
+     "probabilities": [
+      0.0002603573144400991,
+      0.003171799898359071,
+      0.9965678427872008
+     ],
+     "rawProbs": [
+      0.000260333340710052,
+      0.003171507838676822,
+      0.9964760787110197
+     ],
+     "coverage": 0.9999079198904066,
+     "degraded": false,
+     "topToken": {
+      "text": "C",
+      "p": 0.9964583628048532
+     }
+    },
+    {
+     "question": 1,
+     "division": "autonomie d'alimentation",
+     "champ": "alimentation",
+     "oracle": "autonome seulement",
+     "poles": [
+      "autonome seulement",
+      "raccordable au secteur"
+     ],
+     "probabilities": [
+      0.0020504906118182214,
+      0.9979495093881817
+     ],
+     "rawProbs": [
+      0.0020324932244111843,
+      0.98919039396985
+     ],
+     "coverage": 0.9912228871942612,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9890683332642585
+     }
+    },
+    {
+     "question": 2,
+     "division": "régulation de l'éclair",
+     "champ": "type de flash",
+     "oracle": "sans thyristor attesté",
+     "poles": [
+      "à thyristor",
+      "sans thyristor attesté"
+     ],
+     "probabilities": [
+      0.0006263243770029432,
+      0.9993736756229971
+     ],
+     "rawProbs": [
+      0.0006093828866452184,
+      0.9723415496017366
+     ],
+     "coverage": 0.9729509324883818,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9723262939996756
+     }
+    }
+   ]
+  },
+  {
+   "id": "Topcon Automatic R-3",
+   "nQuestions": 5,
+   "nTokens": 789,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond étendu",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.017985246472640135,
+      0.9820147535273599
+     ],
+     "rawProbs": [
+      0.017961519399493236,
+      0.9807192285578398
+     ],
+     "coverage": 0.998680747957333,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9806655245873381
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.5926689173251883,
+      0.4073310826748116
+     ],
+     "rawProbs": [
+      0.5918649784941783,
+      0.40677854943936276
+     ],
+     "coverage": 0.998643527933541,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.5917712056559433
+     }
+    },
+    {
+     "question": 2,
+     "division": "type de fixation native",
+     "champ": "monture des objectifs",
+     "oracle": "à baïonnette",
+     "poles": [
+      "à baïonnette",
+      "à vis"
+     ],
+     "probabilities": [
+      0.9964065702309288,
+      0.0035934297690711483
+     ],
+     "rawProbs": [
+      0.9630347901074379,
+      0.0034730781458227624
+     ],
+     "coverage": 0.9665078682532606,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9629882508336622
+     }
+    },
+    {
+     "question": 3,
+     "division": "motorisation",
+     "champ": "avance du film",
+     "oracle": "manuelle seulement",
+     "poles": [
+      "manuelle seulement",
+      "motorisable"
+     ],
+     "probabilities": [
+      0.9971990724501967,
+      0.0028009275498032987
+     ],
+     "rawProbs": [
+      0.7495969173043521,
+      0.0021054639087926385
+     ],
+     "coverage": 0.7517023812131447,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.7495969173043521
+     }
+    },
+    {
+     "question": 4,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.9964063967382855,
+      0.003593603261714484
+     ],
+     "rawProbs": [
+      0.9500989558495708,
+      0.003426592520751683
+     ],
+     "coverage": 0.9535255483703226,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9500989558495708
+     }
+    }
+   ]
+  },
+  {
+   "id": "Voigtländer VSL-1",
+   "nQuestions": 4,
+   "nTokens": 649,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond standard",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.9859368924160445,
+      0.014063107583955377
+     ],
+     "rawProbs": [
+      0.9857109659581044,
+      0.01405988503684459
+     ],
+     "coverage": 0.999770850994949,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9856738673106615
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.07587695359410022,
+      0.9241230464058998
+     ],
+     "rawProbs": [
+      0.07568610858583026,
+      0.921798700710931
+     ],
+     "coverage": 0.9974848092967612,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9213489946255752
+     }
+    },
+    {
+     "question": 2,
+     "division": "type de fixation native",
+     "champ": "monture des objectifs",
+     "oracle": "à baïonnette",
+     "poles": [
+      "à baïonnette",
+      "à vis"
+     ],
+     "probabilities": [
+      0.9975277436011747,
+      0.0024722563988253373
+     ],
+     "rawProbs": [
+      0.9733352332736616,
+      0.0024122980780222265
+     ],
+     "coverage": 0.9757475313516838,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9731903635828008
+     }
+    },
+    {
+     "question": 3,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.9964067630823171,
+      0.0035932369176828335
+     ],
+     "rawProbs": [
+      0.8923134813277145,
+      0.0032178562631734672
+     ],
+     "coverage": 0.895531337590888,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8922221978154066
+     }
+    }
+   ]
+  },
+  {
+   "id": "Yashica FX-2",
+   "nQuestions": 4,
+   "nTokens": 655,
+   "rows": [
+    {
+     "question": 0,
+     "division": "sensibilité maximale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plafond étendu",
+     "poles": [
+      "plafond standard",
+      "plafond étendu"
+     ],
+     "probabilities": [
+      0.012430134276620472,
+      0.9875698657233795
+     ],
+     "rawProbs": [
+      0.012413219776639084,
+      0.9862260145546261
+     ],
+     "coverage": 0.9986392343312652,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9861043196300521
+     }
+    },
+    {
+     "question": 1,
+     "division": "sensibilité minimale admise",
+     "champ": "sensibilité du film (ISO)",
+     "oracle": "plancher bas",
+     "poles": [
+      "plancher courant",
+      "plancher bas"
+     ],
+     "probabilities": [
+      0.07585479794610947,
+      0.9241452020538906
+     ],
+     "rawProbs": [
+      0.07561525034905339,
+      0.9212267741036878
+     ],
+     "coverage": 0.9968420244527412,
+     "degraded": false,
+     "topToken": {
+      "text": "B",
+      "p": 0.9211822552176521
+     }
+    },
+    {
+     "question": 2,
+     "division": "type de fixation native",
+     "champ": "monture des objectifs",
+     "oracle": "à baïonnette",
+     "poles": [
+      "à baïonnette",
+      "à vis"
+     ],
+     "probabilities": [
+      0.9914241413707537,
+      0.008575858629246279
+     ],
+     "rawProbs": [
+      0.9372341897128348,
+      0.008107113371639914
+     ],
+     "coverage": 0.9453413030844747,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.9370550801634923
+     }
+    },
+    {
+     "question": 3,
+     "division": "aide à la mise au point",
+     "champ": "viseur",
+     "oracle": "sans aide attestée",
+     "poles": [
+      "sans aide attestée",
+      "avec stigmomètre"
+     ],
+     "probabilities": [
+      0.995930429969026,
+      0.0040695700309739576
+     ],
+     "rawProbs": [
+      0.8807647596285157,
+      0.003598980171972116
+     ],
+     "coverage": 0.8843637398004879,
+     "degraded": false,
+     "topToken": {
+      "text": "A",
+      "p": 0.8806416092991899
+     }
+    }
+   ]
+  }
+ ]
+}

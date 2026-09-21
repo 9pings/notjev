@@ -14,6 +14,8 @@ const { createServer } = require('./lib/server');
 const { replay, report } = require('./lib/replay');
 const logits = require('./lib/logits');
 const tokenizer = require('./lib/tokenizer');
+const packed = require('./lib/packed');
+const chatml = require('./lib/chatml');
 
 module.exports = {
 	// the client (does I/O)
@@ -30,6 +32,8 @@ module.exports = {
 	metrics,
 	logits,
 	tokenizer,
+	packed,
+	chatml,
 	// the pieces most callers reach for directly
 	renderTurn  : readout.renderTurn,
 	chatParams  : readout.chatParams,

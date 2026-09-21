@@ -1,0 +1,2856 @@
+{
+ "arm": "maison-http",
+ "backend": "vLLM OpenAI /v1/completions Qwen3.8-27B-NVFP4",
+ "url": "http://172.22.0.8:8000",
+ "model": "",
+ "gpu": "cuda",
+ "wallSec": 16.817,
+ "secPerItem": 0.18685555555555555,
+ "promptTokens": 20880,
+ "results": [
+  {
+   "id": "nombre-guide pour 100 ISO|Agfa Agfatronic 160 A|portée nominale",
+   "label": 1,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 529,
+   "nPromptTokens": 286,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0013035942598053163,
+      0.9828153765429086,
+      0.01588102919728598
+     ],
+     "rawProbs": [
+      0.00129978805073315,
+      0.9799457713921305,
+      0.01583466007825114
+     ],
+     "coverage": 0.9970802195211148,
+     "degraded": false,
+     "exactMass": 0.9967901974669025,
+     "spacedMass": 0.0002900220542123624,
+     "topToken": {
+      "text": "B",
+      "p": 0.9796557493379181
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Bauer E 250|portée nominale",
+   "label": 1,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 402,
+   "nPromptTokens": 268,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.001673566957554656,
+      0.9824480718447086,
+      0.015878361197736817
+     ],
+     "rawProbs": [
+      0.0016724972912258908,
+      0.9818201366327538,
+      0.015868212486176446
+     ],
+     "coverage": 0.9993608464101561,
+     "degraded": false,
+     "exactMass": 0.9992722073010363,
+     "spacedMass": 0.00008863910911984414,
+     "topToken": {
+      "text": "B",
+      "p": 0.981731497523634
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Fujifilm Auto-Strobo AZ|portée nominale",
+   "label": 0,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 418,
+   "nPromptTokens": 270,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9233054142337969,
+      0.05208932899448549,
+      0.0246052567717177
+     ],
+     "rawProbs": [
+      0.9210035373873946,
+      0.051959465984360576,
+      0.02454391382929642
+     ],
+     "coverage": 0.9975069172010516,
+     "degraded": false,
+     "exactMass": 0.9975069172010516,
+     "spacedMass": 0,
+     "topToken": {
+      "text": "A",
+      "p": 0.9210035373873946
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Hanimex CBX 350|portée nominale",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 408,
+   "nPromptTokens": 271,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0009084454824313433,
+      0.0027982090813084923,
+      0.9962933454362601
+     ],
+     "rawProbs": [
+      0.0009077241661163411,
+      0.0027959872706416235,
+      0.9955022768928096
+     ],
+     "coverage": 0.9992059883295675,
+     "degraded": false,
+     "exactMass": 0.9991442169248441,
+     "spacedMass": 0.00006177140472335723,
+     "topToken": {
+      "text": "C",
+      "p": 0.9954405054880862
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Kako Elite III|portée nominale",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 423,
+   "nPromptTokens": 265,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.00042998158102445887,
+      0.0013244365105959518,
+      0.9982455819083796
+     ],
+     "rawProbs": [
+      0.00042985000245256827,
+      0.0013240312200618579,
+      0.997940108990794
+     ],
+     "coverage": 0.9996939902133084,
+     "degraded": false,
+     "exactMass": 0.9996817963073379,
+     "spacedMass": 0.000012193905970483184,
+     "topToken": {
+      "text": "C",
+      "p": 0.9979279150848235
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Kako Kakonet Special|portée nominale",
+   "label": 1,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 407,
+   "nPromptTokens": 266,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0007042297901942877,
+      0.9917245864493991,
+      0.007571183760406573
+     ],
+     "rawProbs": [
+      0.0007011746999571036,
+      0.98742228605793,
+      0.007538338444981953
+     ],
+     "coverage": 0.9956617992028691,
+     "degraded": false,
+     "exactMass": 0.995566905526252,
+     "spacedMass": 0.00009489367661704154,
+     "topToken": {
+      "text": "B",
+      "p": 0.987327392381313
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|King Regula Variant FP|portée nominale",
+   "label": 1,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 421,
+   "nPromptTokens": 268,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0018763085504925937,
+      0.972222057043712,
+      0.02590163440579542
+     ],
+     "rawProbs": [
+      0.0018748362953930795,
+      0.9714591980347462,
+      0.025881310555898946
+     ],
+     "coverage": 0.9992153448860382,
+     "degraded": false,
+     "exactMass": 0.9989452491091078,
+     "spacedMass": 0.0002700957769305402,
+     "topToken": {
+      "text": "B",
+      "p": 0.9711891022578157
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Metz Mecablitz 185|portée nominale",
+   "label": 1,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 417,
+   "nPromptTokens": 270,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.000904948337573604,
+      0.992408337629461,
+      0.0066867140329653916
+     ],
+     "rawProbs": [
+      0.0009047019491998601,
+      0.9921381367061088,
+      0.0066848934554496735
+     ],
+     "coverage": 0.9997277321107584,
+     "degraded": false,
+     "exactMass": 0.9997156090977044,
+     "spacedMass": 0.000012123013053945974,
+     "topToken": {
+      "text": "B",
+      "p": 0.9921260136930549
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Polaroid Combiflash 5000|portée nominale",
+   "label": 0,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 397,
+   "nPromptTokens": 273,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.21336758225851646,
+      0.12941399585589713,
+      0.6572184218855863
+     ],
+     "rawProbs": [
+      0.2128317671202856,
+      0.12908900750788033,
+      0.6555679950689023
+     ],
+     "coverage": 0.9974887696970682,
+     "degraded": false,
+     "exactMass": 0.9974887696970682,
+     "spacedMass": 0,
+     "topToken": {
+      "text": "C",
+      "p": 0.6555679950689023
+     }
+    }
+   ]
+  },
+  {
+   "id": "nombre-guide pour 100 ISO|Sunpak auto 4205 G|portée nominale",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 400,
+   "nPromptTokens": 271,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0021661416604070575,
+      0.007560577289266473,
+      0.9902732810503264
+     ],
+     "rawProbs": [
+      0.002162686592188367,
+      0.007548517916241816,
+      0.9886937621279432
+     ],
+     "coverage": 0.9984049666363735,
+     "degraded": false,
+     "exactMass": 0.998372127975039,
+     "spacedMass": 0.00003283866133438742,
+     "topToken": {
+      "text": "C",
+      "p": 0.9886609234666088
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|Agfa Agfatronic 160 A|durée de recharge",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 410,
+   "nPromptTokens": 266,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0014007986417795715,
+      0.006682836561592951,
+      0.9919163647966275
+     ],
+     "rawProbs": [
+      0.0013991446842896952,
+      0.0066749459717144344,
+      0.990745184691254
+     ],
+     "coverage": 0.9988192753472582,
+     "degraded": false,
+     "exactMass": 0.9987240623111867,
+     "spacedMass": 0.00009521303607156975,
+     "topToken": {
+      "text": "C",
+      "p": 0.9906499716551825
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|Bauer E 250|durée de recharge",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 407,
+   "nPromptTokens": 262,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0008018037308431073,
+      0.0027985700052148696,
+      0.9963996262639421
+     ],
+     "rawProbs": [
+      0.000801571955496449,
+      0.0027977610297659477,
+      0.9961115995812218
+     ],
+     "coverage": 0.9997109325664841,
+     "degraded": false,
+     "exactMass": 0.999671024648734,
+     "spacedMass": 0.000039907917750064105,
+     "topToken": {
+      "text": "C",
+      "p": 0.9960716916634716
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|Braun F 650|durée de recharge",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 406,
+   "nPromptTokens": 278,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.004457606875013646,
+      0.032937499413542036,
+      0.9626048937114443
+     ],
+     "rawProbs": [
+      0.004453617204080203,
+      0.03290801951822711,
+      0.9617433379770529
+     ],
+     "coverage": 0.9991049746993602,
+     "degraded": false,
+     "exactMass": 0.9990749664626849,
+     "spacedMass": 0.000030008236675307616,
+     "topToken": {
+      "text": "C",
+      "p": 0.9617133297403776
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|Fujifilm Auto-Strobo AZ|durée de recharge",
+   "label": 1,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 416,
+   "nPromptTokens": 263,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0011687059641420875,
+      0.9982057308119725,
+      0.0006255632238853575
+     ],
+     "rawProbs": [
+      0.0011679209251227902,
+      0.9975352196038357,
+      0.0006251430227784452
+     ],
+     "coverage": 0.999328283551737,
+     "degraded": false,
+     "exactMass": 0.9992663860103368,
+     "spacedMass": 0.00006189754140015898,
+     "topToken": {
+      "text": "B",
+      "p": 0.9974733220624356
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|King Regula Variant FP|durée de recharge",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 412,
+   "nPromptTokens": 261,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0002605334854611135,
+      0.0024718740652619232,
+      0.997267592449277
+     ],
+     "rawProbs": [
+      0.00026047290765826385,
+      0.0024712993187968784,
+      0.9970357133129086
+     ],
+     "coverage": 0.9997674855393638,
+     "degraded": false,
+     "exactMass": 0.9997249645060727,
+     "spacedMass": 0.000042521033291045866,
+     "topToken": {
+      "text": "C",
+      "p": 0.9969931922796176
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|Metz Mecablitz 185|durée de recharge",
+   "label": 1,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 391,
+   "nPromptTokens": 263,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0004875399701978591,
+      0.9988864463164169,
+      0.0006260137133852351
+     ],
+     "rawProbs": [
+      0.0004872924791890779,
+      0.9983793793488482,
+      0.0006256959286395584
+     ],
+     "coverage": 0.9994923677566769,
+     "degraded": false,
+     "exactMass": 0.9994681068927004,
+     "spacedMass": 0.000024260863976532537,
+     "topToken": {
+      "text": "B",
+      "p": 0.9983551184848717
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|Polaroid Combiflash 5000|durée de recharge",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 428,
+   "nPromptTokens": 265,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0003141300274381281,
+      0.0027998104580373327,
+      0.9968860595145246
+     ],
+     "rawProbs": [
+      0.0003138132860114785,
+      0.002796987372431479,
+      0.9958808862260211
+     ],
+     "coverage": 0.998991686884464,
+     "degraded": false,
+     "exactMass": 0.9989072251843514,
+     "spacedMass": 0.00008446170011269653,
+     "topToken": {
+      "text": "C",
+      "p": 0.9957964245259084
+     }
+    }
+   ]
+  },
+  {
+   "id": "temps de recyclage (s)|Sunpak 7 R|durée de recharge",
+   "label": 2,
+   "labels": [
+    "A",
+    "B",
+    "C"
+   ],
+   "ms": 393,
+   "nPromptTokens": 267,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0014911501831557715,
+      0.006682871478081824,
+      0.9918259783387624
+     ],
+     "rawProbs": [
+      0.0014900978098296353,
+      0.006678155068048164,
+      0.9911260010892786
+     ],
+     "coverage": 0.9992942539671564,
+     "degraded": false,
+     "exactMass": 0.9992942539671564,
+     "spacedMass": 0,
+     "topToken": {
+      "text": "C",
+      "p": 0.9911260010892786
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Agfa Agfatronic 160 A|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 72,
+   "nPromptTokens": 205,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.03733215128475251,
+      0.9626678487152475
+     ],
+     "rawProbs": [
+      0.03731137578525324,
+      0.9621321200009713
+     ],
+     "coverage": 0.9994434957862245,
+     "degraded": false,
+     "exactMass": 0.9992694751006778,
+     "spacedMass": 0.00017402068554679846,
+     "topToken": {
+      "text": "B",
+      "p": 0.961969853836923
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Bauer E 250|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 75,
+   "nPromptTokens": 203,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.09534377376557639,
+      0.9046562262344237
+     ],
+     "rawProbs": [
+      0.09514408319272727,
+      0.9027614898199363
+     ],
+     "coverage": 0.9979055730126636,
+     "degraded": false,
+     "exactMass": 0.9978459436613105,
+     "spacedMass": 0.000059629351353026874,
+     "topToken": {
+      "text": "B",
+      "p": 0.9027018604685833
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Braun F 650|autonomie d'alimentation",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 68,
+   "nPromptTokens": 204,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0008040258956727394,
+      0.9991959741043273
+     ],
+     "rawProbs": [
+      0.0008029345774944082,
+      0.9978397482213998
+     ],
+     "coverage": 0.9986426827988941,
+     "degraded": false,
+     "exactMass": 0.9985679982492989,
+     "spacedMass": 0.00007468454959522228,
+     "topToken": {
+      "text": "B",
+      "p": 0.9977650636718045
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Hanimex CBX 350|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 79,
+   "nPromptTokens": 209,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9940891811712353,
+      0.005910818828764755
+     ],
+     "rawProbs": [
+      0.993516684384038,
+      0.005907414783279432
+     ],
+     "coverage": 0.9994240991673173,
+     "degraded": false,
+     "exactMass": 0.999381728191985,
+     "spacedMass": 0.000042370975332343226,
+     "topToken": {
+      "text": "A",
+      "p": 0.9934743134087056
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Kako Elite III|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 77,
+   "nPromptTokens": 211,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.8175729986608136,
+      0.1824270013391864
+     ],
+     "rawProbs": [
+      0.8168657372279009,
+      0.18226918841901849
+     ],
+     "coverage": 0.9991349256469194,
+     "degraded": false,
+     "exactMass": 0.9990848253775791,
+     "spacedMass": 0.00005010026934023257,
+     "topToken": {
+      "text": "A",
+      "p": 0.8168262616627776
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Kako Kakonet Special|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 77,
+   "nPromptTokens": 196,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9947799310137602,
+      0.005220068986239837
+     ],
+     "rawProbs": [
+      0.9939145523576757,
+      0.005215527945409452
+     ],
+     "coverage": 0.9991300803030851,
+     "degraded": false,
+     "exactMass": 0.9991193626136113,
+     "spacedMass": 0.00001071768947375814,
+     "topToken": {
+      "text": "A",
+      "p": 0.9939038346682019
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|King Regula Variant FP|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 82,
+   "nPromptTokens": 201,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.992422920505686,
+      0.007577079494313983
+     ],
+     "rawProbs": [
+      0.9919592269229088,
+      0.0075735392262839835
+     ],
+     "coverage": 0.9995327661491928,
+     "degraded": false,
+     "exactMass": 0.9995114936361821,
+     "spacedMass": 0.000021272513010797697,
+     "topToken": {
+      "text": "A",
+      "p": 0.9919379544098981
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Metz Mecablitz 185|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 206,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.010986508260557967,
+      0.989013491739442
+     ],
+     "rawProbs": [
+      0.010965582087554252,
+      0.9871297023734021
+     ],
+     "coverage": 0.9980952844609564,
+     "degraded": false,
+     "exactMass": 0.9980557363968345,
+     "spacedMass": 0.000039548064121927584,
+     "topToken": {
+      "text": "B",
+      "p": 0.9870901543092803
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Polaroid Combiflash 5000|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 68,
+   "nPromptTokens": 204,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9992903342520391,
+      0.0007096657479609831
+     ],
+     "rawProbs": [
+      0.9988989956142026,
+      0.0007093878311057839
+     ],
+     "coverage": 0.9996083834453083,
+     "degraded": false,
+     "exactMass": 0.9996018502092501,
+     "spacedMass": 0.000006533236058213796,
+     "topToken": {
+      "text": "A",
+      "p": 0.9988924623781443
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Sunpak 7 R|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 73,
+   "nPromptTokens": 197,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9947805560064505,
+      0.005219443993549414
+     ],
+     "rawProbs": [
+      0.993877786146746,
+      0.005214707313993966
+     ],
+     "coverage": 0.99909249346074,
+     "degraded": false,
+     "exactMass": 0.9989619458175588,
+     "spacedMass": 0.00013054764318125336,
+     "topToken": {
+      "text": "A",
+      "p": 0.9937472385035648
+     }
+    }
+   ]
+  },
+  {
+   "id": "alimentation|Sunpak auto 4205 G|autonomie d'alimentation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 87,
+   "nPromptTokens": 224,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0004305436235905626,
+      0.9995694563764095
+     ],
+     "rawProbs": [
+      0.00043034528638834994,
+      0.9991089878000975
+     ],
+     "coverage": 0.9995393330864858,
+     "degraded": false,
+     "exactMass": 0.999508158963634,
+     "spacedMass": 0.00003117412285178404,
+     "topToken": {
+      "text": "B",
+      "p": 0.9990778136772457
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Agfa Agfatronic 160 A|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 246,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0021826915409748995,
+      0.997817308459025
+     ],
+     "rawProbs": [
+      0.0021820925654962406,
+      0.997543486854493
+     ],
+     "coverage": 0.9997255794199893,
+     "degraded": false,
+     "exactMass": 0.9997141288491032,
+     "spacedMass": 0.000011450570886158432,
+     "topToken": {
+      "text": "B",
+      "p": 0.9975320362836069
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Bauer E 250|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 78,
+   "nPromptTokens": 246,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.000911041179040293,
+      0.9990889588209596
+     ],
+     "rawProbs": [
+      0.0009109024095695372,
+      0.9989367779434722
+     ],
+     "coverage": 0.9998476803530418,
+     "degraded": false,
+     "exactMass": 0.999836908508243,
+     "spacedMass": 0.000010771844798791962,
+     "topToken": {
+      "text": "B",
+      "p": 0.9989260060986734
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Braun F 650|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 67,
+   "nPromptTokens": 247,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.00035696743395779046,
+      0.9996430325660423
+     ],
+     "rawProbs": [
+      0.000356513683613692,
+      0.9983723609953238
+     ],
+     "coverage": 0.9987288746789375,
+     "degraded": false,
+     "exactMass": 0.9987199495292506,
+     "spacedMass": 0.000008925149686868652,
+     "topToken": {
+      "text": "B",
+      "p": 0.9983634358456369
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Fujifilm Auto-Strobo AZ|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 68,
+   "nPromptTokens": 245,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0035934175692357642,
+      0.9964065824307642
+     ],
+     "rawProbs": [
+      0.0035804560767538312,
+      0.9928125340970295
+     ],
+     "coverage": 0.9963929901737834,
+     "degraded": false,
+     "exactMass": 0.9963419177108036,
+     "spacedMass": 0.000051072462979714437,
+     "topToken": {
+      "text": "B",
+      "p": 0.9927614616340498
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Hanimex CBX 350|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 250,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0007096288967861057,
+      0.999290371103214
+     ],
+     "rawProbs": [
+      0.0007094862723163956,
+      0.9990895291421403
+     ],
+     "coverage": 0.9997990154144567,
+     "degraded": false,
+     "exactMass": 0.9997407772069998,
+     "spacedMass": 0.00005823820745690114,
+     "topToken": {
+      "text": "B",
+      "p": 0.9990312909346835
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Kako Elite III|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 73,
+   "nPromptTokens": 247,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0005527687336201652,
+      0.9994472312663799
+     ],
+     "rawProbs": [
+      0.000552681008599781,
+      0.9992886178655068
+     ],
+     "coverage": 0.9998412988741066,
+     "degraded": false,
+     "exactMass": 0.9998235329721965,
+     "spacedMass": 0.0000177659019100047,
+     "topToken": {
+      "text": "B",
+      "p": 0.9992708519635968
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Kako Kakonet Special|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 77,
+   "nPromptTokens": 242,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0004878466518464113,
+      0.9995121533481536
+     ],
+     "rawProbs": [
+      0.00048766648853654525,
+      0.9991430303519886
+     ],
+     "coverage": 0.9996306968405252,
+     "degraded": false,
+     "exactMass": 0.999609270260171,
+     "spacedMass": 0.000021426580354177612,
+     "topToken": {
+      "text": "B",
+      "p": 0.9991216037716344
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|King Regula Variant FP|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 241,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.00048784600481052465,
+      0.9995121539951896
+     ],
+     "rawProbs": [
+      0.0004877783519031955,
+      0.9993735448798913
+     ],
+     "coverage": 0.9998613232317944,
+     "degraded": false,
+     "exactMass": 0.9998385095346906,
+     "spacedMass": 0.00002281369710393422,
+     "topToken": {
+      "text": "B",
+      "p": 0.9993507311827874
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Metz Mecablitz 185|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 70,
+   "nPromptTokens": 248,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0009110275825515452,
+      0.9990889724174485
+     ],
+     "rawProbs": [
+      0.0009105762695297631,
+      0.998594034753862
+     ],
+     "coverage": 0.9995046110233917,
+     "degraded": false,
+     "exactMass": 0.999478779950597,
+     "spacedMass": 0.000025831072794697215,
+     "topToken": {
+      "text": "B",
+      "p": 0.9985682036810672
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Polaroid Combiflash 5000|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 80,
+   "nPromptTokens": 250,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0004878552905294847,
+      0.9995121447094705
+     ],
+     "rawProbs": [
+      0.00048782789626876415,
+      0.9994560196723601
+     ],
+     "coverage": 0.9999438475686289,
+     "degraded": false,
+     "exactMass": 0.9999401229549022,
+     "spacedMass": 0.0000037246137266340596,
+     "topToken": {
+      "text": "B",
+      "p": 0.9994522950586334
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Sunpak 7 R|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 78,
+   "nPromptTokens": 240,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0006263157206925018,
+      0.9993736842793075
+     ],
+     "rawProbs": [
+      0.0006261788534101238,
+      0.9991552935288789
+     ],
+     "coverage": 0.999781472382289,
+     "degraded": false,
+     "exactMass": 0.9997521856075913,
+     "spacedMass": 0.00002928677469766531,
+     "topToken": {
+      "text": "B",
+      "p": 0.9991260067541812
+     }
+    }
+   ]
+  },
+  {
+   "id": "type de flash|Sunpak auto 4205 G|régulation de l'éclair",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 393,
+   "nPromptTokens": 257,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.00048784516506770613,
+      0.9995121548349324
+     ],
+     "rawProbs": [
+      0.00048776974611791483,
+      0.9993576341746511
+     ],
+     "coverage": 0.9998454039207689,
+     "degraded": false,
+     "exactMass": 0.9998211192834914,
+     "spacedMass": 0.00002428463727756293,
+     "topToken": {
+      "text": "B",
+      "p": 0.9993333495373735
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Canon FT QL|sensibilité maximale admise",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 79,
+   "nPromptTokens": 207,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9770238579521013,
+      0.022976142047898655
+     ],
+     "rawProbs": [
+      0.9761811360347298,
+      0.02295632421200569
+     ],
+     "coverage": 0.9991374602467354,
+     "degraded": false,
+     "exactMass": 0.9990840048144422,
+     "spacedMass": 0.00005345543229331346,
+     "topToken": {
+      "text": "A",
+      "p": 0.9761276806024365
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Canon FT QL|sensibilité minimale admise",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 407,
+   "nPromptTokens": 270,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9706886582572748,
+      0.029311341742725164
+     ],
+     "rawProbs": [
+      0.970307453951487,
+      0.02929983072981109
+     ],
+     "coverage": 0.9996072846812981,
+     "degraded": false,
+     "exactMass": 0.9995770092281739,
+     "spacedMass": 0.000030275453124118926,
+     "topToken": {
+      "text": "A",
+      "p": 0.9702771784983628
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Fujifilm Fujica AX-3|sensibilité maximale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 82,
+   "nPromptTokens": 200,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.012430934484427768,
+      0.9875690655155722
+     ],
+     "rawProbs": [
+      0.012419057366096527,
+      0.9866254940836662
+     ],
+     "coverage": 0.9990445514497627,
+     "degraded": false,
+     "exactMass": 0.9989870398043532,
+     "spacedMass": 0.000057511645409480457,
+     "topToken": {
+      "text": "B",
+      "p": 0.9865679824382567
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Fujifilm Fujica AX-3|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 392,
+   "nPromptTokens": 263,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.5,
+      0.5
+     ],
+     "rawProbs": [
+      0.4993264648133651,
+      0.4993264648133651
+     ],
+     "coverage": 0.9986529296267302,
+     "degraded": false,
+     "exactMass": 0.9984227334821011,
+     "spacedMass": 0.0002301961446291095,
+     "topToken": {
+      "text": "A",
+      "p": 0.49921136674105054
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Konica Autoreflex T3|sensibilité maximale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 82,
+   "nPromptTokens": 197,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.20181083842789596,
+      0.798189161572104
+     ],
+     "rawProbs": [
+      0.20157836932963652,
+      0.7972697148462661
+     ],
+     "coverage": 0.9988480841759027,
+     "degraded": false,
+     "exactMass": 0.9988363332298456,
+     "spacedMass": 0.000011750946057131568,
+     "topToken": {
+      "text": "B",
+      "p": 0.797257963900209
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Konica Autoreflex T3|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 393,
+   "nPromptTokens": 260,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.24510013132176786,
+      0.7548998686782321
+     ],
+     "rawProbs": [
+      0.24456605441406354,
+      0.753254930402125
+     ],
+     "coverage": 0.9978209848161885,
+     "degraded": false,
+     "exactMass": 0.9976218762220419,
+     "spacedMass": 0.0001991085941466739,
+     "topToken": {
+      "text": "B",
+      "p": 0.7531197000861578
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Mamiya ZE-2 quartz|sensibilité maximale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 73,
+   "nPromptTokens": 197,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.025983163633013017,
+      0.974016836366987
+     ],
+     "rawProbs": [
+      0.02595443185348845,
+      0.972939783649659
+     ],
+     "coverage": 0.9988942155031475,
+     "degraded": false,
+     "exactMass": 0.9978366909006634,
+     "spacedMass": 0.0010575246024841025,
+     "topToken": {
+      "text": "B",
+      "p": 0.9719354849053027
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Mamiya ZE-2 quartz|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 421,
+   "nPromptTokens": 260,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.11919843333576464,
+      0.8808015666642354
+     ],
+     "rawProbs": [
+      0.1189299653385377,
+      0.8788177567605379
+     ],
+     "coverage": 0.9977477220990756,
+     "degraded": false,
+     "exactMass": 0.9977102427327916,
+     "spacedMass": 0.000037479366283920964,
+     "topToken": {
+      "text": "B",
+      "p": 0.8787802773942539
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Minolta Autocord CdS I|sensibilité maximale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 206,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0011694739300648004,
+      0.9988305260699352
+     ],
+     "rawProbs": [
+      0.0011692454461565012,
+      0.9986353813159925
+     ],
+     "coverage": 0.999804626762149,
+     "degraded": false,
+     "exactMass": 0.9997734674413022,
+     "spacedMass": 0.000031159320846789455,
+     "topToken": {
+      "text": "B",
+      "p": 0.9986042219951458
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Minolta Autocord CdS I|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 389,
+   "nPromptTokens": 269,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9148991890939238,
+      0.08510081090607623
+     ],
+     "rawProbs": [
+      0.9142902053694394,
+      0.08504416531123911
+     ],
+     "coverage": 0.9993343706806785,
+     "degraded": false,
+     "exactMass": 0.999252826457455,
+     "spacedMass": 0.00008154422322354989,
+     "topToken": {
+      "text": "A",
+      "p": 0.9142173611478244
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Minolta SRT 303|sensibilité maximale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 77,
+   "nPromptTokens": 199,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0013238899676508548,
+      0.9986761100323491
+     ],
+     "rawProbs": [
+      0.001322204100170316,
+      0.9974043762639591
+     ],
+     "coverage": 0.9987265803641294,
+     "degraded": false,
+     "exactMass": 0.9978729012352175,
+     "spacedMass": 0.0008536791289118816,
+     "topToken": {
+      "text": "B",
+      "p": 0.9965506971350472
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Minolta SRT 303|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 399,
+   "nPromptTokens": 262,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.5621766427970937,
+      0.43782335720290627
+     ],
+     "rawProbs": [
+      0.5619523315421714,
+      0.43764866352264264
+     ],
+     "coverage": 0.999600995064814,
+     "degraded": false,
+     "exactMass": 0.9995917349349832,
+     "spacedMass": 0.00000926012983076455,
+     "topToken": {
+      "text": "A",
+      "p": 0.5619469838601131
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Nikon EM|sensibilité maximale admise",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 80,
+   "nPromptTokens": 192,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9626734117517034,
+      0.037326588248296634
+     ],
+     "rawProbs": [
+      0.9619579647252492,
+      0.037298847587503556
+     ],
+     "coverage": 0.9992568123127528,
+     "degraded": false,
+     "exactMass": 0.9992487337179424,
+     "spacedMass": 0.000008078594810325695,
+     "topToken": {
+      "text": "A",
+      "p": 0.9619498861304389
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Nikon EM|sensibilité minimale admise",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 255,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.8807897640431638,
+      0.11921023595683625
+     ],
+     "rawProbs": [
+      0.8797882085733782,
+      0.119074680721352
+     ],
+     "coverage": 0.9988628892947302,
+     "degraded": false,
+     "exactMass": 0.998609503053921,
+     "spacedMass": 0.0002533862408092897,
+     "topToken": {
+      "text": "A",
+      "p": 0.8795723354555406
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Olympus OM-1|sensibilité maximale admise",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 196,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9859364301281284,
+      0.014063569871871628
+     ],
+     "rawProbs": [
+      0.9856649420493848,
+      0.01405969731838023
+     ],
+     "coverage": 0.999724639367765,
+     "degraded": false,
+     "exactMass": 0.9997204770704524,
+     "spacedMass": 0.0000041622973125624734,
+     "topToken": {
+      "text": "A",
+      "p": 0.9856607797520722
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Olympus OM-1|sensibilité minimale admise",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 421,
+   "nPromptTokens": 259,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9740399348559223,
+      0.025960065144077636
+     ],
+     "rawProbs": [
+      0.9731656132292494,
+      0.025936762766451137
+     ],
+     "coverage": 0.9991023759957006,
+     "degraded": false,
+     "exactMass": 0.9989763140734047,
+     "spacedMass": 0.0001260619222959547,
+     "topToken": {
+      "text": "A",
+      "p": 0.9730455299036929
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Topcon Automatic R-3|sensibilité maximale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 80,
+   "nPromptTokens": 196,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0203277627236113,
+      0.9796722372763886
+     ],
+     "rawProbs": [
+      0.02029159664286269,
+      0.9779292562251903
+     ],
+     "coverage": 0.9982208528680531,
+     "degraded": false,
+     "exactMass": 0.9979954336449363,
+     "spacedMass": 0.00022541922311683353,
+     "topToken": {
+      "text": "B",
+      "p": 0.9777038370020735
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Topcon Automatic R-3|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 400,
+   "nPromptTokens": 259,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.6224583300882154,
+      0.3775416699117845
+     ],
+     "rawProbs": [
+      0.6220522079747423,
+      0.37729534334902964
+     ],
+     "coverage": 0.999347551323772,
+     "degraded": false,
+     "exactMass": 0.9992799351063724,
+     "spacedMass": 0.00006761621739962854,
+     "topToken": {
+      "text": "A",
+      "p": 0.6220111200897451
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Voigtländer VSL-1|sensibilité maximale admise",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 77,
+   "nPromptTokens": 200,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9740407826510851,
+      0.025959217348914956
+     ],
+     "rawProbs": [
+      0.9733540984871052,
+      0.025940916489463985
+     ],
+     "coverage": 0.9992950149765691,
+     "degraded": false,
+     "exactMass": 0.9992083538055034,
+     "spacedMass": 0.00008666117106579207,
+     "topToken": {
+      "text": "A",
+      "p": 0.9732715472977478
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Voigtländer VSL-1|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 412,
+   "nPromptTokens": 263,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.18243059842110895,
+      0.817569401578891
+     ],
+     "rawProbs": [
+      0.18226700575330096,
+      0.8168362550525953
+     ],
+     "coverage": 0.9991032608058963,
+     "degraded": false,
+     "exactMass": 0.9990222753914606,
+     "spacedMass": 0.00008098541443560623,
+     "topToken": {
+      "text": "B",
+      "p": 0.8167751179495202
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Yashica FX-2|sensibilité maximale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 72,
+   "nPromptTokens": 198,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.03733175797323592,
+      0.962668242026764
+     ],
+     "rawProbs": [
+      0.037290654507169174,
+      0.9616083133342003
+     ],
+     "coverage": 0.9988989678413694,
+     "degraded": false,
+     "exactMass": 0.9987145842557582,
+     "spacedMass": 0.00018438358561124113,
+     "topToken": {
+      "text": "B",
+      "p": 0.9614356777476865
+     }
+    }
+   ]
+  },
+  {
+   "id": "sensibilité du film (ISO)|Yashica FX-2|sensibilité minimale admise",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 405,
+   "nPromptTokens": 261,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.3775406687981454,
+      0.6224593312018546
+     ],
+     "rawProbs": [
+      0.37697107011665376,
+      0.6215202217399165
+     ],
+     "coverage": 0.9984912918565703,
+     "degraded": false,
+     "exactMass": 0.9984912918565703,
+     "spacedMass": 0,
+     "topToken": {
+      "text": "B",
+      "p": 0.6215202217399165
+     }
+    }
+   ]
+  },
+  {
+   "id": "monture des objectifs|Canon FT QL|type de fixation native",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 82,
+   "nPromptTokens": 211,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9992903763468631,
+      0.0007096236531368487
+     ],
+     "rawProbs": [
+      0.9988844622729673,
+      0.0007093354023593013
+     ],
+     "coverage": 0.9995937976753266,
+     "degraded": false,
+     "exactMass": 0.9995278192366581,
+     "spacedMass": 0.00006597843866851217,
+     "topToken": {
+      "text": "A",
+      "p": 0.9988184838342988
+     }
+    }
+   ]
+  },
+  {
+   "id": "monture des objectifs|Fujifilm Fujica AX-3|type de fixation native",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 82,
+   "nPromptTokens": 217,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.999196033765928,
+      0.0008039662340719136
+     ],
+     "rawProbs": [
+      0.9984421814622298,
+      0.0008033596746209454
+     ],
+     "coverage": 0.9992455411368508,
+     "degraded": false,
+     "exactMass": 0.9990969345396103,
+     "spacedMass": 0.00014860659724045896,
+     "topToken": {
+      "text": "A",
+      "p": 0.9982935748649894
+     }
+    }
+   ]
+  },
+  {
+   "id": "monture des objectifs|Gomz Almaz 103|type de fixation native",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 75,
+   "nPromptTokens": 215,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9992904172631217,
+      0.0007095827368783148
+     ],
+     "rawProbs": [
+      0.9990507110337664,
+      0.0007094125246964162
+     ],
+     "coverage": 0.9997601235584628,
+     "degraded": false,
+     "exactMass": 0.9996368460877298,
+     "spacedMass": 0.00012327747073289733,
+     "topToken": {
+      "text": "A",
+      "p": 0.9989274335630335
+     }
+    }
+   ]
+  },
+  {
+   "id": "monture des objectifs|Minolta SRT 303|type de fixation native",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 78,
+   "nPromptTokens": 219,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9993737338828225,
+      0.0006262661171775676
+     ],
+     "rawProbs": [
+      0.9992139932998457,
+      0.0006261660143719156
+     ],
+     "coverage": 0.9998401593142177,
+     "degraded": false,
+     "exactMass": 0.9997313480285309,
+     "spacedMass": 0.00010881128568677927,
+     "topToken": {
+      "text": "A",
+      "p": 0.999105182014159
+     }
+    }
+   ]
+  },
+  {
+   "id": "monture des objectifs|Topcon Automatic R-3|type de fixation native",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 68,
+   "nPromptTokens": 225,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9971997167300158,
+      0.0028002832699841867
+     ],
+     "rawProbs": [
+      0.994885867292893,
+      0.00279378564091417
+     ],
+     "coverage": 0.9976796529338071,
+     "degraded": false,
+     "exactMass": 0.9974503250433172,
+     "spacedMass": 0.00022932789048990784,
+     "topToken": {
+      "text": "A",
+      "p": 0.9946565394024031
+     }
+    }
+   ]
+  },
+  {
+   "id": "monture des objectifs|Voigtländer VSL-1|type de fixation native",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 216,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9978173022955551,
+      0.002182697704444819
+     ],
+     "rawProbs": [
+      0.9975354315487072,
+      0.002182081119995261
+     ],
+     "coverage": 0.9997175126687025,
+     "degraded": false,
+     "exactMass": 0.9997091352920283,
+     "spacedMass": 0.000008377376674134801,
+     "topToken": {
+      "text": "A",
+      "p": 0.997527054172033
+     }
+    }
+   ]
+  },
+  {
+   "id": "monture des objectifs|Yashica FX-2|type de fixation native",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 222,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.999820483887411,
+      0.00017951611258904785
+     ],
+     "rawProbs": [
+      0.9995702398384753,
+      0.00017947118168436303
+     ],
+     "coverage": 0.9997497110201596,
+     "degraded": false,
+     "exactMass": 0.9996836872621352,
+     "spacedMass": 0.00006602375802442187,
+     "topToken": {
+      "text": "A",
+      "p": 0.9995042160804508
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Canon FT QL|motorisation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 192,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9947799026543825,
+      0.005220097345617426
+     ],
+     "rawProbs": [
+      0.9945377579672084,
+      0.005218826693852749
+     ],
+     "coverage": 0.9997565846610612,
+     "degraded": false,
+     "exactMass": 0.9997511920597619,
+     "spacedMass": 0.000005392601299269299,
+     "topToken": {
+      "text": "A",
+      "p": 0.9945323653659092
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Fujifilm Fujica AX-3|motorisation",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 79,
+   "nPromptTokens": 204,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.014062714260206081,
+      0.9859372857397939
+     ],
+     "rawProbs": [
+      0.014045036208603968,
+      0.9846978770530174
+     ],
+     "coverage": 0.9987429132616213,
+     "degraded": false,
+     "exactMass": 0.9986778718713439,
+     "spacedMass": 0.00006504139027741777,
+     "topToken": {
+      "text": "B",
+      "p": 0.98463283566274
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Gomz Almaz 103|motorisation",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 75,
+   "nPromptTokens": 206,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.09536298679514629,
+      0.9046370132048538
+     ],
+     "rawProbs": [
+      0.09515507599760437,
+      0.9026647196639079
+     ],
+     "coverage": 0.9978197956615122,
+     "degraded": false,
+     "exactMass": 0.9976468034118273,
+     "spacedMass": 0.00017299224968505872,
+     "topToken": {
+      "text": "B",
+      "p": 0.9025217049308105
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Konica Autoreflex T3|motorisation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 72,
+   "nPromptTokens": 194,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9933071504502248,
+      0.006692849549775269
+     ],
+     "rawProbs": [
+      0.9929451318765394,
+      0.006690410288317419
+     ],
+     "coverage": 0.9996355421648568,
+     "degraded": false,
+     "exactMass": 0.9996355421648568,
+     "spacedMass": 0,
+     "topToken": {
+      "text": "A",
+      "p": 0.9929451318765394
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Mamiya ZE-2 quartz|motorisation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 67,
+   "nPromptTokens": 195,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9820141908078386,
+      0.01798580919216136
+     ],
+     "rawProbs": [
+      0.9812502335074733,
+      0.01797181714361059
+     ],
+     "coverage": 0.9992220506510839,
+     "degraded": false,
+     "exactMass": 0.9991996506704205,
+     "spacedMass": 0.000022399980663476504,
+     "topToken": {
+      "text": "A",
+      "p": 0.9812278335268099
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Minolta Autocord CdS I|motorisation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 211,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9626734505933497,
+      0.03732654940665024
+     ],
+     "rawProbs": [
+      0.9622452745553911,
+      0.03730994737610109
+     ],
+     "coverage": 0.9995552219314922,
+     "degraded": false,
+     "exactMass": 0.9995460649600614,
+     "spacedMass": 0.000009156971430725974,
+     "topToken": {
+      "text": "A",
+      "p": 0.9622361175839603
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Nikon EM|motorisation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 73,
+   "nPromptTokens": 204,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9959299216691082,
+      0.004070078330891792
+     ],
+     "rawProbs": [
+      0.9955461435283598,
+      0.0040685099403248
+     ],
+     "coverage": 0.9996146534686846,
+     "degraded": false,
+     "exactMass": 0.9995999801307153,
+     "spacedMass": 0.000014673337969288985,
+     "topToken": {
+      "text": "A",
+      "p": 0.9955314701903905
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Olympus OM-1|motorisation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 70,
+   "nPromptTokens": 198,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9914226561147287,
+      0.008577343885271326
+     ],
+     "rawProbs": [
+      0.9909951414773471,
+      0.008573645220490778
+     ],
+     "coverage": 0.9995687866978379,
+     "degraded": false,
+     "exactMass": 0.9995522356768516,
+     "spacedMass": 0.00001655102098630166,
+     "topToken": {
+      "text": "A",
+      "p": 0.9909785904563608
+     }
+    }
+   ]
+  },
+  {
+   "id": "avance du film|Topcon Automatic R-3|motorisation",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 77,
+   "nPromptTokens": 197,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.966907589440201,
+      0.03309241055979888
+     ],
+     "rawProbs": [
+      0.965566342980712,
+      0.033046506402065474
+     ],
+     "coverage": 0.9986128493827775,
+     "degraded": false,
+     "exactMass": 0.9984030604537367,
+     "spacedMass": 0.0002097889290407187,
+     "topToken": {
+      "text": "A",
+      "p": 0.9653699207520792
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Canon FT QL|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 72,
+   "nPromptTokens": 208,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9959301304522858,
+      0.00406986954771423
+     ],
+     "rawProbs": [
+      0.9944373658164891,
+      0.0040637693634268295
+     ],
+     "coverage": 0.9985011351799159,
+     "degraded": false,
+     "exactMass": 0.9984354504344817,
+     "spacedMass": 0.00006568474543422372,
+     "topToken": {
+      "text": "A",
+      "p": 0.9943716810710549
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Fujifilm Fujica AX-3|aide à la mise au point",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 78,
+   "nPromptTokens": 233,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.0008040392850795265,
+      0.9991959607149205
+     ],
+     "rawProbs": [
+      0.0008026914924565501,
+      0.9975210314300582
+     ],
+     "coverage": 0.9983237229225148,
+     "degraded": false,
+     "exactMass": 0.9982655761735544,
+     "spacedMass": 0.00005814674896047603,
+     "topToken": {
+      "text": "B",
+      "p": 0.9974628846810978
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Gomz Almaz 103|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 73,
+   "nPromptTokens": 213,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.997817320407221,
+      0.002182679592778908
+     ],
+     "rawProbs": [
+      0.9975870136462397,
+      0.0021821758073093714
+     ],
+     "coverage": 0.9997691894535491,
+     "degraded": false,
+     "exactMass": 0.9997525283356582,
+     "spacedMass": 0.000016661117890923852,
+     "topToken": {
+      "text": "A",
+      "p": 0.9975703525283488
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Konica Autoreflex T3|aide à la mise au point",
+   "label": 1,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 221,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.00023047836951648113,
+      0.9997695216304835
+     ],
+     "rawProbs": [
+      0.0002304512729368281,
+      0.9996519820343194
+     ],
+     "coverage": 0.9998824333072562,
+     "degraded": false,
+     "exactMass": 0.9997590816297001,
+     "spacedMass": 0.00012335167755618632,
+     "topToken": {
+      "text": "B",
+      "p": 0.9995286303567632
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Minolta Autocord CdS I|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 387,
+   "nPromptTokens": 279,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9740409060802353,
+      0.025959093919764684
+     ],
+     "rawProbs": [
+      0.9738066106864824,
+      0.025952849730128052
+     ],
+     "coverage": 0.9997594604166105,
+     "degraded": false,
+     "exactMass": 0.9997029325339275,
+     "spacedMass": 0.000056527882682898625,
+     "topToken": {
+      "text": "A",
+      "p": 0.973753285245451
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Minolta SRT 303|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 209,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9890131665840484,
+      0.010986833415951674
+     ],
+     "rawProbs": [
+      0.9884189648403577,
+      0.010980232497183377
+     ],
+     "coverage": 0.9993991973375411,
+     "degraded": false,
+     "exactMass": 0.9993891846615494,
+     "spacedMass": 0.00001001267599177715,
+     "topToken": {
+      "text": "A",
+      "p": 0.988408952164366
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Nikon EM|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 77,
+   "nPromptTokens": 234,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9859367305588109,
+      0.014063269441188993
+     ],
+     "rawProbs": [
+      0.9855241582053245,
+      0.014057384564410158
+     ],
+     "coverage": 0.9995815427697347,
+     "degraded": false,
+     "exactMass": 0.9995560497895227,
+     "spacedMass": 0.000025492980211936598,
+     "topToken": {
+      "text": "A",
+      "p": 0.9854986652251125
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Olympus OM-1|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 88,
+   "nPromptTokens": 206,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9840943650401683,
+      0.015905634959831712
+     ],
+     "rawProbs": [
+      0.981946149960121,
+      0.01587091397565349
+     ],
+     "coverage": 0.9978170639357744,
+     "degraded": false,
+     "exactMass": 0.9977696107396696,
+     "spacedMass": 0.000047453196104847965,
+     "topToken": {
+      "text": "A",
+      "p": 0.9818986967640161
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Topcon Automatic R-3|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 214,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9959298896359419,
+      0.004070110364058127
+     ],
+     "rawProbs": [
+      0.9956740524335647,
+      0.004069064822941485
+     ],
+     "coverage": 0.9997431172565061,
+     "degraded": false,
+     "exactMass": 0.9997361851171234,
+     "spacedMass": 0.000006932139382767009,
+     "topToken": {
+      "text": "A",
+      "p": 0.9956671202941819
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Voigtländer VSL-1|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 76,
+   "nPromptTokens": 209,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.9890131630623128,
+      0.010986836937687245
+     ],
+     "rawProbs": [
+      0.9885963461196651,
+      0.010982206564753122
+     ],
+     "coverage": 0.9995785526844182,
+     "degraded": false,
+     "exactMass": 0.9995691449502588,
+     "spacedMass": 0.000009407734159413799,
+     "topToken": {
+      "text": "A",
+      "p": 0.9885869383855057
+     }
+    }
+   ]
+  },
+  {
+   "id": "viseur|Yashica FX-2|aide à la mise au point",
+   "label": 0,
+   "labels": [
+    "A",
+    "B"
+   ],
+   "ms": 71,
+   "nPromptTokens": 207,
+   "rows": [
+    {
+     "question": 0,
+     "probabilities": [
+      0.994089048830122,
+      0.005910951169878117
+     ],
+     "rawProbs": [
+      0.9939458801906369,
+      0.005910099875079075
+     ],
+     "coverage": 0.999855980065716,
+     "degraded": false,
+     "exactMass": 0.9998359563464779,
+     "spacedMass": 0.000020023719238001023,
+     "topToken": {
+      "text": "A",
+      "p": 0.9939258564713989
+     }
+    }
+   ]
+  }
+ ]
+}

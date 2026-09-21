@@ -17,6 +17,8 @@
     "./replay": "./lib/replay.js",
     "./logits": "./lib/logits.js",
     "./tokenizer": "./lib/tokenizer.js",
+    "./packed": "./lib/packed.js",
+    "./chatml": "./lib/chatml.js",
     "./errors": "./lib/errors.js",
     "./package.json": "./package.json"
   },
