@@ -61,7 +61,7 @@ const jev = createClient();
   });
 
   console.log(r.choice, r.p1.toFixed(3), r.margin.toFixed(3), r.band, r.coverage.toFixed(3));
-  // SAME 0.684 0.368 med 0.997
+  // e.g.  null 0.500 0.000 med 0.983   <- a 27B, exactly torn on this pair: no verdict at theta 0.5
   if (r.undecided) console.log('no verdict:', r.explain());
 })();
 ```
@@ -305,6 +305,21 @@ here as provenance, not as a promise about your questions:
 | space variants (`" A"` vs `"A"`) | <= 0.08 % of coverage |
 | abstention at theta = 0.5 on an entity-matching bench | precision 0.927, correct abstention 0.716 |
 | the same bench at theta = 0 | 100 % of new entities wrongly merged |
+
+And one measurement made *with this library*, 2026-09-21, replaying the recorded 48-question set
+(`--truth gold`) and then re-asking 3 of those questions live on a **different** vLLM instance of the
+same model:
+
+| measurement | value |
+|---|---|
+| replay of the recording, agreement with the human truth | 0.896 (43/48), null arm 0.563, ECE 0.065 |
+| the same rows at theta = 0.5 | coverage 79.2 %, precision **100 %** (5 errors out of 5 removed) |
+| live re-ask, same verdict as the recording | **3/3** |
+| live re-ask, same band as the recording | **3/3** |
+| live re-ask, movement of the raw `p1` | up to **0.179** |
+
+Which is the whole argument for the band, measured twice: the verdict and the band survived a
+different server, the float did not.
 
 The exact string this library sends is fingerprinted against that campaign
 (`test/fixtures/campaign-turns.json`): if one byte of the envelope moves, `npm test` fails and the
