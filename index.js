@@ -17,6 +17,7 @@ const tokenizer = require('./lib/tokenizer');
 const packed = require('./lib/packed');
 const chatml = require('./lib/chatml');
 const calibration = require('./lib/calibration');
+const backends = { 'llama-server': require('./lib/backends/llama-server') };
 
 module.exports = {
 	// the client (does I/O)
@@ -36,6 +37,7 @@ module.exports = {
 	packed,
 	chatml,
 	calibration,
+	backends,
 	// the pieces most callers reach for directly
 	renderTurn  : readout.renderTurn,
 	chatParams  : readout.chatParams,

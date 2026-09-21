@@ -20,6 +20,7 @@
     "./packed": "./lib/packed.js",
     "./chatml": "./lib/chatml.js",
     "./calibration": "./lib/calibration.js",
+    "./backends/llama-server": "./lib/backends/llama-server.js",
     "./errors": "./lib/errors.js",
     "./package.json": "./package.json"
   },
