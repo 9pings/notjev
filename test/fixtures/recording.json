@@ -1,0 +1,232 @@
+{
+ "note": "A synthetic recording in the shape a run writes: one row per question, the WHOLE server response kept. r5 carries almost no option mass on purpose (degraded).",
+ "model": "recorded-model",
+ "at": "2026-09-21T00:00:00.000Z",
+ "results": [
+  {
+   "id": "r1",
+   "family": "a",
+   "options": [
+    "SAME",
+    "OTHER"
+   ],
+   "gold": "SAME",
+   "ms": 101,
+   "resp": {
+    "id": "chatcmpl-r1",
+    "model": "recorded-model",
+    "choices": [
+     {
+      "index": 0,
+      "message": {
+       "role": "assistant",
+       "content": "A"
+      },
+      "logprobs": {
+       "content": [
+        {
+         "token": "A",
+         "logprob": -0.05129329438755058,
+         "top_logprobs": [
+          {
+           "token": "A",
+           "logprob": -0.05129329438755058
+          },
+          {
+           "token": "B",
+           "logprob": -3.506557897319982
+          },
+          {
+           "token": "The",
+           "logprob": -3.912023005428146
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "r2",
+   "family": "a",
+   "options": [
+    "SAME",
+    "OTHER"
+   ],
+   "gold": "OTHER",
+   "ms": 98,
+   "resp": {
+    "id": "chatcmpl-r2",
+    "model": "recorded-model",
+    "choices": [
+     {
+      "index": 0,
+      "message": {
+       "role": "assistant",
+       "content": "A"
+      },
+      "logprobs": {
+       "content": [
+        {
+         "token": "A",
+         "logprob": -0.6539264674066639,
+         "top_logprobs": [
+          {
+           "token": "A",
+           "logprob": -0.6539264674066639
+          },
+          {
+           "token": "B",
+           "logprob": -0.7765287894989963
+          },
+          {
+           "token": "The",
+           "logprob": -3.912023005428146
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "r3",
+   "family": "b",
+   "options": [
+    "SAME",
+    "OTHER"
+   ],
+   "gold": "OTHER",
+   "ms": 110,
+   "resp": {
+    "id": "chatcmpl-r3",
+    "model": "recorded-model",
+    "choices": [
+     {
+      "index": 0,
+      "message": {
+       "role": "assistant",
+       "content": "A"
+      },
+      "logprobs": {
+       "content": [
+        {
+         "token": "A",
+         "logprob": -2.3025850929940455,
+         "top_logprobs": [
+          {
+           "token": "A",
+           "logprob": -2.3025850929940455
+          },
+          {
+           "token": "B",
+           "logprob": -0.12783337150988489
+          },
+          {
+           "token": "The",
+           "logprob": -3.912023005428146
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "r4",
+   "family": "b",
+   "options": [
+    "SAME",
+    "OTHER"
+   ],
+   "gold": "SAME",
+   "ms": 95,
+   "resp": {
+    "id": "chatcmpl-r4",
+    "model": "recorded-model",
+    "choices": [
+     {
+      "index": 0,
+      "message": {
+       "role": "assistant",
+       "content": "A"
+      },
+      "logprobs": {
+       "content": [
+        {
+         "token": "A",
+         "logprob": -0.5108256237659907,
+         "top_logprobs": [
+          {
+           "token": "A",
+           "logprob": -0.5108256237659907
+          },
+          {
+           "token": "B",
+           "logprob": -0.9675840262617056
+          },
+          {
+           "token": "The",
+           "logprob": -3.912023005428146
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "r5",
+   "family": "b",
+   "options": [
+    "SAME",
+    "OTHER"
+   ],
+   "gold": "SAME",
+   "ms": 120,
+   "resp": {
+    "id": "chatcmpl-r5",
+    "model": "recorded-model",
+    "choices": [
+     {
+      "index": 0,
+      "message": {
+       "role": "assistant",
+       "content": "A"
+      },
+      "logprobs": {
+       "content": [
+        {
+         "token": "A",
+         "logprob": -4.605170185988091,
+         "top_logprobs": [
+          {
+           "token": "A",
+           "logprob": -4.605170185988091
+          },
+          {
+           "token": "B",
+           "logprob": -4.605170185988091
+          },
+          {
+           "token": "The",
+           "logprob": -0.020202707317519466
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ]
+}
