@@ -17,7 +17,10 @@ const tokenizer = require('./lib/tokenizer');
 const packed = require('./lib/packed');
 const chatml = require('./lib/chatml');
 const calibration = require('./lib/calibration');
-const backends = { 'llama-server': require('./lib/backends/llama-server') };
+const backends = {
+	'llama-server'  : require('./lib/backends/llama-server'),
+	'node-llama-cpp': require('./lib/backends/node-llama-cpp'),
+};
 
 module.exports = {
 	// the client (does I/O)
