@@ -19,6 +19,7 @@
     "./tokenizer": "./lib/tokenizer.js",
     "./packed": "./lib/packed.js",
     "./chatml": "./lib/chatml.js",
+    "./calibration": "./lib/calibration.js",
     "./errors": "./lib/errors.js",
     "./package.json": "./package.json"
   },

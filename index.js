@@ -16,6 +16,7 @@ const logits = require('./lib/logits');
 const tokenizer = require('./lib/tokenizer');
 const packed = require('./lib/packed');
 const chatml = require('./lib/chatml');
+const calibration = require('./lib/calibration');
 
 module.exports = {
 	// the client (does I/O)
@@ -34,6 +35,7 @@ module.exports = {
 	tokenizer,
 	packed,
 	chatml,
+	calibration,
 	// the pieces most callers reach for directly
 	renderTurn  : readout.renderTurn,
 	chatParams  : readout.chatParams,
