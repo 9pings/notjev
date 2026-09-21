@@ -73,7 +73,7 @@ test('createPackedClient — baseUrl avec ou sans /v1 rend la même URL de compl
   const fetch = async ( url ) => { seen.push(url); return { ok: false, status: 599, json: async () => ({}) }; };
   const tokenize = async ( s ) => [...s].map(( c ) => c.charCodeAt(0) );
   for ( const baseUrl of ['http://h:8000', 'http://h:8000/', 'http://h:8000/v1', 'http://h:8000/v1/'] ) {
-    const pk = createPackedClient({ baseUrl, model: 'm', tokenize, fetch });
+    const pk = P.createPackedClient({ baseUrl, model: 'm', tokenize, fetch });
     await assert.rejects(() => pk.decidePacked('s', [{ id: 'q', question: 'q', options: ['X', 'Y'] }]), /NOTJEV_HTTP/);
   }
   assert.deepStrictEqual([...new Set(seen)], ['http://h:8000/v1/completions'], 'une seule URL quelle que soit la forme');
