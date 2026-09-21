@@ -468,6 +468,7 @@ numbers above stop applying. That test is the point of the fixture.
 ## Limits
 
 * **26 options maximum.** One letter, one token. Beyond that, split the question.
+* **`checkBoundary` takes the TEMPLATED prompt** (assistant turn open, `chatml.render(..., { thinkingOff: true })`), never the bare user content — on the bare content it refuses (`ANSWER_BOUNDARY`) although the real readout is fine (measured in vivo 21/09, `docs/verifications/`).
 * **One letter must be one token** on your tokenizer. It is on every tokenizer used here, but check
   before you trust a new model family.
 * **The probabilities are not calibrated.** They are *ordered*, which is enough for a margin and for
