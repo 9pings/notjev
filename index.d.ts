@@ -242,3 +242,149 @@ export const THETA_DEFAULT: number;
 export const UNDECIDED: string;
 export function formOf(q: QuestionForm): { kind: string; ids: string[]; texts: string[]; decode(c: string): unknown; values: unknown[] };
 export function optionOf(x: OptionSpec): { id: string; text: string };
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════
+ * THE MODULES (2026-09-21) — packed, tokenizer checks, calibration, harness, set, contract,
+ * backends. Every one of them returns the same shape as the core: `entries` -> `distribution`
+ * -> `decide`. Nothing here renormalises silently.
+ * ══════════════════════════════════════════════════════════════════════════════════════════ */
+
+/** `[{token, logprob}]` — the one shape every backend produces, per position read. */
+export interface Entry { token: string; logprob: number; prob?: number; rank?: number; id?: number }
+
+/** `(text) => token ids` — injected: a server's `/tokenize`, or node-llama-cpp. */
+export type Tokenize = (text: string) => Promise<number[]> | number[];
+
+export namespace chatml {
+	/** `content: null` = an OPEN turn (the one whose next token is read). */
+	function render(turns: { role: string; content?: string | null }[],
+		o?: { thinkingOff?: boolean }): string;
+}
+
+export interface PackedSpec {
+	prompt: string;
+	/** The index of the token whose distribution answers question `i`. */
+	positions: number[];
+	slots: { id: string | number; letters: string[]; options: string[]; form: unknown; question?: string }[];
+	nTokens: number;
+	placeholder: string;
+}
+
+export interface PackedDecision extends Omit<Decision, 'byOption' | 'prompt' | 'request' | 'raw'> {
+	id: string | number;
+	position: number;
+	question?: string;
+	topToken: Entry | null;
+	backend: string;
+}
+
+export namespace packed {
+	function buildPacked(o: { state?: string | null; questions: Question[]; tokenize: Tokenize;
+		placeholder?: string }): Promise<PackedSpec>;
+	function readPacked(resp: unknown, spec: PackedSpec,
+		opts?: { theta?: number; edges?: number[] }): PackedDecision[];
+	function divergence(a: { id: string | number; top: string; band?: Band }[],
+		b: { id: string | number; top: string; band?: Band }[]): {
+			n: number; differ: number; rate: number; byBand: Record<string, { n: number; differ: number }> };
+	function entriesAt(promptLogprobs: unknown[], pos: number): Entry[] | null;
+	function createPackedClient(o: { baseUrl: string; model?: string; tokenize: Tokenize;
+		fetch?: typeof fetch; k?: number; theta?: number; edges?: number[]; placeholder?: string }): {
+			decidePacked(state: string | null, questions: Question[], opts?: { theta?: number; edges?: number[] }):
+				Promise<{ rows: PackedDecision[]; packed: PackedSpec; ms: number; nTokens: number }>;
+			buildPacked(state: string | null, questions: Question[]): Promise<PackedSpec>;
+		};
+}
+
+export namespace tokenizer {
+	/** Every letter must be ONE token, with distinct ids — else `LETTER_NOT_ATOMIC`. */
+	function checkLetters(tokenize: Tokenize, letters: string[]): Promise<{ ids: number[] }>;
+	/** `tok(prompt+letter) === tok(prompt) ++ [id]` — else `ANSWER_BOUNDARY`. */
+	function checkBoundary(tokenize: Tokenize, prompt: string, letter: string): Promise<{ id: number }>;
+	/** Two codes sharing their first token would merge two options into one mass. */
+	function firstTokenCollision(tokenize: Tokenize, codes: string[], opts?: { strict?: boolean }):
+		Promise<{ ok: boolean; collisions: [string, string][] }>;
+	function makeHttpTokenizer(o: { baseUrl: string; kind?: 'vllm' | 'llama-server';
+		model?: string; fetch?: typeof fetch }): (text: string) => Promise<number[]>;
+}
+
+export namespace calibration {
+	function applyTemperature(probabilities: number[], T: number): number[];
+	/** `label` = the INDEX of the right option. A `T` is published WITH its split. */
+	function fitTemperature(rows: { probabilities: number[]; label: number }[],
+		o?: { grid?: number[]; split?: string }): {
+			T: number; nll: number; eceBefore: number | null; eceAfter: number | null; n: number; split: string };
+	function nll(rows: { probabilities: number[]; label: number }[], T: number): number;
+	function calibrated<D extends { probabilities: number[]; options: string[]; theta?: number }>(
+		decision: D, T: number): D & { T: number };
+}
+
+export namespace harness {
+	function lcg(seed: number): () => number;
+	function shuffled(n: number, rnd: () => number): number[];
+	/** `order[i]` = the ORIGINAL index of the option now shown at `i`. */
+	function permute(question: Question, seed: number): { question: Question; order: number[] };
+	function unpermute<D extends { probabilities: number[]; options: string[] }>(decision: D, order: number[]): D;
+	function swapAB(state: string, m: { a: string; b: string; end?: string }): string;
+	function stratify<R>(rows: R[], by: (r: R) => string, n: number, seed: number): R[];
+	function nullArms(rows: { label: string; options?: string[]; candidates?: string[]; state?: string }[]):
+		{ majority: number; first: number; lexical: number };
+	/** Paired by `id`; `top` is the option CODE — under permutation an index is not an answer. */
+	function flips(a: { id: string | number; top: string }[], b: { id: string | number; top: string }[]):
+		{ n: number; flips: number; rate: number };
+}
+
+export interface SetNode { division: string; node: string; p: number; margin: number; band: Band; prior: number }
+
+export namespace set {
+	function readSet(o: { divisions: { id: string; poles: string[]; probabilities: number[]; applies?: number }[];
+		theta?: number; minBand?: Band; edges?: number[] }): {
+			active: SetNode[]; undecided: SetNode[]; skipped: { division: string; applies: number }[] };
+	function setMetrics(predicted: string[], gold: string[]):
+		{ exact: 0 | 1; jaccard: number; precision: number; recall: number };
+	function curveByBand(objects: { predicted: { node: string; p: number }[]; gold: string[] }[], cuts?: number[]):
+		{ minP: number; exact: number; jaccard: number; precision: number; recall: number; n: number }[];
+}
+
+export namespace contract {
+	/** `{state, question, options}` OR `content` (the already-rendered string, byte for byte). */
+	function validateInput(row: unknown): { ok: true; rendered: boolean };
+	/** `coverage` must be PRESENT; `null` is legal and says the path cannot compute it. */
+	function validateOutput(row: unknown): { ok: true };
+	function sha256(prompt: string): string;
+	const KINDS: ('choice' | 'noul' | 'score')[];
+	const SOURCES: ('http' | 'logits')[];
+	const OUT_REQUIRED: string[];
+}
+
+export interface LlamaServerModule {
+	createLlamaServerClient(o: { baseUrl: string; nProbs?: number; theta?: number; edges?: number[];
+		fetch?: typeof fetch; thinkingOff?: boolean; model?: string }): Client;
+	entriesOfLlamaServer(resp: unknown): Entry[];
+	asChatResponse(resp: unknown): unknown;
+}
+
+export interface NodeLlamaClient extends Client {
+	decidePacked(state: string | null, questions: Question[], opts?: { theta?: number }):
+		Promise<{ rows: PackedDecision[]; packed: PackedSpec; ms: number; nTokens: number }>;
+	tokenize: Tokenize;
+	info: { gpu: string | false; gpuLayers: number; vramDelta: number };
+	close(): Promise<void>;
+}
+
+export interface NodeLlamaCppModule {
+	/** `node-llama-cpp` is an OPTIONAL peer, loaded with `import()` (it is pure ESM). */
+	createNodeLlamaClient(o: { modelPath: string; gpu?: false | 'auto' | 'cuda' | 'vulkan';
+		contextSize?: number; requireGpu?: boolean; theta?: number; edges?: number[];
+		placeholder?: string; topK?: number }): Promise<NodeLlamaClient>;
+	/** The map carries the WHOLE vocabulary: `limit` bounds detokenisation, `keep` forces the
+	 *  letter ids in so that a rare letter is not read as zero mass. */
+	probsToEntries(probMap: Map<number, number>, decode: (id: number) => string,
+		o?: { limit?: number; keep?: number[] }): Entry[];
+	guardVram(o: { requireGpu: boolean; before: number; after: number; gpuLayers: number }): void;
+	RAW_SAMPLING: { temperature: number; topK: number; topP: number; minP: number; seed: number };
+}
+
+export const backends: {
+	'llama-server': LlamaServerModule;
+	'node-llama-cpp': NodeLlamaCppModule;
+};

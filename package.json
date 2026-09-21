@@ -22,6 +22,7 @@
     "./calibration": "./lib/calibration.js",
     "./harness": "./lib/harness.js",
     "./set": "./lib/set.js",
+    "./contract": "./lib/contract.js",
     "./backends/llama-server": "./lib/backends/llama-server.js",
     "./backends/node-llama-cpp": "./lib/backends/node-llama-cpp.js",
     "./errors": "./lib/errors.js",
@@ -33,6 +34,6 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "node --test test/*.test.js",
-    "lint": "node --check index.js && node --check lib/readout.js && node --check lib/metrics.js && node --check lib/client.js && node --check lib/server.js && node --check lib/replay.js && node --check bin/notjev.js"
+    "lint": "for f in index.js lib/*.js lib/backends/*.js bin/notjev.js; do node --check \"$f\" || exit 1; done"
   }
 }
