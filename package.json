@@ -20,6 +20,7 @@
     "./packed": "./lib/packed.js",
     "./chatml": "./lib/chatml.js",
     "./calibration": "./lib/calibration.js",
+    "./harness": "./lib/harness.js",
     "./backends/llama-server": "./lib/backends/llama-server.js",
     "./backends/node-llama-cpp": "./lib/backends/node-llama-cpp.js",
     "./errors": "./lib/errors.js",
