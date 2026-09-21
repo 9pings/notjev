@@ -65,3 +65,16 @@ test('packed: divergence separate ↔ packed compte les verdicts qui diffèrent,
 	assert.equal(d.n, 2); assert.equal(d.differ, 1); assert.equal(d.rate, 0.5);
 	assert.equal(d.byBand.med.differ, 1); assert.equal(d.byBand.certain.differ, 0);
 });
+
+// 21/09, mesuré en vol : le cœur prend la racine du serveur (sans /v1) et le client packed exigeait « /v1 » —
+// la même valeur passée aux deux donnait `/v1/v1/completions` → 404. Les deux formes rendent la même URL.
+test('createPackedClient — baseUrl avec ou sans /v1 rend la même URL de completions (fix 21/09)', async () => {
+  const seen = [];
+  const fetch = async ( url ) => { seen.push(url); return { ok: false, status: 599, json: async () => ({}) }; };
+  const tokenize = async ( s ) => [...s].map(( c ) => c.charCodeAt(0) );
+  for ( const baseUrl of ['http://h:8000', 'http://h:8000/', 'http://h:8000/v1', 'http://h:8000/v1/'] ) {
+    const pk = createPackedClient({ baseUrl, model: 'm', tokenize, fetch });
+    await assert.rejects(() => pk.decidePacked('s', [{ id: 'q', question: 'q', options: ['X', 'Y'] }]), /NOTJEV_HTTP/);
+  }
+  assert.deepStrictEqual([...new Set(seen)], ['http://h:8000/v1/completions'], 'une seule URL quelle que soit la forme');
+});
