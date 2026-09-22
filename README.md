@@ -225,6 +225,7 @@ them renormalises anything in silence.
 | `set` | a coordinate as a SET of active nodes | exact-set 0.692 / Jaccard 0.817, against a null arm at 0.291 |
 | `logits` | entries straight from pruned logits | `lse` missing -> `coverage: null`, never 1 |
 | `contract` | the JSONL form the scorer reads | a missing field refuses BEFORE the GPU is spent |
+| `wire` | the Jev `/v1/systemone` contract, translated | a `typesafe-sdk` works unchanged; >26 options = `422`, never truncated |
 
 **Packed** — one state, k questions, one forward pass. The prompt is a chain of alternating turns
 whose assistant turns carry a fixed placeholder (`_`, never the model's own answer); the
@@ -390,8 +391,39 @@ curl -s localhost:8787/v1/decide -H 'content-type: application/json' -d '{
 kill %1
 ```
 
-One state, N questions, typed answers — the shape is deliberately close to a "system one" service,
-and it claims compatibility with none of them.
+One state, N questions, typed answers — the native route: it claims compatibility with nothing.
+
+## The Jev wire contract — `POST /v1/systemone`
+
+The same server also speaks the one-endpoint contract of TypeSafe's Jev and of the OpenJev
+ecosystem, so a `typesafe-sdk` (or anything that speaks it) pointed at this server works unchanged —
+against ANY OpenAI-compatible engine you configure:
+
+```bash
+notjev serve --port 8788 &        # same process: /v1/decide AND /v1/systemone
+until curl -sf localhost:8788/health >/dev/null; do sleep 0.2; done
+
+curl -s localhost:8788/v1/systemone -H 'content-type: application/json' -d '{
+  "state": "The minister announced a plan on Tuesday.",
+  "questions": {
+    "policy": { "type": "noul",   "instructions": "is this about policy?" },
+    "kind":   { "type": "choice", "instructions": "event type",
+                 "criteria": { "ANNOUNCE": "someone makes something public",
+                               "MEET": "two parties meet", "VOTE": "a ballot is held" } }
+  }
+}'
+
+kill %1
+```
+
+Answers come back grouped as `{ nouls, choices, scores }` with `confidence = 1 − H(p)/ln K`, `usage`
+in Jev field names, `GET /v1/models` resolving `jev-latest`, and FastAPI-shaped `422` detail lists.
+Every answer also carries a `notjev` block — `margin`, `band`, `coverage`, `degraded` — the
+instrument fields the contract has no room for. Two things are REFUSED rather than degraded: a
+choice with more than 26 options (the letter regime; Jev allows 255) comes back `422` with a named
+reason, never a truncated menu; and an upstream failure is a `502` for the whole request, never
+half-filled answers. An optional `apiKey` on `createServer` turns the POST routes into
+bearer-guarded ones (`NOTJEV_API_KEY=sk-… notjev serve`).
 
 ## Server quickstarts
 

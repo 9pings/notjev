@@ -201,18 +201,22 @@ async function main( argv ) {
 	if ( cmd === 'serve' ) {
 		const port = Number(a.port || process.env.NOTJEV_PORT || 8787);
 		const host = a.host || process.env.NOTJEV_HOST || '127.0.0.1';
+		/* `NOTJEV_API_KEY` guards the POST routes too: one key, two doors (upstream, callers). */
+		const apiKey = a['api-key'] || a.apiKey || process.env.NOTJEV_API_KEY || null;
 		const server = createServer({
 			baseUrl: a['base-url'] || a.baseUrl,
 			model  : a.model,
-			apiKey : a['api-key'] || a.apiKey,
+			apiKey : apiKey,
 			theta  : a.theta !== undefined ? Number(a.theta) : undefined,
 			templateKwargs: (a['no-template-kwargs'] || a['template-kwargs'] === 'none') ? null : undefined,
 		});
 		await new Promise(( r ) => server.listen(port, host, r) );
 		console.log('notjev serve · http://' + host + ':' + port + ' -> ' + server.notjev.client.baseUrl
 			+ ' · model ' + (server.notjev.client.model || '(server default)')
-			+ ' · theta ' + server.notjev.client.theta);
+			+ ' · theta ' + server.notjev.client.theta
+			+ (apiKey ? ' · bearer-guarded' : ''));
 		console.log('  POST /v1/decide  { "state": "…", "questions": [{ "question": "…", "options": ["A","B"] }] }');
+		console.log('  POST /v1/systemone  { "state": "…", "questions": { "q": { "type": "choice", "instructions": "…", "criteria": { … } } } }');
 		return new Promise(() => {} ); // runs until killed
 	}
 

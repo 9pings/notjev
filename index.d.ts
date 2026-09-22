@@ -169,7 +169,48 @@ export function report(rows: ReplayRow[], opts?: { bins?: number; thetas?: numbe
 };
 
 export function createServer(opts?: ClientOptions & { client?: Client; bodyLimit?: number;
-	log?: ((...a: unknown[]) => void) | null }): import('http').Server;
+	apiKey?: string; log?: ((...a: unknown[]) => void) | null }): import('http').Server;
+
+/* ── THE JEV WIRE CONTRACT (POST /v1/systemone) ─────────────────────────────────────────── */
+
+/** One question of a `/v1/systemone` request. `criteria` depends on `type`: noul — optional
+ *  `{true, false}` descriptions; choice — `{ name: description }`; score — `[level0, level1, …]`. */
+export interface WireQuestion {
+	type: 'noul' | 'choice' | 'score';
+	instructions: string;
+	criteria?: unknown;
+}
+
+/** The `notjev` block on every wire answer — the instrument fields the contract has no room for. */
+export interface WireExtension {
+	p1: number; p2: number; margin: number; band: Band; prior: number;
+	coverage: number; exactMass: number; spacedMass: number;
+	degraded: boolean; undecided: boolean; theta: number; top: string;
+}
+
+export interface WireAnswers {
+	nouls: Record<string, { type: 'noul'; noul: number; confidence: number; notjev: WireExtension }>;
+	choices: Record<string, { type: 'choice'; choice: string | null;
+		probabilities: Record<string, number>; confidence: number; notjev: WireExtension }>;
+	scores: Record<string, { type: 'score'; score: number | null; legend: string[];
+		probabilities: Record<string, number>; confidence: number; notjev: WireExtension }>;
+}
+
+export namespace wire {
+	/** The wire request -> the library's questions. Throws `NOTJEV_WIRE_422` with a FastAPI
+	 *  `.detail` list — refused BEFORE the engine is spent. */
+	function toQuestions(body: { model?: string; state: string; theta?: number;
+		questions: Record<string, WireQuestion> }): {
+		state: string; theta: number; questions: Question[];
+		specs: { name: string; type: 'noul' | 'choice' | 'score'; criteria: unknown; ids: string[] }[] };
+	/** The decideMany rows -> the grouped answers. Throws `NOTJEV_WIRE_UPSTREAM` when any
+	 *  question failed — every name answered or none, never a half-filled response. */
+	function toAnswers(specs: { name: string; type: 'noul' | 'choice' | 'score';
+		criteria: unknown; ids: string[] }[], results: Decision[]): {
+		answers: WireAnswers; usage: { input_tokens: number | null; output_tokens: number | null } };
+	/** `1 − H(p)/ln K` over the renormalised distribution — certain = 1, uniform = 0. */
+	function confidenceOf(probabilities: number[]): number;
+}
 
 export namespace readout {
 	const LETTERS: string;

@@ -111,6 +111,5 @@ describe('README — every example runs as written', () => {
 		assert.strictEqual(require('../package.json').engines.node, '>=20');
 		assert.strictEqual(require('../package.json').license, 'Apache-2.0',
 			'the README states Apache-2.0 (owner decision, 21/09) — the manifest must say the same');
-		assert.strictEqual(require('../package.json').private, true);
 	});
 });

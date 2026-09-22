@@ -1,9 +1,10 @@
 {
   "name": "notjev",
   "version": "0.1.0",
-  "private": true,
   "license": "Apache-2.0",
-  "description": "Read a decision out of the next-token distribution instead of making a model write it: one chat/completions request, max_tokens 1, logprobs on, a verdict AND a calibrated-ish probability. Server-agnostic, zero runtime dependency.",
+  "author": "Nathanael Braun <pp9ping@gmail.com>",
+  "publishConfig": { "access": "public" },
+  "description": "Read a decision out of the next-token distribution instead of making a model write it: one chat/completions request, max_tokens 1, logprobs on, a verdict AND a calibrated-ish probability. Server-agnostic, zero runtime dependency. Speaks the Jev /v1/systemone wire contract.",
   "keywords": ["llm", "logprobs", "classification", "decision", "abstention", "calibration", "vllm", "llama.cpp", "ollama", "openai"],
   "main": "index.js",
   "types": "index.d.ts",
@@ -23,6 +24,7 @@
     "./harness": "./lib/harness.js",
     "./set": "./lib/set.js",
     "./contract": "./lib/contract.js",
+    "./wire": "./lib/wire.js",
     "./backends/llama-server": "./lib/backends/llama-server.js",
     "./backends/node-llama-cpp": "./lib/backends/node-llama-cpp.js",
     "./errors": "./lib/errors.js",
@@ -34,6 +36,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "node --test test/*.test.js",
-    "lint": "for f in index.js lib/*.js lib/backends/*.js bin/notjev.js; do node --check \"$f\" || exit 1; done"
+    "lint": "for f in index.js lib/*.js lib/backends/*.js bin/notjev.js; do node --check \"$f\" || exit 1; done",
+    "prepublishOnly": "npm run lint && npm test"
   }
 }
