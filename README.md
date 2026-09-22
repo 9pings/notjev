@@ -167,6 +167,44 @@ const jev = createClient();
   longer fits the model: the mass went somewhere outside your menu.
 * **`degraded` is never "it hesitates".** It means the answer was not in your codomain at all.
 
+## What it needs, what it buys, what it costs
+
+**It needs a model, loaded and reachable — and that is the whole deployment story.** This library
+does no inference: it needs an OpenAI-compatible server (vLLM, llama.cpp, Ollama, an API) that
+returns `logprobs`, with weights already in memory. There is nothing to train and nothing to
+download here, but there is an engine to run.
+
+**It is the SAME model as the rest of your stack — that is the point, not a concession.** The
+weights that answer your chat sessions are the weights that decide: one engine serves both paths
+against the same weights, with nothing extra in VRAM and no second deployment. notjev is the fast
+**System 1** read on that model (one token, ~70 ms, a probability); the same server's
+`/v1/chat/completions` is the **System 2** answer (generation, reasoning, as many tokens as the
+case deserves). Escalation is a route change, not a stack change: decide first at one token, and
+send to the same model, as a chat, the cases whose `margin` was not enough.
+
+**What that buys:**
+
+* a verdict **and** a probability, therefore a margin, therefore an abstention you tune as a curve
+  (`theta`), not a plea for mercy from the model;
+* a decision at the price of one prefill plus one token — and on `decideMany` the shared state is
+  nearly free behind the server's prefix cache;
+* no parsing, no schema, no repair loop: the answer is read off the distribution, so it cannot be
+  hallucinated off-schema;
+* a `coverage` smoke alarm for the runs where the model meant something else entirely;
+* record-and-replay: re-tune `theta` on last week's run without touching a GPU.
+
+**What it costs:**
+
+* **one token is one thought.** The model cannot deliberate: a question that needs reasoning must
+  go to the same server as a chat — that is the System 2 path above, it costs tokens, and notjev
+  tells you exactly when to take it (the margin);
+* the probabilities are **ordered, not calibrated** — measure the ECE on your own questions before
+  writing `p1` anywhere (the `calibration` module is for that);
+* the menu order is part of the measurement (5.6-17.7 % of flips on permutation) and the raw `p1`
+  does not survive a change of engine — the `band` does;
+* some providers return no logprobs (Anthropic's Messages API): there this cannot work, and it says
+  so instead of guessing.
+
 ## Measure it on your own questions
 
 Record the responses while you run, replay them for free afterwards:
@@ -548,8 +586,8 @@ flexibility, and written down so they can be argued with:
    every diagnosis.
 8. **Exit codes 3 and 4** for UNDECIDED and DEGRADED, so a shell cannot mistake an abstention for a
    verdict.
-9. **Apache-2.0, revisable** — the owner settled the licence on 21/09; the package stays
-   `private: true` until publication.
+9. **Apache-2.0, revisable** — the owner settled the licence on 21/09; published as `notjev` on npm
+   (public access), source at `github.com/9pings/notjev`.
 
 ## En français, en bref
 
