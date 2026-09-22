@@ -43,6 +43,11 @@ async function connected( scope = 'local' ) {
 		assert.deepEqual(tools.map(( t ) => t.name).sort(), ['notjev_context_drop', 'notjev_context_put', 'notjev_decide']);
 		const decide = tools.find(( t ) => t.name === 'notjev_decide');
 		assert.equal(decide.inputSchema.required[0], 'questions');
+		assert.deepEqual(decide.inputSchema.properties.context.properties.type.enum,
+			['fresh', 'messages', 'snapshot', 'current']);
+		const put = tools.find(( t ) => t.name === 'notjev_context_put');
+		assert.deepEqual(put.inputSchema.properties.context.properties.type.enum, ['fresh', 'messages'],
+			'put ne doit pas annoncer snapshot/current que le service refuse');
 		assert.deepEqual(TOOLS.map(( t ) => t.name), tools.map(( t ) => t.name), 'la déclaration publique est celle servie');
 		await c.close();
 	});

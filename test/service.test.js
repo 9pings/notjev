@@ -22,7 +22,12 @@ function fakeBackend( o = {} ) {
 			calls.push({ context: JSON.parse(JSON.stringify(context)), question, signal });
 			inFlight++; maxInFlight = Math.max(maxInFlight, inFlight);
 			try {
-				if ( o.delayMs ) await new Promise(( r ) => setTimeout(r, o.delayMs));
+				if ( o.delayMs ) await new Promise(( resolve, reject ) => {
+					const timer = setTimeout(done, o.delayMs);
+					function done() { signal?.removeEventListener('abort', abort); resolve(); }
+					function abort() { clearTimeout(timer); reject(signal.reason); }
+					if (signal?.aborted) abort(); else signal?.addEventListener('abort', abort, { once: true });
+				});
 				signal?.throwIfAborted();
 				if ( o.failFor && o.failFor.has(question.id) )
 					throw Object.assign(new Error('backend boom for ' + question.id), { code: 'NOTJEV_X' });
@@ -126,7 +131,7 @@ describe('service — annulation et fermeture', () => {
 		const service = createDecisionService({ backend, timeoutMs: 10000 });
 		const ac = new AbortController();
 		setTimeout(() => ac.abort(), 30);
-		await assert.rejects(() => service.decide({ questions: [Q('a')], signal: ac.signal }));
+		await assert.rejects(() => service.decide({ questions: [Q('a')] }, { signal: ac.signal }));
 	});
 
 	test('close() abrège les vols en cours (NOTJEV_CLOSED), vide le stock et ferme un backend possédé', async () => {

@@ -73,7 +73,9 @@ The host CLI keeps the conversation and the tool loop — NotJev only judges. Th
 context explicitly (`fresh`, `messages`, `snapshot`) but cannot read the host's history: MCP has no
 such access, and `current` is refused by the service (`NOTJEV_BAD_CONTEXT`) unless the gateway
 replaced it first. The SDK is an optional peer: without it the refusal is `NOTJEV_MCP_MISSING`,
-named, not a crash.
+named, not a crash. Install it explicitly alongside the package:
+`npm install notjev @modelcontextprotocol/sdk`. The native command likewise needs the optional
+`node-llama-cpp` peer.
 
 ## The gateway — `current` becomes THE request
 
