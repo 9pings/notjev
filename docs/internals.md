@@ -15,6 +15,12 @@
 * **The prompt weighs more than the engine** (0.833 vs 0.733 on layout alone, same model). Changing
   `instruction`, the option order, or adding descriptions is a new experiment, not a setting.
 * **A thinking model must have thinking off**, or the first token is `ﰢ` and coverage is 0.
+* **`current` exists only through the gateway.** MCP alone has no access to the host CLI's
+  conversation: the gateway binds `current` to THE request that carried the tool call; without it,
+  the service refuses by name.
+* **Images travel over HTTP engines only.** The native backend refuses image content explicitly
+  (`NOTJEV_NATIVE_VISION_UNSUPPORTED`); use a multimodal engine (llama-server with its `mmproj`,
+  or any OpenAI-compatible vision endpoint) for image contexts.
 
 ## What this is not
 

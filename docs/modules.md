@@ -17,6 +17,7 @@ of them renormalises anything in silence.
 | `logits` | entries straight from pruned logits | `lse` missing -> `coverage: null`, never 1 |
 | `contract` | the JSONL form the scorer reads | a missing field refuses BEFORE the GPU is spent |
 | `wire` | the Jev `/v1/systemone` contract, translated | a `typesafe-sdk` works unchanged; >26 options = `422`, never truncated |
+| `context` + `service` + `gateway` + `mcp` | a CONVERSATION as context: snapshots, three MCP tools, `current` bound to its request — [docs/context-mcp.md](context-mcp.md) | abstention removes 24/27 vision errors (MNIST) and 55/59 (CIFAR-10), theta = 0.5 |
 
 **Packed** — one state, k questions, one forward pass. The prompt is a chain of alternating turns
 whose assistant turns carry a fixed placeholder (`_`, never the model's own answer); the

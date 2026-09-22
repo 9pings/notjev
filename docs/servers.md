@@ -92,3 +92,17 @@ notjev decide --no-template-kwargs --state 'x' --question q --option A1 --option
 
 (in code: `createClient({ templateKwargs: null })`; some models also want
 `extra: { max_completion_tokens: 1 }` instead of `max_tokens`.)
+
+## The context gateway and MCP
+
+Two more serving surfaces for decisions over a conversation (snapshots, images, tool calls),
+configured with the same `NOTJEV_BASE_URL` / `NOTJEV_MODEL` as above:
+
+```sh
+notjev gateway --port 8789 &     # Chat Completions proxy + /notjev/decide, /notjev/context/* routes
+notjev mcp                       # stdio, three tools: notjev_decide, notjev_context_put, _drop
+```
+
+The gateway is the only thing that can give `{ context: { type: 'current' } }` a meaning: it binds
+`current` to THE request that carried the tool call, as an immutable snapshot. Contract, limits
+and the vision numbers (MNIST, CIFAR-10, text and screenshots): [docs/context-mcp.md](context-mcp.md).

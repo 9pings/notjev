@@ -151,6 +151,8 @@ gateway` serve the context subsystem (see [docs/context-mcp.md](docs/context-mcp
 * **Entity anchoring / deduplication** — the margin is the product, not the verdict.
 * **Grading with confidence** — `score` returns the expectation over the whole scale.
 * **Measuring a prompt change** — `harness` permutes, stratifies, runs the null arms.
+* **Judging a conversation, or an image** — [MCP tools, snapshots, `current` binding](docs/context-mcp.md):
+  the host CLI keeps the conversation, NotJev keeps the verdict.
 * **Not**: free generation, or anything whose codomain you cannot write down. One token says
   nothing there, and this library refuses to pretend otherwise.
 
