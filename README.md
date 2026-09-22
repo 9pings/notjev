@@ -1,26 +1,44 @@
-# notjev
+<h1 align="center">NotJev</h1>
 
-[![npm version](https://img.shields.io/npm/v/notjev.svg)](https://www.npmjs.com/package/notjev)
-[![CI](https://github.com/9pings/notjev/actions/workflows/ci.yml/badge.svg)](https://github.com/9pings/notjev/actions/workflows/ci.yml)
-[![Node >= 20](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+---
 
-**Read the decision out of the distribution, instead of making the model write it.**
+<p align="center">
+  <a href="https://www.npmjs.com/package/notjev">
+    <img src="https://img.shields.io/npm/v/notjev.svg" alt="npm version">
+  </a>
+  <a href="https://github.com/9pings/notjev/actions/workflows/ci.yml">
+    <img src="https://github.com/9pings/notjev/actions/workflows/ci.yml/badge.svg" alt="CI">
+  </a>
+  <a href="https://nodejs.org/">
+    <img src="https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg" alt="Node >= 20">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License: Apache-2.0">
+  </a><br/>
+<b>One token. A real probability. A decision you can trust (or refuse).</b>
+</p>
 
-A closed question — "same or other?", "which of these 12 categories?", "1 to 5?" — does not need a
-generated answer. Present the options as `A.`, `B.`, … ask for **one** token with `logprobs: true`,
-keep the mass of the letter tokens, renormalise: you get a verdict **and a probability** — therefore
-a margin, therefore an abstention you can tune. One HTTP request, `max_tokens: 1`. Zero runtime
-dependency; works against anything that speaks OpenAI `chat/completions` with logprobs (vLLM,
-llama.cpp, Ollama, OpenAI). **26 options maximum** — one letter, one token.
+---
 
-It needs a model, **loaded and reachable** — and it is the SAME model as the rest of your stack, not
-a concession: the weights that answer your chat sessions are the weights that decide. notjev is the
-fast **System 1** read on that model (one token, a probability); the same server's
-`/v1/chat/completions` is the **System 2** answer. Escalation is a route change: decide first at one
-token, and send to the same model, as a chat, the cases whose `margin` was not enough. What it costs:
-one token is one thought (no deliberation), the probabilities are ordered but not calibrated, and
-the raw `p1` does not survive a change of engine — the `band` does.
+
+Closed questions don’t need free-text generation.  
+Present the options as `A.` `B.` `C.`…, ask for a single token with `logprobs`, keep only the letter mass, renormalise → you get a **verdict + margin + tunable abstention**.
+
+- Works with **any** OpenAI-compatible endpoint that returns logprobs (vLLM, llama.cpp, Ollama, OpenAI…)
+- Zero runtime dependencies
+- Same model as your chat stack (true System 1)
+- Speaks the Jev `/v1/systemone` wire contract
+- 26 options max. One HTTP request. `max_tokens: 1`
+
+You just need a model, **loaded and reachable** — and it is the *same* model as the rest of your stack, not a concession. The weights that answer your chat sessions are the weights that decide.
+
+**notjev** is the fast **System 1** read on that model (one token, a probability).  
+When the margin is too thin → escalate to the same model in full chat mode.  
+The same server’s `/v1/chat/completions` becomes the **System 2** answer. Escalation is just a route change: decide first with one token, then send the uncertain cases to the same model as a normal chat.
+
+What it costs:  
+one token is one thought (no deliberation), the probabilities are ordered but not calibrated, and the raw `p1` does not survive a change of engine — the `band` does.
+
 
 ## Install
 
