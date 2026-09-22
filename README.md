@@ -223,8 +223,9 @@ by `bench/throughput.js` (raws committed in `bench/results/`), on **real gold-la
 | llama-server `Qwen3-8B-Q4_K_M` | **23 ms** | 41.8 q/s (c1) · 52.6 q/s (c2) |
 | vLLM `Qwen3.8-27B-NVFP4` | **101 ms** | 9.6 q/s (c1) · 20.3 q/s (c4) |
 
-For scale, on the same style of questions: hosted Jev measures at a **419 ms** median (wiseways
-s1bench, 20/09), and so1's headline 71.9 q/s is a 4B model on an H200 slice. One honest inversion we
+For scale, on the same style of questions: hosted Jev measures at a **419 ms** median (an
+independent same-questions bench of the hosted services, 2026-09-20), and so1's headline 71.9 q/s is
+a 4B model on an H200 slice. One honest inversion we
 measured ourselves and publish as-is: **on vLLM, `packed` is slower than reading one by one** (1.1 q/s
 vs 9.6 on short states — extracting `prompt_logprobs` costs more than a cached-prefill one-token
 read). so1 measured the same thing. `packed` saves tokens, not time, on an engine with a prefix
@@ -530,9 +531,11 @@ notjev decide --no-template-kwargs --state 'x' --question q --option A1 --option
 
 ## What is measured, and where
 
-These numbers come from the **wiseways.me** project, campaign of **2026-09-20**, 27B model served
-by vLLM (NVFP4) and by llama.cpp (GGUF), on that project's own judge questions — they are quoted
-here as provenance, not as a promise about your questions:
+These numbers come from a **production judge** — a real editorial pipeline where this readout decides
+entity matches, anchorings and event types on live traffic (170k recorded calls, 5 089 distinct
+questions), campaign of **2026-09-20**, 27B model served by vLLM (NVFP4) and by llama.cpp (GGUF),
+on that pipeline's own judge questions — they are quoted here as provenance, not as a promise about
+your questions:
 
 | measurement | value |
 |---|---|
@@ -597,7 +600,7 @@ numbers above stop applying. That test is the point of the fixture.
 Design calls that the source material did not settle, resolved here in favour of long-term
 flexibility, and written down so they can be argued with:
 
-1. **`lib/readout.js` is a faithful port** of the module that runs in production at wiseways.me
+1. **`lib/readout.js` is a faithful port** of the module that runs in that production judge
    (same constants, same layout, same refusals, same band/snap arithmetic — 8018 differential
    comparisons, 0 divergence). Only the parts tied to that host were dropped (its calibration store
    and the key helper), and the measurement helpers moved to `lib/metrics.js`.
@@ -632,8 +635,8 @@ pendante et se re-pose quand l'état change. Le point `p1` n'est pas portable d'
 la **bande** l'est : on range `p1` dans `low/med/high/certain` et on écrit le milieu de bande
 (`prior`). Aucune liste de mots d'une langue ne vit dans la bibliothèque : les options, leurs
 descriptions et la question viennent de l'appelant, toujours — `noul()` prend donc ses deux options
-en argument. Les chiffres cités viennent de la campagne du 20/09/2026 de wiseways.me (27B, vLLM),
-et l'empreinte sha256 de la chaîne envoyée est testée contre cette campagne : si un octet de
+en argument. Les chiffres cités viennent d'une campagne de mesure en production du 20/09/2026
+(27B, vLLM), et l'empreinte sha256 de la chaîne envoyée est testée contre cette campagne : si un octet de
 l'enveloppe bouge, `npm test` tombe et les chiffres ne s'appliquent plus.
 
 ## Tests

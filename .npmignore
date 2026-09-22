@@ -3,6 +3,8 @@
 # Everything else here is dev-only and must never reach a user's node_modules.
 test/
 scripts/
+docs/plans/
+docs/specs/
 docs/verifications/
 .github/
 .idea/

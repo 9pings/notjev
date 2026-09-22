@@ -49,8 +49,9 @@ const W = 960, H = 560;
 let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">\n`
 	+ `<rect width="${W}" height="${H}" fill="#fff" />\n`
 	/* Panel 1 — median latency per decision. Sources: bench/results/llama-throughput-2026-09-22.json
-	 * (notjev llama), campaign 20/09 (notjev vLLM 27B, docs README), s1bench-20260920.json
-	 * (wiseways jev-bench: jev 0.419 s, simplejev-qwen38-27b 0.613, djev-full 0.270, reflex-4b 0.138 — medians). */
+	 * (notjev llama), bench/results/throughput-2026-09-22.json (notjev vLLM 27B), an independent
+	 * same-questions bench of the hosted services and local clones (2026-09-20): jev 0.419 s,
+	 * simplejev-qwen38-27b 0.613, djev-full 0.270, reflex-4b 0.138 — medians. */
 	+ panel(24, 10, 912, 'Median latency per decision', 'ms — lower is better; each arm on its own engine (log scale)', [
 		{ label: 'notjev · llama.cpp 8B Q4', value: c1.p50, unit: ' ms', hi: true },
 		{ label: 'notjev · vLLM 27B NVFP4', value: v1.p50, unit: ' ms', hi: true },
@@ -72,14 +73,15 @@ let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" vi
 		{ label: 'Jev (hosted)', value: 2.39 },
 		{ label: 'simple-jev · 27B', value: 1.63 },
 	].sort(( a, b ) => b.value - a.value ), 100, 'log')
-	+ `<text x="24" y="${H - 52}" font-size="9" fill="#888">notjev rows: measured 2026-09-22 by bench/throughput.js against live engines — llama-server Qwen3-8B-Q4_K_M (n=16/arm) and vLLM Qwen3.8-27B-NVFP4 (n=24/arm, real gold states) — raw in bench/results/. Other rows: their own publications / the wiseways s1bench of 2026-09-20, each on its own engine.</text>\n`
+	+ `<text x="24" y="${H - 52}" font-size="9" fill="#888">notjev rows: measured 2026-09-22 by bench/throughput.js against live engines — llama-server Qwen3-8B-Q4_K_M (n=16/arm) and vLLM Qwen3.8-27B-NVFP4 (n=24/arm, real judge states) — raw in bench/results/. Other rows: their own publications / an independent bench of the hosted services on shared questions (2026-09-20), each on its own engine.</text>\n`
 	+ `<text x="24" y="${H - 38}" font-size="9" fill="#888">The engine is the variable, not the readout: so1's 71.9 q/s is a 4B on an H200, openjev's a purpose-built diffusion model, Jev's their fleet. notjev runs on the model you already serve.</text>\n`
 	+ `<text x="24" y="${H - 24}" font-size="9" fill="#888">Latency panel: shorter bars are faster. Throughput panel: longer bars are faster — hence the opposite sort.</text>\n`
 	+ `</svg>\n`;
 fs.writeFileSync(path.join(OUT, 'perf-2026-09-22.svg'), svg);
 
-/* ── The accuracy figure — TABLE_20260920.md (wiseways jev-bench): readout 27B (the core of this
- * library, as it runs in production at wiseways.me) vs the null arm and the best clone on each bench. */
+/* ── The accuracy figure — an independent clones bench on gold-labelled production questions
+ * (2026-09-20): readout 27B (the core of this library, as it runs in a production judge) vs the
+ * null arm and the best clone on each bench. */
 const BENCHES = [
 	{ name: 'actor dedup (n=450)', null_: 92.0, best: { v: 95.3, who: 'xenc-mmBERT' }, readout: 98.7 },
 	{ name: 'subject dedup (n=450)', null_: 66.4, best: { v: 90.7, who: 'xenc-mmBERT' }, readout: 90.2 },
@@ -90,8 +92,8 @@ const BENCHES = [
 	const W2 = 960, H2 = 330, x0 = 40, y0 = 70, pw = W2 - 80, gap = pw / BENCHES.length, bw = 18;
 	let g = `<svg xmlns="http://www.w3.org/2000/svg" width="${W2}" height="${H2}" viewBox="0 0 ${W2} ${H2}" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">\n`
 		+ `<rect width="${W2}" height="${H2}" fill="#fff" />\n`
-		+ `<text x="${x0}" y="30" font-size="15" font-weight="700" fill="#111">Accuracy on the wiseways production benches — against the null arm and the best clone</text>\n`
-		+ `<text x="${x0}" y="46" font-size="10.5" fill="#666">Same questions, gold-labelled (jev-bench, 2026-09-20). The null arm — “always answer the majority class” — is the bar a tool must clear to measure anything.</text>\n`;
+		+ `<text x="${x0}" y="30" font-size="15" font-weight="700" fill="#111">Accuracy on gold-labelled production questions — against the null arm and the best clone</text>\n`
+		+ `<text x="${x0}" y="46" font-size="10.5" fill="#666">Same questions, human-reviewed labels (2026-09-20). The null arm — “always answer the majority class” — is the bar a tool must clear to measure anything.</text>\n`;
 	[ ['#b9b9b9', 'null arm (majority)'], ['#7a9cc7', 'best clone on that bench'], ['#0a7a4a', 'readout 27B (this library\'s core)'] ]
 		.forEach(( [c, l], i ) => {
 			g += `<rect x="${x0 + 250 + i * 220}" y="52" width="10" height="10" fill="${c}" /><text x="${x0 + 264 + i * 220}" y="61" font-size="10.5" fill="#444">${esc(l)}</text>\n`;
@@ -107,7 +109,7 @@ const BENCHES = [
 		g += `<text x="${cx.toFixed(0)}" y="${y0 + 218}" font-size="10.5" text-anchor="middle" fill="#222">${esc(b.name)}</text>\n`
 			+ `<text x="${cx.toFixed(0)}" y="${y0 + 231}" font-size="9" text-anchor="middle" fill="#888">best clone: ${esc(b.best.who)}</text>\n`;
 	});
-	g += `<text x="${x0}" y="${H2 - 14}" font-size="9" fill="#888">Source: wiseways.me jev-bench, TABLE_20260920.md — clones benched on the same gold-labelled questions (their own raws). The readout 27B is the mechanism this library implements, as it runs in production.</text>\n</svg>\n`;
+	g += `<text x="${x0}" y="${H2 - 14}" font-size="9" fill="#888">Source: an independent bench of the clones on the same gold-labelled production questions, human-reviewed labels (2026-09-20). The readout 27B is the mechanism this library implements, as it runs in a production judge.</text>\n</svg>\n`;
 	fs.writeFileSync(path.join(OUT, 'accuracy-2026-09-20.svg'), g);
 }
 

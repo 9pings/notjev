@@ -20,7 +20,7 @@ const nj = require('..');
 const arg = ( n, d ) => { const i = process.argv.indexOf('--' + n); return i > -1 ? process.argv[i + 1] : d; };
 const BASE = arg('base-url'), MODEL = arg('model');
 const BACKEND = arg('backend', 'chat');   /* 'chat' (createClient) or 'llama' (/completion + n_probs) */
-const GOLD = arg('gold', '/mnt/wsl/WipDrive/_perso/wiseways.me/WIP/data/jev-bench/gold.jsonl');
+const GOLD = arg('gold', null);   /* pass a gold.jsonl (rows with `state`), or use the built-in states */
 const N = Number(arg('n', 24));
 const CONCS = String(arg('concs', '1,4')).split(',').map(Number);
 const NPACKED = Number(arg('packed', 12));
@@ -37,9 +37,28 @@ const pct = ( xs, p ) => {
 };
 const r3 = ( x ) => Math.round(x * 10) / 10;
 
+/** Built-in states — the bench runs with no corpus at all. Short, neutral, of the types this
+ * readout decides in production: pairs to match (`MEME`/`AUTRE`) and things to type. */
+const BUILTIN = [
+	{ id: 'p1', state: 'A: "Marie Curie" / B: "Mary Curie" (as heard in a radio transcript)\n' },
+	{ id: 'p2', state: 'A: "Paris, France" / B: "Paris, Texas"\n' },
+	{ id: 'p3', state: 'A: "ACME Industries Ltd" / B: "ACME Industries Limited"\n' },
+	{ id: 'p4', state: 'A: "Jean Dupont, conseiller municipal" / B: "J. Dupont, conseiller municipal"\n' },
+	{ id: 'p5', state: 'A: "OM" / B: "Olympique de Marseille"\n' },
+	{ id: 'p6', state: 'A: "RER ligne B" / B: "ligne B du métro"\n' },
+	{ id: 'p7', state: 'A: "Nikon FM2 (1982, manual focus)" / B: "Nikon FM2n (manual focus)"\n' },
+	{ id: 'p8', state: 'A: "Organisation des Nations unies" / B: "ONU"\n' },
+	{ id: 'p9', state: 'A: "Support vector machine" / B: "SVM"\n' },
+	{ id: 'p10', state: 'A: "Bureau de vote n°12" / B: "bureau n°12 de vote"\n' },
+	{ id: 'p11', state: 'A: "18 rue des Lilas" / B: "18, rue des Lilas"\n' },
+	{ id: 'p12', state: 'A: "Q3 revenue" / B: "third-quarter revenue"\n' },
+];
+
 (async () => {
-	const gold = fs.readFileSync(GOLD, 'utf8').split('\n').filter(Boolean)
-		.map(( l ) => JSON.parse(l) ).filter(( r ) => r.state && (r.options || []).length === 2 );
+	const gold = GOLD
+		? fs.readFileSync(GOLD, 'utf8').split('\n').filter(Boolean)
+			.map(( l ) => JSON.parse(l) ).filter(( r ) => r.state && (r.options || []).length === 2 )
+		: BUILTIN;
 	const states = gold.slice(0, Math.max(N, NPACKED));
 	const questions = ( s ) => [{ id: s.id, question: 'verdict', options: ['MEME', 'AUTRE'] }];
 	const client = BACKEND === 'llama'
