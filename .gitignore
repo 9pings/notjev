@@ -3,3 +3,6 @@ npm-debug.log*
 *.tgz
 .DS_Store
 .idea/
+docs/plans/
+docs/specs/
+docs/verifications/
