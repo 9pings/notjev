@@ -35,7 +35,7 @@ jobs:
         run: |
           set -e
           mkdir -p dist
-          for target in bun-linux-x64 bun-linux-arm64 bun-windows-x64 bun-darwin-x64 bun-darwin-arm64; do
+          for target in bun-linux-x64 bun-linux-arm64 bun-windows-x64 bun-windows-arm64 bun-darwin-x64 bun-darwin-arm64; do
             out="notjev-${GITHUB_REF_NAME}-${target#bun-}"
             bun build --compile bin/notjev.js --target="$target" \
               --external node-llama-cpp --external @modelcontextprotocol/sdk \

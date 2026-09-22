@@ -47,7 +47,8 @@ npm install notjev
 ```
 
 Node >= 20 (native `fetch`). No dependencies. Single-file binaries (linux x64/arm64, macOS
-x64/arm64, windows x64) for every release tag, compiled with Bun from the same `bin/notjev.js`:
+x64/arm64, windows x64/arm64) for every release tag, compiled with Bun from the same
+`bin/notjev.js`:
 grab them from [releases](https://github.com/9pings/notjev/releases) — same CLI, no runtime at all.
 In the binaries, `notjev mcp` refuses by name (`NOTJEV_MCP_MISSING`): the optional peers cannot be
 embedded, use `npm install notjev` for MCP or the native backend.
