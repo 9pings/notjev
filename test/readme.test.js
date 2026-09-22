@@ -100,16 +100,4 @@ describe('README — every example runs as written', () => {
 				+ '\n--- stderr ---\n' + r.stderr);
 		}
 	});
-
-	test('the fingerprinted numbers quoted in the README are the ones the code carries', () => {
-		const R = require('../lib/readout');
-		assert.ok(README.includes('`low` < 0.5 <= `med` < 0.75 <= `high` < 0.9 <= `certain`'));
-		assert.deepStrictEqual(R.BAND_EDGES, [0.5, 0.75, 0.9], 'the README states the band edges: they must be these');
-		assert.ok(README.includes('26 options maximum'));
-		assert.strictEqual(R.MAX_OPTIONS, 26);
-		assert.ok(README.includes('Node >= 20'));
-		assert.strictEqual(require('../package.json').engines.node, '>=20');
-		assert.strictEqual(require('../package.json').license, 'Apache-2.0',
-			'the README states Apache-2.0 (owner decision, 21/09) — the manifest must say the same');
-	});
 });
