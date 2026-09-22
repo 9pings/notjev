@@ -1,0 +1,61 @@
+name: release
+
+# A tag (v*) is the only trigger: a release is a decision, not a side effect of a push.
+# The binaries are compiled with Bun from bin/notjev.js — same CLI, zero runtime. The optional
+# peers (node-llama-cpp, @modelcontextprotocol/sdk) stay --external: they cannot be embedded, and
+# the named refusals (NODE_LLAMA_CPP_MISSING, NOTJEV_MCP_MISSING) are the tested behaviour.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  binaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # The suite gates the release: lint + 180 tests BEFORE anything is compiled or published.
+      - run: npm install
+      - run: npm run lint
+      - run: npm test
+
+      - name: the tag must match package.json
+        run: node -e "const v=require('./package.json').version; if (process.env.GITHUB_REF_NAME!=='v'+v) { console.error('tag '+process.env.GITHUB_REF_NAME+' != v'+v); process.exit(1); }"
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: compile one binary per target
+        run: |
+          set -e
+          mkdir -p dist
+          for target in bun-linux-x64 bun-linux-arm64 bun-windows-x64 bun-darwin-x64 bun-darwin-arm64; do
+            out="notjev-${GITHUB_REF_NAME}-${target#bun-}"
+            bun build --compile bin/notjev.js --target="$target" \
+              --external node-llama-cpp --external @modelcontextprotocol/sdk \
+              --outfile "dist/$out"
+          done
+
+      - name: smoke the binary — pure render and named refusal, no server needed
+        run: |
+          set -e
+          bin="dist/notjev-${GITHUB_REF_NAME}-linux-x64"
+          "$bin" prompt --state 'A: one / B: two' --question verdict --option SAME --option OTHER \
+            | grep -qx 'A. SAME'
+          "$bin" mcp --service-url http://127.0.0.1:9 > mcp-refusal.txt 2>&1 || test $? -eq 1
+          grep -q 'Install optional peer @modelcontextprotocol/sdk' mcp-refusal.txt
+
+      - name: checksums
+        run: cd dist && shasum -a 256 * > checksums.txt
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*

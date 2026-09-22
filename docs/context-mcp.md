@@ -101,6 +101,14 @@ Honest limits: buffering all tools' fragments is broader than "only NotJev calls
 latency on every streamed tool call. Compatibility with a real CLI's enriched arguments is
 exercised by the unit suite against a fake upstream, not demonstrated against a specific CLI.
 
+One measured trap (2026-09-22, Qwen on llama-server): deciding on a snapshot captured from a
+request that CARRIED tools can collapse the coverage — `tool_choice: 'none'` is not honoured by
+every template, the model opens a tool call instead (the top token was `<tool_call`, 96 % of the
+mass) and the menu letters keep a sliver (coverage 0.0004) that renormalises into a confident
+verdict. `coverage` is the honest signal in that regime: read it before trusting a verdict made
+over a tools-carrying capture. The readout's renormalisation policy is historical and is not
+changed silently to hide this.
+
 ## What was actually run (2026-09-22)
 
 One RTX 5090, one model (Qwen3.8-27B NVFP4). Text: the 4-run A→B→A smoke plus concurrency, per
