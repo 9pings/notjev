@@ -1,12 +1,19 @@
 {
   "name": "notjev",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "Apache-2.0",
   "author": "Nathanael Braun <pp9ping@gmail.com>",
-  "repository": { "type": "git", "url": "git+https://github.com/9pings/notjev.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9pings/notjev.git"
+  },
   "homepage": "https://github.com/9pings/notjev#readme",
-  "bugs": { "url": "https://github.com/9pings/notjev/issues" },
-  "publishConfig": { "access": "public" },
+  "bugs": {
+    "url": "https://github.com/9pings/notjev/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Read a decision out of the next-token distribution instead of making a model write it: one chat/completions request, max_tokens 1, logprobs on, a verdict AND a calibrated-ish probability. Server-agnostic, zero runtime dependency. Speaks the Jev /v1/systemone wire contract.",
   "keywords": [
     "llm",
@@ -24,12 +31,19 @@
     "vllm",
     "llama.cpp",
     "ollama",
-    "openai"],
+    "openai"
+  ],
   "main": "index.js",
   "types": "index.d.ts",
-  "bin": { "notjev": "bin/notjev.js" },
+  "bin": {
+    "notjev": "bin/notjev.js"
+  },
   "exports": {
-    ".": { "types": "./index.d.ts", "require": "./index.js", "default": "./index.js" },
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./index.js",
+      "default": "./index.js"
+    },
     "./readout": "./lib/readout.js",
     "./metrics": "./lib/metrics.js",
     "./client": "./lib/client.js",
@@ -55,10 +69,31 @@
     "./errors": "./lib/errors.js",
     "./package.json": "./package.json"
   },
-  "files": ["index.js", "index.d.ts", "lib/", "bin/", "bench/", "README.md", "docs/*.md", "docs/figures/"],
-  "peerDependencies": { "node-llama-cpp": ">=3", "@modelcontextprotocol/sdk": "^1.30.0" },
-  "peerDependenciesMeta": { "node-llama-cpp": { "optional": true }, "@modelcontextprotocol/sdk": { "optional": true } },
-  "engines": { "node": ">=20" },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "lib/",
+    "bin/",
+    "bench/",
+    "README.md",
+    "docs/*.md",
+    "docs/figures/"
+  ],
+  "peerDependencies": {
+    "node-llama-cpp": ">=3",
+    "@modelcontextprotocol/sdk": "^1.30.0"
+  },
+  "peerDependenciesMeta": {
+    "node-llama-cpp": {
+      "optional": true
+    },
+    "@modelcontextprotocol/sdk": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test": "node --test test/*.test.js",
     "lint": "for f in index.js lib/*.js lib/backends/*.js bin/notjev.js bench/*.js scripts/*.js; do node --check \"$f\" || exit 1; done",
