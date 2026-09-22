@@ -1,6 +1,6 @@
 {
   "name": "notjev",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "Apache-2.0",
   "author": "Nathanael Braun <pp9ping@gmail.com>",
   "repository": { "type": "git", "url": "git+https://github.com/9pings/notjev.git" },
@@ -49,7 +49,7 @@
     "./errors": "./lib/errors.js",
     "./package.json": "./package.json"
   },
-  "files": ["index.js", "index.d.ts", "lib/", "bin/", "docs/figures/", "bench/", "README.md"],
+  "files": ["index.js", "index.d.ts", "lib/", "bin/", "bench/", "README.md", "docs/*.md", "docs/figures/"],
   "peerDependencies": { "node-llama-cpp": ">=3" },
   "peerDependenciesMeta": { "node-llama-cpp": { "optional": true } },
   "engines": { "node": ">=20" },

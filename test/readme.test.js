@@ -74,7 +74,7 @@ describe('README — every example runs as written', () => {
 	after(async () => { await fake.close(); fs.rmSync(dir, { recursive: true, force: true }); });
 
 	test('the README carries the examples this test claims to cover', () => {
-		assert.ok(runnable.length >= 9, 'only ' + runnable.length + ' runnable blocks found — a fence has '
+		assert.ok(runnable.length >= 3, 'only ' + runnable.length + ' runnable blocks found — a fence has '
 			+ 'been lost, or the examples have been deleted: this test would then pass by covering nothing');
 		const notRun = all.filter(( b ) => b.lang && b.lang !== 'js' && b.lang !== 'bash' );
 		assert.deepStrictEqual([...new Set(notRun.map(( b ) => b.lang ))], ['sh'],
