@@ -1,0 +1,170 @@
+{
+  "at": "2026-09-22T15:27:32.158Z",
+  "backend": "http",
+  "model": "qwen27b",
+  "info": null,
+  "runs": [
+    {
+      "name": "cold",
+      "elapsedMs": 961,
+      "id": "code",
+      "status": "decided",
+      "choice": "ORANGE",
+      "value": "ORANGE",
+      "margin": 0.9406042268148321,
+      "p1": 0.966730790454425,
+      "coverage": 0.99674436968187,
+      "degraded": false,
+      "undecided": false,
+      "model": "qwen27b",
+      "ms": 959,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 1664,
+        "total_tokens": 1665,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 0
+      }
+    },
+    {
+      "name": "warm",
+      "elapsedMs": 569,
+      "id": "code",
+      "status": "decided",
+      "choice": "ORANGE",
+      "value": "ORANGE",
+      "margin": 0.9406042268148321,
+      "p1": 0.966730790454425,
+      "coverage": 0.99674436968187,
+      "degraded": false,
+      "undecided": false,
+      "model": "qwen27b",
+      "ms": 569,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 1664,
+        "total_tokens": 1665,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 0
+      }
+    },
+    {
+      "name": "other",
+      "elapsedMs": 255,
+      "id": "code",
+      "status": "decided",
+      "choice": "BLUE",
+      "value": "BLUE",
+      "margin": 0.9974778526331132,
+      "p1": 0.9984752284605268,
+      "coverage": 0.9991198224471659,
+      "degraded": false,
+      "undecided": false,
+      "model": "qwen27b",
+      "ms": 255,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 1663,
+        "total_tokens": 1664,
+        "prompt_tokens_details": {
+          "cached_tokens": 1148
+        }
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 1148
+      }
+    },
+    {
+      "name": "restore",
+      "elapsedMs": 254,
+      "id": "code",
+      "status": "decided",
+      "choice": "ORANGE",
+      "value": "ORANGE",
+      "margin": 0.9406042268148321,
+      "p1": 0.966730790454425,
+      "coverage": 0.99674436968187,
+      "degraded": false,
+      "undecided": false,
+      "model": "qwen27b",
+      "ms": 254,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 1664,
+        "total_tokens": 1665,
+        "prompt_tokens_details": {
+          "cached_tokens": 1148
+        }
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 1148
+      }
+    },
+    {
+      "name": "vision-RED",
+      "id": "color",
+      "status": "decided",
+      "choice": "RED",
+      "value": "RED",
+      "margin": 0.9981287987392042,
+      "p1": 0.9990482157964791,
+      "coverage": 0.9999867945270752,
+      "degraded": false,
+      "undecided": false,
+      "model": "qwen27b",
+      "ms": 1214,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 72,
+        "total_tokens": 73,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 0
+      }
+    },
+    {
+      "name": "vision-BLUE",
+      "id": "color",
+      "status": "decided",
+      "choice": "BLUE",
+      "value": "BLUE",
+      "margin": 0.9958307728986827,
+      "p1": 0.9978986462343693,
+      "coverage": 0.9999830873876226,
+      "degraded": false,
+      "undecided": false,
+      "model": "qwen27b",
+      "ms": 489,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 72,
+        "total_tokens": 73,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 0
+      }
+    }
+  ],
+  "parallelIsolation": true,
+  "ok": true
+}

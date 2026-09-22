@@ -46,3 +46,26 @@ An independent bench of the clones (2026-09-20) ran the same gold-labelled produ
 through each tool, human-reviewed labels. The readout 27B — the mechanism this library implements —
 clears the null arm on every bench and the best clone on three of four. Clone scores quoted in the
 figure come from their own runs on the same questions.
+
+## The context subsystem, smoke-tested (2026-09-22)
+
+A smoke, not a campaign: one RTX 5090, one model (Qwen3.8-27B NVFP4), the same 4-run A→B→A text
+script plus 2 synthetic-image runs, by `bench/context-smoke.js`. Raws committed:
+`bench/results/context-native-2026-09-22.json`, `bench/results/context-http-2026-09-22.json`.
+
+| run | native (node-llama-cpp, chatml thinking-off) | HTTP (llama-server, full offload) |
+|---|---|---|
+| cold read, 1664-token context | ORANGE, 938 ms, 0 reused | ORANGE, 959 ms, 0 cached |
+| warm re-read of the same context | ORANGE, 191 ms, **1614 tokens reused** | ORANGE, 569 ms, 0 reported |
+| switch to the BLUE context | BLUE, 797 ms, 1609 reused | BLUE, 255 ms, 1148 cached |
+| back to the first context | ORANGE, 794 ms, 1609 reused | ORANGE, 254 ms, 1148 cached |
+| two contexts read concurrently | both correct, isolated | both correct, isolated |
+| synthetic RED / BLUE image, `mmproj` | refused (`NOTJEV_NATIVE_VISION_UNSUPPORTED`) | RED and BLUE, correct, coverage 1.0 |
+
+Every verdict was right and every coverage >= 0.99. What these numbers do NOT say: that the cache
+gain generalises (the warm path is one prompt family, one engine), or that vision works beyond two
+solid-colour PNGs — and the native row for vision is a REFUSAL, which is the tested behaviour.
+The first native attempt failed for a reason worth recording: with the model's Jinja template the
+first token belonged to the thought block, the letters carried ~1e-8 of the mass and the verdict
+was still emitted, wrong. The render is now explicit (`chatml`, thinking off), and the readout
+still never renormalises silently to hide such a regime.

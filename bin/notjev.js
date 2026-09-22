@@ -124,6 +124,8 @@ const USAGE = [
 	'  notjev prompt  …same flags…                 print the EXACT string, send nothing',
 	'  notjev replay  <recording.json> [--truth gold] [--theta 0] [--positive CODE] [--summary]',
 	'  notjev serve   [--port 8787] [--host 127.0.0.1]',
+	'  notjev mcp     [--base-url URL --model ID | --model-path GGUF] [--service-url URL]',
+	'  notjev gateway [--base-url URL --model ID] [--port 8789] [--gateway-key TOKEN]',
 	'',
 	'  server: --base-url (NOTJEV_BASE_URL) --model (NOTJEV_MODEL) --api-key (NOTJEV_API_KEY)',
 	'          --theta (NOTJEV_THETA) --top-logprobs --max-tokens --timeout --retries',
@@ -138,6 +140,7 @@ async function main( argv ) {
 
 	if ( !cmd || cmd === 'help' || a.help ) { console.log('notjev ' + pkg.version + '\n\n' + USAGE); return 0; }
 	if ( cmd === 'version' || a.version ) { console.log(pkg.version); return 0; }
+	if ( cmd === 'mcp' || cmd === 'gateway' ) return require('../lib/context-cli').runContextCommand(cmd, a);
 
 	if ( cmd === 'prompt' ) {
 		const kind = a.score !== undefined ? 'score' : (a.yes !== undefined || a.no !== undefined || a.noul) ? 'noul' : 'choice';

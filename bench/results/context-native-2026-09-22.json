@@ -1,0 +1,115 @@
+{
+  "at": "2026-09-22T13:59:28.488Z",
+  "backend": "native",
+  "model": "/mnt/wsl/WipDrive/_perso/c&c/app.dist/models/Qwen3.8-27B-NVFP4-MTP-HIGHEST.gguf",
+  "info": {
+    "gpu": "cuda",
+    "gpuLayers": 66,
+    "render": "chatml(thinkingOff)",
+    "needsCheckpoints": true
+  },
+  "runs": [
+    {
+      "name": "cold",
+      "elapsedMs": 940,
+      "id": "code",
+      "status": "decided",
+      "choice": "ORANGE",
+      "value": "ORANGE",
+      "margin": 0.9700121257378597,
+      "p1": 0.982797439322283,
+      "coverage": 0.9994883228824367,
+      "degraded": false,
+      "undecided": false,
+      "model": "/mnt/wsl/WipDrive/_perso/c&c/app.dist/models/Qwen3.8-27B-NVFP4-MTP-HIGHEST.gguf",
+      "ms": 938,
+      "usage": {
+        "prompt_tokens": 1664,
+        "completion_tokens": 0,
+        "evaluated_tokens": 1664
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 0,
+        "checkpoint": true
+      }
+    },
+    {
+      "name": "warm",
+      "elapsedMs": 191,
+      "id": "code",
+      "status": "decided",
+      "choice": "ORANGE",
+      "value": "ORANGE",
+      "margin": 0.9700121257378597,
+      "p1": 0.982797439322283,
+      "coverage": 0.9994883228824367,
+      "degraded": false,
+      "undecided": false,
+      "model": "/mnt/wsl/WipDrive/_perso/c&c/app.dist/models/Qwen3.8-27B-NVFP4-MTP-HIGHEST.gguf",
+      "ms": 191,
+      "usage": {
+        "prompt_tokens": 1664,
+        "completion_tokens": 0,
+        "evaluated_tokens": 50
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 1614,
+        "checkpoint": true
+      }
+    },
+    {
+      "name": "other",
+      "elapsedMs": 798,
+      "id": "code",
+      "status": "decided",
+      "choice": "BLUE",
+      "value": "BLUE",
+      "margin": 0.9860406650675276,
+      "p1": 0.9911431047842794,
+      "coverage": 0.9974516758102254,
+      "degraded": false,
+      "undecided": false,
+      "model": "/mnt/wsl/WipDrive/_perso/c&c/app.dist/models/Qwen3.8-27B-NVFP4-MTP-HIGHEST.gguf",
+      "ms": 797,
+      "usage": {
+        "prompt_tokens": 1663,
+        "completion_tokens": 0,
+        "evaluated_tokens": 54
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 1609,
+        "checkpoint": true
+      }
+    },
+    {
+      "name": "restore",
+      "elapsedMs": 795,
+      "id": "code",
+      "status": "decided",
+      "choice": "ORANGE",
+      "value": "ORANGE",
+      "margin": 0.9757945455664039,
+      "p1": 0.9865651834097082,
+      "coverage": 0.9970087648313655,
+      "degraded": false,
+      "undecided": false,
+      "model": "/mnt/wsl/WipDrive/_perso/c&c/app.dist/models/Qwen3.8-27B-NVFP4-MTP-HIGHEST.gguf",
+      "ms": 794,
+      "usage": {
+        "prompt_tokens": 1664,
+        "completion_tokens": 0,
+        "evaluated_tokens": 55
+      },
+      "cache": {
+        "status": "reported",
+        "cachedTokens": 1609,
+        "checkpoint": true
+      }
+    }
+  ],
+  "parallelIsolation": true,
+  "ok": true
+}

@@ -36,6 +36,8 @@ export interface Question extends QuestionForm {
 	maxTokens?: number;
 	topLogprobs?: number;
 	model?: string;
+	/** Cancels the in-flight HTTP decision. */
+	signal?: AbortSignal;
 	/** `null`/`false` removes `chat_template_kwargs` from the body (OpenAI); an object replaces it. */
 	templateKwargs?: Record<string, unknown> | null | false;
 	/** Merged into the request body, last. */
@@ -170,6 +172,74 @@ export function report(rows: ReplayRow[], opts?: { bins?: number; thetas?: numbe
 
 export function createServer(opts?: ClientOptions & { client?: Client; bodyLimit?: number;
 	apiKey?: string; log?: ((...a: unknown[]) => void) | null }): import('http').Server;
+
+/** JSON-compatible OpenAI chat messages; content parts can include image_url for HTTP engines. */
+export interface ContextMessage {
+	role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
+	content: string | null | Array<{ type: 'text'; text: string } | { type: 'image_url'; image_url: { url: string } }>;
+	tool_call_id?: string;
+	tool_calls?: Array<{ id: string; type: 'function'; function: { name: string; arguments: string } }>;
+	[key: string]: unknown;
+}
+export type ContextInput = {
+	type?: 'fresh' | 'messages'; state?: string | null; messages?: ContextMessage[];
+	model?: string; tools?: Record<string, unknown>[];
+	templateKwargs?: Record<string, unknown> | null | false;
+};
+export type ContextSelector = ContextInput | { type: 'snapshot'; ref: string };
+/** `current` works only when a NotJev gateway binds the model's tool call to its request. */
+export type GatewayContextSelector = ContextSelector | { type: 'current' };
+export interface ContextQuestion extends Pick<Question, 'question' | 'options' | 'noul' | 'score' | 'theta' | 'instruction'> {
+	id?: string;
+}
+export interface CompactDecision {
+	id: string;
+	status: 'decided' | 'undecided' | 'degraded' | 'error';
+	choice?: string | null; value?: string | boolean | number | null;
+	margin?: number; p1?: number; coverage?: number;
+	degraded?: boolean; undecided?: boolean; expectation?: number | null;
+	model?: string | null; ms?: number | null; usage?: unknown;
+	cache?: { status: 'unknown' | 'reported'; cachedTokens?: number; checkpoint?: boolean };
+	error?: { code: string; message: string };
+}
+export interface ContextBackend {
+	model?: string;
+	decideContext(input: { context: ContextInput; question: ContextQuestion; signal?: AbortSignal }): Promise<Decision>;
+	validateContext?(context: ContextInput): void;
+	close?(): Promise<void>;
+}
+export interface DecisionService {
+	store: ContextStore;
+	putContext(context: ContextInput, options?: { scope?: string }): { ref: string; expiresAt: number; bytes: number };
+	dropContext(ref: string, options?: { scope?: string }): { dropped: true };
+	decide(input: { context?: ContextSelector; questions: ContextQuestion[]; execution?: 'independent' },
+		options?: { scope?: string; signal?: AbortSignal }): Promise<{ contextRef: string | null; model: string | null; results: CompactDecision[] }>;
+	close(): Promise<void>;
+}
+export interface ContextStore {
+	put(context: ContextInput, scope?: string): { ref: string; expiresAt: number; bytes: number };
+	acquire(ref: string, scope?: string): { data: ContextInput; release(): void };
+	drop(ref: string, scope?: string): { dropped: true };
+	stats(): { entries: number; bytes: number };
+	clear(): void;
+}
+export function createContextStore(options?: { maxEntries?: number; maxBytes?: number; ttlMs?: number;
+	clock?: () => number }): ContextStore;
+export function createDecisionService(options?: ClientOptions & { backend?: ContextBackend; store?: ContextStore;
+	storeOptions?: { maxEntries?: number; maxBytes?: number; ttlMs?: number };
+	maxQuestions?: number; maxContextBytes?: number; concurrency?: number; timeoutMs?: number;
+	ownsBackend?: boolean }): DecisionService;
+export function createHttpContextBackend(options?: ClientOptions & { client?: Client }): ContextBackend;
+export function createNativeContextBackend(options: { modelPath: string; model?: string;
+	gpu?: false | 'auto' | 'cuda' | 'vulkan'; requireGpu?: boolean; contextSize?: number;
+	chunkSize?: number; mmproj?: string; theta?: number }): Promise<ContextBackend & { info: Record<string, unknown> }>;
+export function createGateway(options: { service: DecisionService; baseUrl?: string;
+	apiKey?: string; upstreamApiKey?: string; scope?: string; toolName?: string;
+	bodyLimit?: number; timeoutMs?: number; fetch?: typeof fetch }): import('http').Server;
+export function createRemoteService(options: { baseUrl: string; apiKey?: string; fetch?: typeof fetch }):
+	Pick<DecisionService, 'decide' | 'putContext' | 'dropContext' | 'close'>;
+export function createMcpServer(options: { service: DecisionService; scope?: string }): Promise<{
+	connect(transport: unknown): Promise<void>; close(): Promise<void> }>;
 
 /* ── THE JEV WIRE CONTRACT (POST /v1/systemone) ─────────────────────────────────────────── */
 

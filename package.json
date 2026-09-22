@@ -33,6 +33,12 @@
     "./readout": "./lib/readout.js",
     "./metrics": "./lib/metrics.js",
     "./client": "./lib/client.js",
+    "./context": "./lib/context.js",
+    "./service": "./lib/service.js",
+    "./context-http": "./lib/context-http.js",
+    "./context-native": "./lib/context-native.js",
+    "./mcp": "./lib/mcp.js",
+    "./gateway": "./lib/gateway.js",
     "./server": "./lib/server.js",
     "./replay": "./lib/replay.js",
     "./logits": "./lib/logits.js",
@@ -50,8 +56,8 @@
     "./package.json": "./package.json"
   },
   "files": ["index.js", "index.d.ts", "lib/", "bin/", "bench/", "README.md", "docs/*.md", "docs/figures/"],
-  "peerDependencies": { "node-llama-cpp": ">=3" },
-  "peerDependenciesMeta": { "node-llama-cpp": { "optional": true } },
+  "peerDependencies": { "node-llama-cpp": ">=3", "@modelcontextprotocol/sdk": "^1.30.0" },
+  "peerDependenciesMeta": { "node-llama-cpp": { "optional": true }, "@modelcontextprotocol/sdk": { "optional": true } },
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "node --test test/*.test.js",

@@ -142,7 +142,8 @@ notjev decide --state 'A: "Sarah Knafo" / B: "Sarah Knafot"' --question verdict 
 
 `--state` takes a file, a literal, or `-` (stdin). Exit codes: **0** a verdict, **3** UNDECIDED,
 **4** DEGRADED, **1** an error — a shell can tell "it said SAME" from "it said nothing". `notjev
-replay run.json` re-reads a recorded run offline, no server at all.
+replay run.json` re-reads a recorded run offline, no server at all. `notjev mcp` and `notjev
+gateway` serve the context subsystem (see [docs/context-mcp.md](docs/context-mcp.md)).
 
 ## Use cases
 
@@ -159,6 +160,7 @@ replay run.json` re-reads a recorded run offline, no server at all.
 * [Measuring it on your own questions](docs/measurement.md) — record, replay, report, null arms
 * [The modules](docs/modules.md) — packed, tokenizer checks, calibration, harness, set, contract, wire
 * [Serving it, and the engines](docs/servers.md) — /v1/decide, /v1/systemone, vLLM, llama.cpp, Ollama, OpenAI
+* [Context, MCP and the gateway](docs/context-mcp.md) — snapshots, the decision service, the 3 MCP tools, `current` binding
 * [What is measured, and where](docs/measurements.md) — provenance, against the null arms and the clones
 * [Limits, and the decisions behind them](docs/internals.md)
 

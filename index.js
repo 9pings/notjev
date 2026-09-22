@@ -27,6 +27,13 @@ const backends = {
 };
 
 module.exports = {
+	createContextStore: require('./lib/context').createContextStore,
+	createDecisionService: require('./lib/service').createDecisionService,
+	createHttpContextBackend: require('./lib/context-http').createHttpContextBackend,
+	createNativeContextBackend: require('./lib/context-native').createNativeContextBackend,
+	createGateway: require('./lib/gateway').createGateway,
+	createRemoteService: require('./lib/gateway').createRemoteService,
+	createMcpServer: require('./lib/mcp').createMcpServer,
 	// the client (does I/O)
 	createClient,
 	createServer,
