@@ -103,7 +103,9 @@ exercised by the unit suite against a fake upstream, not demonstrated against a 
 
 ## What was actually run (2026-09-22)
 
-A smoke, not a campaign: one RTX 5090, one model (Qwen3.8-27B NVFP4), 6 text runs + 2 vision runs
-per backend, raws in `bench/results/context-*-2026-09-22.json` — see
-[docs/measurements.md](measurements.md). Vision was validated over llama-server with `mmproj` only;
-the native backend refuses images explicitly, and that refusal is tested, not assumed.
+One RTX 5090, one model (Qwen3.8-27B NVFP4). Text: the 4-run A→B→A smoke plus concurrency, per
+backend (raws: `bench/results/context-*-2026-09-22.json`). Vision: three labelled sets through
+the same published path — MNIST handwriting (150), CIFAR-10 real colour photos (150), and 100
+rendered text/screenshot panels — numbers and what they do NOT say in
+[docs/measurements.md](measurements.md). The native backend refuses images explicitly
+(`NOTJEV_NATIVE_VISION_UNSUPPORTED`), and that refusal is tested, not assumed.

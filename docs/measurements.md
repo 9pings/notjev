@@ -69,3 +69,26 @@ The first native attempt failed for a reason worth recording: with the model's J
 first token belonged to the thought block, the letters carried ~1e-8 of the mass and the verdict
 was still emitted, wrong. The render is now explicit (`chatml`, thinking off), and the readout
 still never renormalises silently to hide such a regime.
+
+## Vision on real labelled images (2026-09-22)
+
+Three sets, all through the PUBLISHED path (`createDecisionService` + the HTTP context backend →
+llama-server + `mmproj`, Qwen3.8-27B NVFP4, RTX 5090), scored against ground truth, `theta = 0.5`.
+Reproduce with `bench/vision-mnist.js`, `bench/vision-animals.js`, `bench/vision-text.js`
+(raws: `bench/results/vision-*-2026-09-22.json`).
+
+| set | raw accuracy (argmax) | decided | precision among decided | errors removed by abstention |
+|---|---|---|---|---|
+| MNIST test, 150 handwritten digits (28×28 → 112) | 80.0 % | 123/150 | **97.6 %** | 24 of 27 |
+| CIFAR-10 test, 150 real colour photos (32×32 → 128) | 60.7 % | 95/150 | **95.8 %** | 55 of 59 |
+| rendered text pages, 50 | **100 %** | 50/50 | 100 % | — |
+| UI screenshot panels, 50 | **100 %** | 50/50 | 100 % | — |
+
+What to read from this, and what NOT to: the raw accuracy of MNIST and CIFAR-10 is the MODEL's
+vision, not the readout's — a 32×32 CIFAR photograph is a genuinely hard input. What the readout
+adds is the abstention: at `theta = 0.5` it removed 55 of 59 CIFAR errors and 24 of 27 MNIST
+errors, keeping 4 and 3 wrong verdicts respectively, at the price of abstaining on 18-36 % of the
+images. The text and screenshot sets are RENDERED locally (Pillow, `bench/vision-text-gen.py`),
+ground truth by construction — they validate text and UI reading at clean resolutions, not noisy
+photography. One model, one engine, one point of the theta curve per set; ±1 verdict of inter-run
+variance was observed on the MNIST set between two identical runs.

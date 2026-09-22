@@ -1,0 +1,30 @@
+{
+  "at": "2026-09-22T16:06:33.758Z",
+  "set": "rendered text pages + UI screenshot panels",
+  "n": 100,
+  "seed": 42,
+  "model": "qwen27b",
+  "baseUrl": "http://127.0.0.1:8827",
+  "theta": 0.5,
+  "elapsedMs": 57555,
+  "document": {
+    "n": 50,
+    "accuracyRaw": 1,
+    "decided": 50,
+    "undecided": [],
+    "precisionAmongDecided": 1,
+    "coverageMin": 0.9998,
+    "p1MedianAmongDecided": 1,
+    "errorsAmongDecided": []
+  },
+  "screenshot": {
+    "n": 50,
+    "accuracyRaw": 1,
+    "decided": 50,
+    "undecided": [],
+    "precisionAmongDecided": 1,
+    "coverageMin": 0.9997,
+    "p1MedianAmongDecided": 0.998,
+    "errorsAmongDecided": []
+  }
+}

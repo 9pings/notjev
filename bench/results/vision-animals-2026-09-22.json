@@ -1,0 +1,356 @@
+{
+  "at": "2026-09-22T16:00:32.250Z",
+  "set": "CIFAR-10 test set",
+  "n": 150,
+  "seed": 42,
+  "model": "qwen27b",
+  "baseUrl": "http://127.0.0.1:8827",
+  "theta": 0.5,
+  "elapsedMs": 60463,
+  "accuracyRaw": 0.6067,
+  "decided": 95,
+  "undecided": [
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.44176927271391325
+    },
+    {
+      "label": "dog",
+      "top": null,
+      "p1": 0.3209585611558344
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.5838723825881165
+    },
+    {
+      "label": "dog",
+      "top": null,
+      "p1": 0.42112842043241
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.1864765018455803
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.48067941758786537
+    },
+    {
+      "label": "bird",
+      "top": null,
+      "p1": 0.2906438858120687
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.33717028158166396
+    },
+    {
+      "label": "deer",
+      "top": null,
+      "p1": 0.3866843397524821
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.3335093463243888
+    },
+    {
+      "label": "airplane",
+      "top": null,
+      "p1": 0.6384201704914909
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.6736784375625785
+    },
+    {
+      "label": "airplane",
+      "top": null,
+      "p1": 0.449149028980567
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.5347786619761851
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.43953449674462136
+    },
+    {
+      "label": "horse",
+      "top": null,
+      "p1": 0.5342181942181139
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.652521672839479
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.5098359955185017
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.5117122855812087
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.3197963885954914
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.6015498450826571
+    },
+    {
+      "label": "horse",
+      "top": null,
+      "p1": 0.24957207808288948
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.6127812152649453
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.5500984524675276
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.6172136688894432
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.5527078110810774
+    },
+    {
+      "label": "horse",
+      "top": null,
+      "p1": 0.4099068625047945
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.5905396136774081
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.2020646969908351
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.5535028968539906
+    },
+    {
+      "label": "dog",
+      "top": null,
+      "p1": 0.6442354346769328
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.48478952390620067
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.27645717595681274
+    },
+    {
+      "label": "airplane",
+      "top": null,
+      "p1": 0.3942538795376981
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.677106280481577
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.388842693102033
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.3053609347112042
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.3020040834642941
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.4552671862318912
+    },
+    {
+      "label": "airplane",
+      "top": null,
+      "p1": 0.2960437368347476
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.4695395985348902
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.4015955331856819
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.4991209300328661
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.6211040654869623
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.3620819919799458
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.4498224056056261
+    },
+    {
+      "label": "deer",
+      "top": null,
+      "p1": 0.6029644376736808
+    },
+    {
+      "label": "deer",
+      "top": null,
+      "p1": 0.4389526466191618
+    },
+    {
+      "label": "truck",
+      "top": null,
+      "p1": 0.5797733210876658
+    },
+    {
+      "label": "horse",
+      "top": null,
+      "p1": 0.5756942722622312
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.28242800499741083
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.33230041498200247
+    },
+    {
+      "label": "cat",
+      "top": null,
+      "p1": 0.29420444910221166
+    },
+    {
+      "label": "frog",
+      "top": null,
+      "p1": 0.5120152346584296
+    },
+    {
+      "label": "ship",
+      "top": null,
+      "p1": 0.30086791140011143
+    }
+  ],
+  "precisionAmongDecided": 0.9579,
+  "coverageMin": 0.968,
+  "p1MedianAmongDecided": 0.9851,
+  "byClass": {
+    "airplane": {
+      "n": 15,
+      "correct": 11
+    },
+    "automobile": {
+      "n": 11,
+      "correct": 11
+    },
+    "bird": {
+      "n": 17,
+      "correct": 16
+    },
+    "cat": {
+      "n": 12,
+      "correct": 3
+    },
+    "deer": {
+      "n": 15,
+      "correct": 11
+    },
+    "dog": {
+      "n": 9,
+      "correct": 6
+    },
+    "frog": {
+      "n": 20,
+      "correct": 6
+    },
+    "horse": {
+      "n": 22,
+      "correct": 18
+    },
+    "ship": {
+      "n": 16,
+      "correct": 7
+    },
+    "truck": {
+      "n": 13,
+      "correct": 2
+    }
+  },
+  "errorsAmongDecided": [
+    {
+      "label": "truck",
+      "said": "automobile",
+      "p1": 0.8180725308940257
+    },
+    {
+      "label": "frog",
+      "said": "bird",
+      "p1": 0.7323957083117937
+    },
+    {
+      "label": "cat",
+      "said": "dog",
+      "p1": 0.990553921897824
+    },
+    {
+      "label": "deer",
+      "said": "horse",
+      "p1": 0.7223423820652224
+    }
+  ]
+}
