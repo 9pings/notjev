@@ -8,7 +8,7 @@
   "bugs": { "url": "https://github.com/9pings/notjev/issues" },
   "publishConfig": { "access": "public" },
   "description": "Read a decision out of the next-token distribution instead of making a model write it: one chat/completions request, max_tokens 1, logprobs on, a verdict AND a calibrated-ish probability. Server-agnostic, zero runtime dependency. Speaks the Jev /v1/systemone wire contract.",
-  "keywords": ["llm", "logprobs", "classification", "decision", "abstention", "calibration", "vllm", "llama.cpp", "ollama", "openai"],
+  "keywords": ["llm", "logprobs", "classification", "decision", "abstention", "calibration", "jev", "openjev", "typesafe", "typesafe-ai", "system-one", "typed-decisions", "vllm", "llama.cpp", "ollama", "openai"],
   "main": "index.js",
   "types": "index.d.ts",
   "bin": { "notjev": "bin/notjev.js" },

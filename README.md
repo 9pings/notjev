@@ -1,5 +1,10 @@
 # notjev
 
+[![npm version](https://img.shields.io/npm/v/notjev.svg)](https://www.npmjs.com/package/notjev)
+[![CI](https://github.com/9pings/notjev/actions/workflows/ci.yml/badge.svg)](https://github.com/9pings/notjev/actions/workflows/ci.yml)
+[![Node >= 20](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 **Read the decision out of the distribution, instead of making the model write it.**
 
 A closed question — "same or other?", "which of these 12 categories?", "1 to 5?" — does not need a
@@ -609,6 +614,9 @@ l'enveloppe bouge, `npm test` tombe et les chiffres ne s'appliquent plus.
 npm test      # node --test: the pure reading, the client against a real socket, the CLI, the README
 npm run lint  # node --check on every file
 ```
+
+CI runs `npm run lint` and `npm test` on Node 20 and 22 (`.github/workflows/ci.yml`), and
+`npm publish` runs them again through `prepublishOnly` — a published version is a tested one.
 
 Every negative control in the suite is **named**: it states which sabotage it detects (a trimmed
 state, a permuted menu, a token outside the codomain, a margin under theta, a retried 400, a
