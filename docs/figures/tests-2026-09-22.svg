@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="120" viewBox="0 0 960 120" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<rect width="960" height="120" fill="#f6f6f6" rx="8" />
+<text x="30" y="52" font-size="26" font-weight="700" fill="#0a7a4a">134</text>
+<text x="30" y="72" font-size="11" fill="#444">tests, 14 suites</text>
+<text x="212.4" y="52" font-size="26" font-weight="700" fill="#0a7a4a">0</text>
+<text x="212.4" y="72" font-size="11" fill="#444">runtime dependency</text>
+<text x="394.8" y="52" font-size="26" font-weight="700" fill="#0a7a4a">0</text>
+<text x="394.8" y="72" font-size="11" fill="#444">failure on Node 20/22</text>
+<text x="577.2" y="52" font-size="26" font-weight="700" fill="#0a7a4a">3/3</text>
+<text x="577.2" y="72" font-size="11" fill="#444">in-vivo verifications re-run 2026-09-22</text>
+<text x="759.6" y="52" font-size="26" font-weight="700" fill="#0a7a4a">125</text>
+<text x="759.6" y="72" font-size="11" fill="#444">fingerprinted bytes of prompt</text>
+</svg>

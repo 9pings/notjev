@@ -8,7 +8,23 @@
   "bugs": { "url": "https://github.com/9pings/notjev/issues" },
   "publishConfig": { "access": "public" },
   "description": "Read a decision out of the next-token distribution instead of making a model write it: one chat/completions request, max_tokens 1, logprobs on, a verdict AND a calibrated-ish probability. Server-agnostic, zero runtime dependency. Speaks the Jev /v1/systemone wire contract.",
-  "keywords": ["llm", "logprobs", "classification", "decision", "abstention", "calibration", "jev", "openjev", "typesafe", "typesafe-ai", "system-one", "typed-decisions", "vllm", "llama.cpp", "ollama", "openai"],
+  "keywords": [
+    "llm",
+    "logprobs",
+    "classification",
+    "decision",
+    "abstention",
+    "calibration",
+    "jev",
+    "openjev",
+    "typesafe",
+    "typesafe-ai",
+    "system-one",
+    "typed-decisions",
+    "vllm",
+    "llama.cpp",
+    "ollama",
+    "openai"],
   "main": "index.js",
   "types": "index.d.ts",
   "bin": { "notjev": "bin/notjev.js" },
@@ -33,13 +49,13 @@
     "./errors": "./lib/errors.js",
     "./package.json": "./package.json"
   },
-  "files": ["index.js", "index.d.ts", "lib/", "bin/", "README.md"],
+  "files": ["index.js", "index.d.ts", "lib/", "bin/", "docs/figures/", "bench/", "README.md"],
   "peerDependencies": { "node-llama-cpp": ">=3" },
   "peerDependenciesMeta": { "node-llama-cpp": { "optional": true } },
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "node --test test/*.test.js",
-    "lint": "for f in index.js lib/*.js lib/backends/*.js bin/notjev.js; do node --check \"$f\" || exit 1; done",
+    "lint": "for f in index.js lib/*.js lib/backends/*.js bin/notjev.js bench/*.js scripts/*.js; do node --check \"$f\" || exit 1; done",
     "prepublishOnly": "npm run lint && npm test"
   }
 }

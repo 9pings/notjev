@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="330" viewBox="0 0 960 330" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<rect width="960" height="330" fill="#fff" />
+<text x="40" y="30" font-size="15" font-weight="700" fill="#111">Accuracy on the wiseways production benches — against the null arm and the best clone</text>
+<text x="40" y="46" font-size="10.5" fill="#666">Same questions, gold-labelled (jev-bench, 2026-09-20). The null arm — “always answer the majority class” — is the bar a tool must clear to measure anything.</text>
+<rect x="290" y="52" width="10" height="10" fill="#b9b9b9" /><text x="304" y="61" font-size="10.5" fill="#444">null arm (majority)</text>
+<rect x="510" y="52" width="10" height="10" fill="#7a9cc7" /><text x="524" y="61" font-size="10.5" fill="#444">best clone on that bench</text>
+<rect x="730" y="52" width="10" height="10" fill="#0a7a4a" /><text x="744" y="61" font-size="10.5" fill="#444">readout 27B (this library's core)</text>
+<rect x="120.0" y="86.0" width="18" height="184.0" fill="#b9b9b9" /><text x="129.0" y="82.0" font-size="9.5" text-anchor="middle" fill="#444">92</text>
+<rect x="142.0" y="79.4" width="18" height="190.6" fill="#7a9cc7" /><text x="151.0" y="75.4" font-size="9.5" text-anchor="middle" fill="#444">95.3</text>
+<rect x="164.0" y="72.6" width="18" height="197.4" fill="#0a7a4a" /><text x="173.0" y="68.6" font-size="9.5" text-anchor="middle" fill="#444">98.7</text>
+<text x="150" y="288" font-size="10.5" text-anchor="middle" fill="#222">actor dedup (n=450)</text>
+<text x="150" y="301" font-size="9" text-anchor="middle" fill="#888">best clone: xenc-mmBERT</text>
+<rect x="340.0" y="137.2" width="18" height="132.8" fill="#b9b9b9" /><text x="349.0" y="133.2" font-size="9.5" text-anchor="middle" fill="#444">66.4</text>
+<rect x="362.0" y="88.6" width="18" height="181.4" fill="#7a9cc7" /><text x="371.0" y="84.6" font-size="9.5" text-anchor="middle" fill="#444">90.7</text>
+<rect x="384.0" y="89.6" width="18" height="180.4" fill="#0a7a4a" /><text x="393.0" y="85.6" font-size="9.5" text-anchor="middle" fill="#444">90.2</text>
+<text x="370" y="288" font-size="10.5" text-anchor="middle" fill="#222">subject dedup (n=450)</text>
+<text x="370" y="301" font-size="9" text-anchor="middle" fill="#888">best clone: xenc-mmBERT</text>
+<rect x="560.0" y="103.4" width="18" height="166.6" fill="#b9b9b9" /><text x="569.0" y="99.4" font-size="9.5" text-anchor="middle" fill="#444">83.3</text>
+<rect x="582.0" y="72.4" width="18" height="197.6" fill="#7a9cc7" /><text x="591.0" y="68.4" font-size="9.5" text-anchor="middle" fill="#444">98.8</text>
+<rect x="604.0" y="74.0" width="18" height="196.0" fill="#0a7a4a" /><text x="613.0" y="70.0" font-size="9.5" text-anchor="middle" fill="#444">98</text>
+<text x="590" y="288" font-size="10.5" text-anchor="middle" fill="#222">place anchoring (n=400)</text>
+<text x="590" y="301" font-size="9" text-anchor="middle" fill="#888">best clone: verdict-150M</text>
+<rect x="780.0" y="213.0" width="18" height="57.0" fill="#b9b9b9" /><text x="789.0" y="209.0" font-size="9.5" text-anchor="middle" fill="#444">28.5</text>
+<rect x="802.0" y="122.0" width="18" height="148.0" fill="#7a9cc7" /><text x="811.0" y="118.0" font-size="9.5" text-anchor="middle" fill="#444">74</text>
+<rect x="824.0" y="107.8" width="18" height="162.2" fill="#0a7a4a" /><text x="833.0" y="103.8" font-size="9.5" text-anchor="middle" fill="#444">81.1</text>
+<text x="810" y="288" font-size="10.5" text-anchor="middle" fill="#222">subject anchoring (n=400)</text>
+<text x="810" y="301" font-size="9" text-anchor="middle" fill="#888">best clone: semif-qwen4b</text>
+<text x="40" y="316" font-size="9" fill="#888">Source: wiseways.me jev-bench, TABLE_20260920.md — clones benched on the same gold-labelled questions (their own raws). The readout 27B is the mechanism this library implements, as it runs in production.</text>
+</svg>

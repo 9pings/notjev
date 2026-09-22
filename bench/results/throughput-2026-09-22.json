@@ -1,0 +1,40 @@
+{
+ "date": "2026-09-22T07:39:11.463Z",
+ "baseUrl": "http://172.22.0.18:8000",
+ "model": "Qwen3.8-27B-NVFP4",
+ "n": 24,
+ "phases": [
+  {
+   "phase": "separate",
+   "concurrency": 1,
+   "questions": 24,
+   "wallMs": 2494,
+   "qps": 9.62309542902967,
+   "p50": 101,
+   "p95": 127,
+   "meanMs": 103.79166666666667,
+   "errors": 0,
+   "promptTokens": 888
+  },
+  {
+   "phase": "separate",
+   "concurrency": 4,
+   "questions": 24,
+   "wallMs": 1181,
+   "qps": 20.32176121930567,
+   "p50": 200,
+   "p95": 225,
+   "meanMs": 196.45833333333334,
+   "errors": 0,
+   "promptTokens": 888
+  },
+  {
+   "phase": "packed",
+   "questions": 24,
+   "states": 12,
+   "wallMs": 21171,
+   "qps": 1.1336261867649142,
+   "tokens": 3831
+  }
+ ]
+}

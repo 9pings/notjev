@@ -210,6 +210,32 @@ send to the same model, as a chat, the cases whose `margin` was not enough.
 * some providers return no logprobs (Anthropic's Messages API): there this cannot work, and it says
   so instead of guessing.
 
+## Performance, measured
+
+![Latency and throughput](docs/figures/perf-2026-09-22.svg)
+
+The engine is the variable, not the readout: every arm above runs the same mechanism (one pass, the
+distribution read off) on ITS OWN model and hardware. All the notjev rows were measured on 2026-09-22
+by `bench/throughput.js` (raws committed in `bench/results/`), on **real gold-labelled states**:
+
+| engine | p50 | throughput |
+|---|---|---|
+| llama-server `Qwen3-8B-Q4_K_M` | **23 ms** | 41.8 q/s (c1) · 52.6 q/s (c2) |
+| vLLM `Qwen3.8-27B-NVFP4` | **101 ms** | 9.6 q/s (c1) · 20.3 q/s (c4) |
+
+For scale, on the same style of questions: hosted Jev measures at a **419 ms** median (wiseways
+s1bench, 20/09), and so1's headline 71.9 q/s is a 4B model on an H200 slice. One honest inversion we
+measured ourselves and publish as-is: **on vLLM, `packed` is slower than reading one by one** (1.1 q/s
+vs 9.6 on short states — extracting `prompt_logprobs` costs more than a cached-prefill one-token
+read). so1 measured the same thing. `packed` saves tokens, not time, on an engine with a prefix
+cache; it shines where states are long and questions share them, and on backends without a cache.
+
+```sh
+# reproduce against any llama-server or vllm instance — ~60 requests, deliberately not a load test
+node bench/throughput.js --backend llama --base-url http://…:8000 --model Qwen3-8B-Q4_K_M --n 16 --concs 1,2 --packed 0 --raw bench/results/out.json
+node scripts/figures.js   # regenerates the figure from the raw
+```
+
 ## Measure it on your own questions
 
 Record the responses while you run, replay them for free afterwards:
@@ -533,6 +559,8 @@ same model:
 | live re-ask, same band as the recording | **3/3** |
 | live re-ask, movement of the raw `p1` | up to **0.179** |
 
+![Accuracy on production benches](docs/figures/accuracy-2026-09-20.svg)
+
 Which is the whole argument for the band, measured twice: the verdict and the band survived a
 different server, the float did not.
 
@@ -609,6 +637,8 @@ et l'empreinte sha256 de la chaîne envoyée est testée contre cette campagne :
 l'enveloppe bouge, `npm test` tombe et les chiffres ne s'appliquent plus.
 
 ## Tests
+
+![The suite](docs/figures/tests-2026-09-22.svg)
 
 ```sh
 npm test      # node --test: the pure reading, the client against a real socket, the CLI, the README

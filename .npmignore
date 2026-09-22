@@ -1,0 +1,11 @@
+# Exclusions within the `files` allowlist of package.json.
+# The allowlist is the contract: index.js, index.d.ts, lib/, bin/, docs/figures/, bench/, README.md.
+# Everything else here is dev-only and must never reach a user's node_modules.
+test/
+scripts/
+docs/verifications/
+.github/
+.idea/
+.vscode/
+*.tgz
+.DS_Store

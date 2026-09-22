@@ -1,0 +1,33 @@
+{
+ "date": "2026-09-22T07:49:44.328Z",
+ "baseUrl": "http://172.22.0.7:8000",
+ "model": "Qwen3-8B-Q4_K_M",
+ "backend": "llama",
+ "n": 16,
+ "phases": [
+  {
+   "phase": "separate",
+   "concurrency": 1,
+   "questions": 16,
+   "wallMs": 383,
+   "qps": 41.775456919060055,
+   "p50": 23,
+   "p95": 42,
+   "meanMs": 23.8125,
+   "errors": 0,
+   "promptTokens": 576
+  },
+  {
+   "phase": "separate",
+   "concurrency": 2,
+   "questions": 16,
+   "wallMs": 304,
+   "qps": 52.631578947368425,
+   "p50": 38,
+   "p95": 40,
+   "meanMs": 36.6875,
+   "errors": 0,
+   "promptTokens": 576
+  }
+ ]
+}
