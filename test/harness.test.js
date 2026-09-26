@@ -30,6 +30,66 @@ test('harness: les bras nuls', () => {
 	assert.ok(Math.abs(n.majority - 2 / 3) < 1e-9);
 	assert.equal(typeof n.first, 'number'); assert.equal(typeof n.lexical, 'number');
 });
+test('harness: letterPrior estime la masse marginale par LETTRE et publie split/tokenizer', () => {
+	/* Quatre bras permutés (référentiel PRÉSENTÉ) : chaque position a reçu le même contenu deux fois
+	 * — la moyenne par colonne est le prior sur les lettres, pas sur les contenus. */
+	const arms = [
+		{ mass: [0.8, 0.2] }, { mass: [0.7, 0.3] },
+		{ mass: [0.3, 0.7] }, { mass: [0.2, 0.8] },
+	];
+	const p = H.letterPrior(arms, { split: 'calib', tokenizer: 'qwen3' });
+	assert.ok(Math.abs(p.prior[0] - 0.5) < 1e-12, 'la masse par lettre se lave du contenu');
+	assert.ok(Math.abs(p.kl) < 1e-12, 'un prior uniforme a une concentration nulle (KL à l\'uniforme)');
+	assert.equal(p.n, 4); assert.equal(p.split, 'calib'); assert.equal(p.tokenizer, 'qwen3');
+	const b = H.letterPrior([{ mass: [0.9, 0.1] }]);
+	assert.ok(Math.abs(b.prior[0] - 0.9) < 1e-12 && b.split === 'undeclared' && b.tokenizer === 'undeclared',
+		'sans déclaration, le prior est publié comme UNDECLARED — c\'est un transfert, pas un réglage');
+	assert.ok(b.kl > 0, 'un prior concentré a une concentration positive');
+});
+test('harness: NEGATIVE CONTROL — à K = 2 les seeds 1..12 de permute donnent TOUS le swap', () => {
+	/* Ce test DOCUMENTE le comportement seedé (rejouable) de permute : à K = 2, chaque seed ≥ 1 rend
+	 * le même ordre. Ce n'est pas un bug de permute (c'est sa garantie de rejeu) — c'est la raison
+	 * pour laquelle l'estimation d'un prior lettre n'a PAS le droit de se contenter de seeds
+	 * consécutifs : les ordres doivent être ÉQUILIBRÉS par question (identité + swap à parts
+	 * égales), sinon le signal de contenu se lit comme un prior de lettre. */
+	const orders = new Set();
+	for ( let s = 1; s <= 12; s++ ) orders.add(H.permute({ options: ['a', 'b'] }, s).order.join(''));
+	assert.equal(orders.size, 1, 'permute a changé de comportement — les fixtures de campagne ne se rejouent plus');
+});
+test('harness: letterPrior récupère un prior CONNU sous ordres équilibrés — et documente les deux biais', () => {
+	/* Générateur synthétique : masse(lettre j | contenu c) = prior[j] × contenu[c] — la décomposition
+	 * de Zheng et al. Ce test vérifie la RECETTE du prior (masse brute + ordres équilibrés) : c'est
+	 * lui qui refuse l'estimateur renormalisé ET les seeds consécutifs. */
+	const priorLettre = [0.8, 0.2], contenu = [0.9, 0.1];
+	const gen = ( ordre ) => ({ mass: ordre.map(( c, j ) => priorLettre[j] * contenu[c] ) });
+	/* Équilibré (identité + swap) : le contenu se lave EXACTEMENT, le prior lettre est récupéré. */
+	const ok = H.letterPrior([gen([0, 1]), gen([1, 0])]);
+	assert.ok(Math.abs(ok.prior[0] - 0.8) < 1e-12,
+		'sous ordres équilibrés, letterPrior doit récupérer le prior lettre (0.8), pas le contenu');
+	/* Biais 1 — non équilibré (swap seul, comme les seeds consécutifs à K = 2) : le contenu FAUSSE
+	 * le prior. */
+	const faux = H.letterPrior([gen([1, 0])]);
+	assert.ok(Math.abs(faux.prior[0] - 0.3077) < 1e-3,
+		'un seul ordre laisse lire le contenu (0.31) comme un prior de lettre — la faille que '
+		+ 'l\'équilibre des ordres doit exclure');
+	/* Biais 2 — l'estimande renormalisé : moyenner des PROBABILITÉS (au lieu des masses) déforme le
+	 * prior MÊME sous ordres équilibrés. */
+	const r1 = gen([0, 1]); r1.mass = r1.mass.map(( x ) => x / (r1.mass[0] + r1.mass[1]) );
+	const r2 = gen([1, 0]); r2.mass = r2.mass.map(( x ) => x / (r2.mass[0] + r2.mass[1]) );
+	const biais = H.letterPrior([r1, r2]);
+	assert.ok(Math.abs(biais.prior[0] - 0.6403) < 1e-3,
+		'moyenner des probabilités renormalisées lit 0.64 pour un prior de 0.8 — biais documenté : '
+		+ 'l\'estimande est la MASSE');
+});
+test('harness: letterPrior refuse le vide, le menu mité et écarte les bras dégradés', () => {
+	assert.throws(() => H.letterPrior([]), ( e ) => e.code === 'PRIOR_EMPTY');
+	assert.throws(() => H.letterPrior([{ probabilities: [0.5, 0.5] }]), ( e ) => e.code === 'PRIOR_EMPTY',
+		'un bras sans `mass` refuse : les `probabilities` renormalisées sont le MAUVAIS estimande');
+	assert.throws(() => H.letterPrior([{ mass: [0.5, 0.5] }, { mass: [1, 0, 0] }]),
+		( e ) => e.code === 'PRIOR_RAGGED', 'le prior dépend de la TAILLE du menu, on ne moyenne pas deux menus');
+	const p = H.letterPrior([{ mass: [0.9, 0.1] }, { mass: [0.5, 0.5], degraded: true }]);
+	assert.equal(p.n, 1, 'un bras DÉGRADÉ dit « autre chose », pas une masse par lettre — il diluerait le prior');
+});
 
 /*
  * LA BARRE 17,7 % (104/588), et LA LECTURE QU'ELLE EXIGE — deux alignements, aucun sur la barre :

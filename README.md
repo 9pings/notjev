@@ -101,6 +101,46 @@ the readout. All notjev rows measured by `bench/throughput.js` (2026-09-22, raws
 |---|---|---|
 | llama-server `Qwen3-8B-Q4_K_M` | **23 ms** | 41.8 q/s (c1) · 52.6 q/s (c2) |
 | vLLM `Qwen3.8-27B-NVFP4` | **101 ms** | 9.6 q/s (c1) · 20.3 q/s (c4) |
+| llama-server `Phi-4-Q4_K_M` | **19 ms** | 48.0 q/s (c1) |
+| llama-server `Gemma-3-12B-Q4_K_M` | 61 ms | 16.1 q/s (c1) |
+
+The 2026-09-26 rows: same bench, same machine (RTX 5090). The packed arm is REFUSED on Gemma
+(`PACKED_MISALIGNED`: the `_` placeholder is not a token of its vocab — a named refusal, not a
+silent skip).
+
+## Which model to prefer — by use case, measured
+
+Same questions (production states, real gold), same day, this readout; raws and caveats in
+[docs/measurements.md](docs/measurements.md). The answer DEPENDS ON THE SHAPE OF THE QUESTION —
+that is the main finding, so the table is by use case, not by model.
+
+**The cases, and what to run on each:**
+
+| your question | pick | why (measured) |
+|---|---|---|
+| **2 options, rich state** — verdicts, entity anchoring on real content | `Qwen3.8-27B` if you can, `Qwen3-8B` if you need speed | 27B: 97.5 % accuracy, 7.5 % flips, nothing to correct. 8B: 92.5 % at 23 ms — the best speed/accuracy trade-off of the four. |
+| **2 options, minimal state** — one-line pairs, trivial context | `Qwen3.8-27B`, or correct the prior | on thin states the letter prior appears in EVERY model (8B: kl 0.007 → 0.119; flips 15 % → 65 %). Enrich the state, or estimate and divide (`harness.letterPrior`). |
+| **long menus (K ≥ 10)** — classification, typing | `Qwen3.8-27B` or split the question | at K = 19 every model degrades, the small ones collapse (8B: 30 % accuracy, 71 % flips). The `letterPrior` correction only rescues a model that still reads content under the bias: Phi-4 +13.4 pts, Gemma +6.7, 27B nothing to gain, **8B −3.3 (worse)**. |
+| **maximum throughput** — filtering, first-pass triage | `Phi-4` (19 ms) or `Qwen3-8B` (23 ms) | both stay ≥ 90 % accuracy at K = 2; escalate their abstentions to the 27B. |
+| **nothing measured on your questions yet** | measure first | `node bench/letters.js --backend llama --base-url … --model … --gold your-states.jsonl` — the regime of the question moves the numbers more than the choice of model does. |
+
+**The model sheet, for reference:**
+
+| model | accuracy K=2 / K=19 | flips K=2 / K=19 | p50 | letter prior kl K=2 / K=19 |
+|---|---|---|---|---|
+| `Qwen3.8-27B-NVFP4` | **97.5 %** / **60 %** | **7.5 %** / **40 %** | 101 ms | 0.007 / 0.125 |
+| `Qwen3-8B-Q4_K_M` | 92.5 % / 30 % | 15 % / 71 % | 23 ms | 0.007 / **0.646** |
+| `Phi-4-Q4_K_M` | 90.0 % / 23 % | 27.5 % / 76 % | **19 ms** | 0.002 / 0.455 |
+| `Gemma-3-12B-Q4_K_M` | 87.5 % / 50 % | 32.5 % / 60 % | 61 ms | 0.009 / 0.512 |
+
+**Where the forms diverge** (all measured, 2026-09-26): **menu size** — going from 2 to 19 options
+concentrates the letter prior 50-300x and multiplies the flips 4-5x in every family; **state
+richness** — the same 8B reads content on a 3 k-char production state (92.5 %) and follows the
+letter on a one-line pair; **the envelope** — this readout sends ChatML, so Gemma and Phi run
+out-of-template (their numbers are "this library on those models", not their native prompt); and
+**the correction is not a universal fix** — it pays exactly when the prior is concentrated AND the
+model still reads content beneath it. Rule of thumb: **pick on accuracy at YOUR menu size first,
+order-stability second, latency last — and measure before believing.**
 
 Hosted Jev measures at a **419 ms** median on the same style of questions; so1's headline 71.9 q/s is
 a 4B on an H200. One honest inversion we measured and publish as-is: on vLLM, `packed` is slower than

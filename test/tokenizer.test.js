@@ -36,6 +36,30 @@ test('tokenizer: le régime code direct est refusé quand deux codes partagent l
 	await assert.rejects(T.firstTokenCollision(fake, ['medtop:01', 'medtop:02'], { strict: true }),
 		( e ) => e.code === 'FIRST_TOKEN_COLLISION');
 });
+test('tokenizer: l\'inventaire des trois régimes de la forme espacée', async () => {
+	/* Trois familles de vocabulaires, telles que mesurées sur le Hub (A..S) — le contrôle classe,
+	 * il ne devine pas : c'est la pièce détokenisée du SERVEUR qui choisit le seau dans `distribution`. */
+	const sp = async ( s ) => [s.charCodeAt(s.length - 1)];                 // SentencePiece : " A" EST "A"
+	const gpt = async ( s ) => [s.charCodeAt(0) * 1000 + s.charCodeAt(s.length - 1)]; // Ġ-BPE : 2 tokens d'ID
+	const phi = async ( s ) => s === ' A' ? [32, 65] : [65];               // Phi-3 : espace nu puis lettre
+	const rSp = await T.checkSpacedLetters(sp, ['A', 'B']);
+	assert.deepEqual(rSp.forms.map(( f ) => f.regime ), ['same', 'same'],
+		'régime `same` : spacedMass est un zéro STRUCTUREL, pas un petit nombre');
+	const rGpt = await T.checkSpacedLetters(gpt, ['A', 'B']);
+	assert.deepEqual(rGpt.forms.map(( f ) => f.regime ), ['single', 'single'],
+		'régime `single` : spacedMass est une quantité réelle');
+	assert.equal(rGpt.counts.single, 2);
+	const rPhi = await T.checkSpacedLetters(phi, ['A']);
+	assert.equal(rPhi.forms[0].regime, 'multi');
+	assert.equal(rPhi.counts.multi, 1);
+});
+test('tokenizer: NEGATIVE CONTROL — la forme espacée multi-token est refusée en strict', async () => {
+	/* À max_tokens: 1, un modèle qui préfère la forme espacée émet l'ESPACE : les lettres ne portent
+	 * rien et la couverture sous-compte sa préférence — ce sabbotage-là, le contrôle le détecte. */
+	const phi = async ( s ) => s === ' A' ? [32, 65] : [65];
+	await assert.rejects(T.checkSpacedLetters(phi, ['A', 'B'], { strict: true }),
+		( e ) => e.code === 'LETTER_SPACED_FRAGMENT');
+});
 test('tokenizer: makeHttpTokenizer parle aux deux serveurs', async () => {
 	const calls = [];
 	// Le faux serveur répond selon le CORPS, pas selon l'URL : les deux implémentations visent le même

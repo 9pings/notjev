@@ -150,6 +150,46 @@ describe('readout — the distribution', () => {
 			'candidates were fabricated from a response that carried none');
 		assert.deepStrictEqual(RDT.entriesOf(null), []);
 	});
+
+	test('THE LETTER PRIOR divides the mass per letter — and `coverage` stays on the RAW mass', () => {
+		/* A model that puts 0.6 on "A" and 0.2 on "B" but carries a letter prior of 0.6/0.2:
+		 * the correction must recover the uniform CONTENT signal, and coverage must NOT move. */
+		const e = RDT.entriesOf(chat([['A', Math.log(0.6)], ['B', Math.log(0.2)], ['The', Math.log(0.2)]]));
+		const d = RDT.distribution(e, ['A', 'B'], [0.6, 0.2]);
+		assert.ok(Math.abs(d.probabilities[0] - 0.5) < 1e-9 && Math.abs(d.probabilities[1] - 0.5) < 1e-9,
+			'(0.6/0.6) / (0.6/0.6 + 0.2/0.2) = 0.5 — the prior-weighted mass renormalises to the content signal');
+		assert.ok(Math.abs(d.coverage - 0.8) < 1e-9,
+			'coverage stays on the RAW mass: it means "the model wanted to answer something else", and a '
+			+ 'per-letter division would change what it means');
+		assert.deepStrictEqual(d.letterPrior, [0.6, 0.2], 'the APPLIED prior is returned, hence auditable');
+	});
+
+	test('the letter prior is DECLARED, not guessed: a mismatched or zero prior is REFUSED', () => {
+		const e = RDT.entriesOf(chat([['A', Math.log(0.6)], ['B', Math.log(0.4)]]));
+		assert.throws(() => RDT.distribution(e, ['A', 'B'], [1]),
+			/1 prior entr/, 'a prior of the wrong length divides the wrong letters');
+		assert.throws(() => RDT.distribution(e, ['A', 'B'], ['x', 'y']),
+			/not an array|letterPrior/, 'a non-array is not a prior');
+		assert.throws(() => RDT.distribution(e, ['A', 'B'], [0, 1]),
+			/dividing by a zero prior/, 'a zero prior would move an option to infinity — the correction '
+			+ 'would decide instead of the model');
+	});
+
+	test('NEGATIVE CONTROL — a DEGRADED distribution is never corrected: the uniform stays, said by `degraded`', () => {
+		const e = RDT.entriesOf(chat([['The', Math.log(0.7)], ['Both', Math.log(0.3)]]));
+		const d = RDT.distribution(e, ['A', 'B'], [0.9, 0.1]);
+		assert.strictEqual(d.degraded, true,
+			'an empty distribution got corrected — it abstains, it does not get re-weighted');
+		assert.deepStrictEqual(d.probabilities, [0.5, 0.5]);
+	});
+
+	test('WITHOUT a prior, the distribution is the measured one — the correction is opt-in, never silent', () => {
+		const e = RDT.entriesOf(chat([['A', Math.log(0.6)], ['B', Math.log(0.2)]]));
+		const d = RDT.distribution(e, ['A', 'B']);
+		assert.strictEqual(d.letterPrior, null,
+			'a prior was returned when none was applied — p1 would not be the measured quantity');
+		assert.ok(Math.abs(d.probabilities[0] - 0.75) < 1e-9);
+	});
 });
 
 describe('readout — the margin, the bands, the codomain', () => {

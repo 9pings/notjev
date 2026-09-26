@@ -1,0 +1,40 @@
+{"id":"q01","state":"A: \"Sarah Knafo\" / B: \"Sarah Knafot\" (heard in an audio transcript)\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q02","state":"A: \"Marie Curie\" / B: \"Mary Curie\" (as heard on the radio)\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q03","state":"A: \"Jean-Luc Mélenchon\" / B: \"Jean Luc Melenchon\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q04","state":"A: \"Valérie Pécresse\" / B: \"Valerie Pecresse\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q05","state":"A: \"Emmanuel Macron\" / B: \"E. Macron\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q06","state":"A: \"Angela Merkel\" / B: \"Angela Merckel\" (misspelled in a blog post)\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q07","state":"A: \"Nikon FM2 (1982)\" / B: \"Nikon FM2n (1983)\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q08","state":"A: \"Olympique de Marseille\" / B: \"OM\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q09","state":"A: \"Organisation des Nations unies\" / B: \"ONU\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q10","state":"A: \"Support vector machine\" / B: \"SVM\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q11","state":"A: \"18 rue des Lilas, Paris\" / B: \"18, rue des Lilas, Paris\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q12","state":"A: \"Centre national de la recherche scientifique\" / B: \"CNRS\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q13","state":"A: \"RER ligne B\" / B: \"RER B\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q14","state":"A: \"Q3 revenue\" / B: \"third-quarter revenue\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q15","state":"A: \"ACME Industries Ltd\" / B: \"ACME Industries Limited\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q16","state":"A: \"J. K. Rowling\" / B: \"Joanne Rowling\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q17","state":"A: \"The Rolling Stones\" / B: \"Rolling Stones\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q18","state":"A: \"St-Etienne\" / B: \"Saint-Étienne\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q19","state":"A: \"Airbus A320neo\" / B: \"A320 Neo\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q20","state":"A: \"Bureau de vote n°12\" / B: \"bureau n°12 de vote\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q21","state":"A: \"Paris, France\" / B: \"Paris, Texas\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q22","state":"A: \"Marie Curie\" / B: \"Maria Callas\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q23","state":"A: \"Jean Dupont, conseiller municipal\" / B: \"Jean Dupont, député européen\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q24","state":"A: \"Nikon FM2\" / B: \"Canon AE-1\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q25","state":"A: \"OM\" / B: \"OL (Olympique Lyonnais)\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q26","state":"A: \"ONU\" / B: \"OTAN\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q27","state":"A: \"SVM (machine learning)\" / B: \"SQL (databases)\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q28","state":"A: \"18 rue des Lilas, Paris\" / B: \"18 rue des Lilas, Lyon\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q29","state":"A: \"CNRS\" / B: \"INSEE\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q30","state":"A: \"RER ligne B (Paris)\" / B: \"Ligne B (Bruxelles métro)\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q31","state":"A: \"Angela Merkel\" / B: \"Theresa May\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q32","state":"A: \"The Rolling Stones\" / B: \"The Beatles\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q33","state":"A: \"Airbus A320\" / B: \"Boeing 737\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q34","state":"A: \"Q3 revenue\" / B: \"Q4 revenue\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q35","state":"A: \"Sarah Knafo\" / B: \"Marine Le Pen\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q36","state":"A: \"J. K. Rowling\" / B: \"Stephen King\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q37","state":"A: \"St-Etienne (Loire)\" / B: \"St-Etienne (Guadeloupe)\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q38","state":"A: \"Valérie Pécresse\" / B: \"Élisabeth Borne\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q39","state":"A: \"Emmanuel Macron\" / B: \"Brigitte Macron\"\n","question":"verdict","options":["MEME","AUTRE"]}
+{"id":"q40","state":"A: \"18 rue des Lilas\" / B: \"18 avenue des Lilas\"\n","question":"verdict","options":["MEME","AUTRE"]}

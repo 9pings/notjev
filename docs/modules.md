@@ -10,9 +10,9 @@ of them renormalises anything in silence.
 | `packed` | several questions on ONE state, in one pass | 0.911 agreement vs 0.900 read one by one, ~2.2x cheaper |
 | `backends/llama-server` | GGUF via `/completion` + `n_probs` | same prompt byte for byte as vLLM; 0.935 vs 0.947 |
 | `backends/node-llama-cpp` | native Node readout, packed by positions, no server | `controlledEvaluate` marks arbitrary positions |
-| `tokenizer` | the instrument checks, before any number | 17 IPTC codes share their first token — that regime is REFUSED |
+| `tokenizer` | the instrument checks, before any number | 17 IPTC codes share their first token — that regime is REFUSED; the spaced letter has 3 regimes (`same` / `single` / `multi`) |
 | `calibration` | temperature fitted on a declared split | ECE 0.121 -> 0.051 (8B), 0.035 -> 0.017 (27B) |
-| `harness` | permutation, A/B swap, strata, null arms, flips | 17.7 % of verdicts flip when the menu is reshuffled |
+| `harness` | permutation, A/B swap, strata, null arms, flips, letter prior | 17.7 % of verdicts flip when the menu is reshuffled — the letter prior is their measured cause (PriDe, arXiv:2309.03882) |
 | `set` | a coordinate as a SET of active nodes | exact-set 0.692 / Jaccard 0.817, against a null arm at 0.291 |
 | `logits` | entries straight from pruned logits | `lse` missing -> `coverage: null`, never 1 |
 | `contract` | the JSONL form the scorer reads | a missing field refuses BEFORE the GPU is spent |
@@ -76,6 +76,30 @@ const perm = harness.permute({ question: 'which one', options: ['x', 'y', 'z'] }
 console.log('menu reshuffled', perm.question.options, 'order', perm.order);
 ```
 
+**The letter prior** — the measured cause of the permutation flips: the model's mass over the
+LETTER TOKENS, estimated on permuted arms and divided out at reading. PriDe (Zheng et al., ICLR
+2024, arXiv:2309.03882); label-free; published with its `split` and its `tokenizer`, because a
+prior carried across models, tokenizers or menu sizes is a transfer, not a correction. Temperature
+cannot do this job: the argmax is invariant under `T`, so calibration moves no flip — this layer can.
+
+```js
+// The PERMUTED arms, in the presented frame (BEFORE unpermute — the prior is per LETTER), under
+// BALANCED orders (at K = 2: identity + swap; consecutive seeds all give the same one — the
+// content would read as a prior). The estimand is the decision's RAW `mass`.
+const fit = harness.letterPrior(permutedDecisions, { split: 'calib-2026-09', tokenizer: 'qwen3' });
+console.log('letterPrior', fit.prior, 'kl', fit.kl.toFixed(4), 'n', fit.n, fit.split, fit.tokenizer);
+
+// Applied per decision — echoed as `letterPrior`; `coverage` stays on the RAW mass.
+const r = await jev.decide({ state, question, options, letterPrior: fit.prior });
+```
+
+The protocol that measures what it buys — flips under permutation and coverage at fixed theta,
+before/after, read from the same raw distributions, with the prior estimated OUT of sample
+(leave-one-question-out): `bench/letters.js` (it also inventories the spaced-letter regime of the
+deployed tokenizer: `same`, `single`, or `multi`). Measured 2026-09-26 on the campaign engines:
+prior near-uniform and correction neutral on production states; concentrated (8B kl 0.119) on
+short synthetic ones — the regime decides. Details: [measurements.md](measurements.md).
+
 **Set** — a coordinate is a SET of active nodes: one Choice per division, plus a Noul asking whether
 the division applies at all. The band is a **reliability cursor per node**, never what constitutes
 the set: tightening to `p1 >= 0.9` raised per-node precision to 0.90 and dropped the exact-set from
@@ -104,7 +128,8 @@ renders the string) **or** `content` — the string already rendered, taken byte
 door exists for probes that must replay their own recorded prompt exactly.
 
 An OUTPUT line carries `id, choice, p1, p2, margin, band, prior, coverage, exactMass, spacedMass,
-degraded, undecided, theta, probabilities`, and optionally `value`, `expectation`, `prompt_sha256`,
+degraded, undecided, theta, probabilities`, and optionally `value`, `expectation`, `letterPrior`
+(the prior APPLIED — absent means the reading is raw), `prompt_sha256`,
 `backend`, `model`, `source` (`'http'` or `'logits'`) and `layer`. **`coverage` must be present**, and
 `null` is a legal value: it says "this path cannot compute it" (pruned logits with no `lse`). Absent,
 it would read as "all was well"; written as `1`, it would claim nothing was said outside the menu.

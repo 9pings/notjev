@@ -40,6 +40,10 @@ export interface Question extends QuestionForm {
 	signal?: AbortSignal;
 	/** `null`/`false` removes `chat_template_kwargs` from the body (OpenAI); an object replaces it. */
 	templateKwargs?: Record<string, unknown> | null | false;
+	/** The model's prior over the LETTER TOKENS, divided out of the mass (PriDe,
+	 *  arXiv:2309.03882). Estimated per (model, tokenizer, menu size) by `harness.letterPrior` —
+	 *  carried across any of those, it is a transfer. `coverage` never moves. */
+	letterPrior?: number[];
 	/** Merged into the request body, last. */
 	extra?: Record<string, unknown>;
 }
@@ -66,6 +70,9 @@ export interface Decision {
 	coverage: number;
 	exactMass: number;
 	spacedMass: number;
+	/** The letter prior APPLIED to this decision (null: the reading is raw) — an audited
+	 *  correction is a published one. `coverage` stays on the RAW mass. */
+	letterPrior: number[] | null;
 	degraded: boolean;
 	undecided: boolean;
 	theta: number;
@@ -97,6 +104,9 @@ export interface ClientOptions {
 	model?: string;
 	apiKey?: string;
 	theta?: number;
+	/** The letter prior applied to every decision unless a question overrides it
+	 *  (`NOTJEV_LETTER_PRIOR`, a JSON number array — malformed JSON is REFUSED). */
+	letterPrior?: number[];
 	edges?: number[];
 	topLogprobs?: number;
 	maxTokens?: number;
@@ -119,6 +129,7 @@ export interface Client {
 	model?: string;
 	theta: number;
 	path: string;
+	letterPrior: number[] | null;
 	decide(q: Question): Promise<Decision>;
 	noul(state: string | null, question: string, pair?: { yes: OptionSpec; no: OptionSpec } | true,
 		more?: Partial<Question>): Promise<Decision>;
@@ -139,7 +150,8 @@ export function createClient(options?: ClientOptions): Client;
 
 /** The PURE reading: a recorded response, a question form, a theta -> the same Decision. */
 export function readResponse(resp: unknown, spec: QuestionForm & {
-	theta?: number; edges?: number[]; prompt?: string; request?: unknown; ms?: number; model?: string;
+	theta?: number; edges?: number[]; letterPrior?: number[];
+	prompt?: string; request?: unknown; ms?: number; model?: string;
 }): Decision;
 
 export interface ReplayRow {
@@ -299,9 +311,13 @@ export namespace readout {
 	function renderTurn(o: { state?: string | null; question?: string; options: string[]; instruction?: string }): string;
 	function chatParams(o: { model?: string; content: string; maxTokens?: number; topLogprobs?: number }): Record<string, unknown>;
 	function entriesOf(resp: unknown): { token: string; logprob: number; prob: number }[];
-	function distribution(entries: { token: string; logprob: number; prob?: number }[], letters: string[]): {
+	/** `letterPrior` is divided out ON THE MASS, per letter (PriDe, arXiv:2309.03882); `coverage`
+	 *  stays on the RAW mass. A zero or mismatched prior is REFUSED, a degraded reading is never
+	 *  corrected. */
+	function distribution(entries: { token: string; logprob: number; prob?: number }[], letters: string[],
+		letterPrior?: number[]): {
 		probabilities: number[]; mass: number[]; coverage: number;
-		exactMass: number; spacedMass: number; degraded: boolean };
+		exactMass: number; spacedMass: number; degraded: boolean; letterPrior: number[] | null };
 	function bandOf(p: number, edges?: number[]): Band;
 	function snap(p: number, edges?: number[]): number;
 	function decide(o: { probabilities: number[]; options: string[]; theta?: number; edges?: number[] }): {
@@ -393,7 +409,8 @@ export namespace packed {
 	function buildPacked(o: { state?: string | null; questions: Question[]; tokenize: Tokenize;
 		placeholder?: string }): Promise<PackedSpec>;
 	function readPacked(resp: unknown, spec: PackedSpec,
-		opts?: { theta?: number; edges?: number[] }): PackedDecision[];
+		opts?: { theta?: number; edges?: number[]; letterPrior?: number[] | ((letters: string[]) => number[] | null) }):
+		PackedDecision[];
 	function divergence(a: { id: string | number; top: string; band?: Band }[],
 		b: { id: string | number; top: string; band?: Band }[]): {
 			n: number; differ: number; rate: number; byBand: Record<string, { n: number; differ: number }> };
@@ -411,6 +428,13 @@ export namespace tokenizer {
 	function checkLetters(tokenize: Tokenize, letters: string[]): Promise<{ ids: number[] }>;
 	/** `tok(prompt+letter) === tok(prompt) ++ [id]` — else `ANSWER_BOUNDARY`. */
 	function checkBoundary(tokenize: Tokenize, prompt: string, letter: string): Promise<{ id: number }>;
+	/** The SPACED form of every letter, against the deployed server: `same` (one ID token per
+	 *  option, `spacedMass` is a structural zero), `single` (two), `multi` (unreadable at
+	 *  `max_tokens: 1` — refused by `strict`, else `LETTER_SPACED_FRAGMENT`). */
+	function checkSpacedLetters(tokenize: Tokenize, letters: string[], opts?: { strict?: boolean }): Promise<{
+		forms: { letter: string; bare: number[]; spaced: number[]; regime: 'same' | 'single' | 'multi' }[];
+		counts: { same: number; single: number; multi: number };
+	}>;
 	/** Two codes sharing their first token would merge two options into one mass. */
 	function firstTokenCollision(tokenize: Tokenize, codes: string[], opts?: { strict?: boolean }):
 		Promise<{ ok: boolean; collisions: [string, string][] }>;
@@ -439,6 +463,14 @@ export namespace harness {
 	function stratify<R>(rows: R[], by: (r: R) => string, n: number, seed: number): R[];
 	function nullArms(rows: { label: string; options?: string[]; candidates?: string[]; state?: string }[]):
 		{ majority: number; first: number; lexical: number };
+	/** The marginal RAW mass per LETTER, from PERMUTED arms in the presented frame under BALANCED
+	 *  orders (PriDe, arXiv:2309.03882) — label-free; degraded arms are excluded; ragged menus are
+	 *  refused; the estimand is the decision's `mass`, NOT the renormalised probabilities.
+	 *  `kl` = KL(prior || uniform): the concentration that predicts flip rates. A prior is
+	 *  published WITH its `split` and its `tokenizer` — carried across, it is a transfer. */
+	function letterPrior(arms: { mass: number[]; degraded?: boolean }[],
+		o?: { split?: string; tokenizer?: string }): {
+		prior: number[]; n: number; kl: number; split: string; tokenizer: string };
 	/** Paired by `id`; `top` is the option CODE — under permutation an index is not an answer. */
 	function flips(a: { id: string | number; top: string }[], b: { id: string | number; top: string }[]):
 		{ n: number; flips: number; rate: number };

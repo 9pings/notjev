@@ -50,6 +50,32 @@ describe('client — one request, one decision', () => {
 		} finally { await fake.close(); }
 	});
 
+	test('a letter prior passed to `decide` re-weights the letters and NEVER the coverage, and is '
+		+ 'echoed on the decision', async () => {
+		const fake = await startFake(() => strongA() );
+		try {
+			const jev = clientOn(fake);
+			const r = await jev.decide({ state: 'S\n', question: 'verdict', options: ['SAME', 'OTHER'] });
+			assert.strictEqual(r.letterPrior, null,
+				'a uniform prior was applied where none was passed — p1 would not be the measured quantity');
+			const b = await jev.decide({ state: 'S\n', question: 'verdict', options: ['SAME', 'OTHER'],
+				letterPrior: [0.9, 0.095] });
+			assert.ok(Math.abs(b.coverage - r.coverage) < 1e-12,
+				'coverage stays on the RAW mass — a per-letter division would change what it means');
+			assert.ok(b.p1 < r.p1, 'a prior favourable to A, divided out, moves mass away from A');
+			assert.deepStrictEqual(b.letterPrior, [0.9, 0.095],
+				'the APPLIED prior belongs next to p1, like T on a calibrated decision — an audited '
+				+ 'correction is a published one');
+		} finally { await fake.close(); }
+	});
+
+	test('NEGATIVE CONTROL — a malformed NOTJEV_LETTER_PRIOR is REFUSED, not guessed', () => {
+		assert.throws(() => createClient({ baseUrl: 'http://h', model: 'm', retries: 0,
+			env: { NOTJEV_LETTER_PRIOR: 'A,B' } }),
+			( e ) => e.code === 'NOTJEV_BAD_PRIOR',
+			'an unparsable prior would silently decide nothing or everything');
+	});
+
 	test('NEGATIVE CONTROL — a distribution WITHOUT any option letter returns `degraded: true`, '
 		+ '`choice: null`, and NEVER a silent uniform', async () => {
 		const fake = await startFake(() => chatResponse(lp([['The', 0.7], ['Both', 0.3]])) );
