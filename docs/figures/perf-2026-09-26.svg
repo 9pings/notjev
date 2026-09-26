@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="690" viewBox="0 0 960 690" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<rect width="960" height="690" fill="#fff" />
+<text x="24" y="26" font-size="15" font-weight="700" fill="#111">Median latency per decision</text>
+<text x="24" y="40" font-size="10.5" fill="#666">ms — lower is better; each arm on its own engine (log scale)</text>
+<text x="24" y="63" font-size="11" fill="#222">notjev · llama Phi-4 14B Q4_K_M</text>
+<rect x="239" y="52" width="271.5" height="15" rx="2" fill="#0a7a4a" />
+<text x="516.5220146023173" y="63" font-size="11" font-weight="600" fill="#0a7a4a">19 ms</text>
+<text x="24" y="90" font-size="11" fill="#222">notjev · llama 8B Q4</text>
+<rect x="239" y="79" width="289.1" height="15" rx="2" fill="#0a7a4a" />
+<text x="534.1402105144023" y="90" font-size="11" font-weight="600" fill="#0a7a4a">23 ms</text>
+<text x="24" y="117" font-size="11" fill="#222">notjev · llama Gemma-3 12B Q4_K_M</text>
+<rect x="239" y="106" width="379.1" height="15" rx="2" fill="#0a7a4a" />
+<text x="624.0850349672862" y="117" font-size="11" font-weight="600" fill="#0a7a4a">61 ms</text>
+<text x="24" y="144" font-size="11" fill="#222">notjev · vLLM 27B NVFP4</text>
+<rect x="239" y="133" width="425.6" height="15" rx="2" fill="#0a7a4a" />
+<text x="670.5842383665145" y="144" font-size="11" font-weight="600" fill="#0a7a4a">101 ms</text>
+<text x="24" y="171" font-size="11" fill="#222">reflex-4b · CPU</text>
+<rect x="239" y="160" width="454.4" height="15" rx="2" fill="#b9b9b9" />
+<text x="699.3676593458625" y="171" font-size="11" font-weight="600" fill="#444">138 ms</text>
+<text x="24" y="198" font-size="11" fill="#222">djev · 26B, GPU</text>
+<rect x="239" y="187" width="516.3" height="15" rx="2" fill="#b9b9b9" />
+<text x="761.2595725897582" y="198" font-size="11" font-weight="600" fill="#444">270 ms</text>
+<text x="24" y="225" font-size="11" fill="#222">Jev (hosted)</text>
+<rect x="239" y="214" width="556.8" height="15" rx="2" fill="#b9b9b9" />
+<text x="801.7834442098433" y="225" font-size="11" font-weight="600" fill="#444">419 ms</text>
+<text x="24" y="252" font-size="11" fill="#222">simple-jev · Qwen 27B</text>
+<rect x="239" y="241" width="591.9" height="15" rx="2" fill="#b9b9b9" />
+<text x="836.8707740894101" y="252" font-size="11" font-weight="600" fill="#444">613 ms</text>
+<text x="24" y="286" font-size="15" font-weight="700" fill="#111">Throughput</text>
+<text x="24" y="300" font-size="10.5" fill="#666">decisions/s — higher is better (log scale)</text>
+<text x="24" y="323" font-size="11" fill="#222">so1 · 4B, vLLM + H200</text>
+<rect x="239" y="312" width="591.4" height="15" rx="2" fill="#b9b9b9" />
+<text x="836.3681515869481" y="323" font-size="11" font-weight="600" fill="#444">71.9</text>
+<text x="24" y="350" font-size="11" fill="#222">notjev · llama 8B Q4_K_M, c2</text>
+<rect x="239" y="339" width="548.2" height="15" rx="2" fill="#0a7a4a" />
+<text x="793.216978096524" y="350" font-size="11" font-weight="600" fill="#0a7a4a">52.6</text>
+<text x="24" y="377" font-size="11" fill="#222">notjev · llama Phi-4 Q4_K_M, c1</text>
+<rect x="239" y="366" width="535.5" height="15" rx="2" fill="#0a7a4a" />
+<text x="780.4753341041245" y="377" font-size="11" font-weight="600" fill="#0a7a4a">48</text>
+<text x="24" y="404" font-size="11" fill="#222">notjev · llama 8B Q4_K_M, c1</text>
+<rect x="239" y="393" width="516.3" height="15" rx="2" fill="#0a7a4a" />
+<text x="761.2634049669057" y="404" font-size="11" font-weight="600" fill="#0a7a4a">41.8</text>
+<text x="24" y="431" font-size="11" fill="#222">openjev · DiffGemma</text>
+<rect x="239" y="420" width="479.8" height="15" rx="2" fill="#b9b9b9" />
+<text x="724.8218528209518" y="431" font-size="11" font-weight="600" fill="#444">32.1 ≈10.7 req/s × 3 q</text>
+<text x="24" y="458" font-size="11" fill="#222">notjev · vLLM 27B NVFP4, c4</text>
+<rect x="239" y="447" width="416.6" height="15" rx="2" fill="#0a7a4a" />
+<text x="661.585688095242" y="458" font-size="11" font-weight="600" fill="#0a7a4a">20.3</text>
+<text x="24" y="485" font-size="11" fill="#222">notjev · llama Gemma-3 Q4_K_M, c1</text>
+<rect x="239" y="474" width="385.2" height="15" rx="2" fill="#0a7a4a" />
+<text x="630.1821276247525" y="485" font-size="11" font-weight="600" fill="#0a7a4a">16.2</text>
+<text x="24" y="512" font-size="11" fill="#222">notjev · vLLM 27B NVFP4, c1</text>
+<rect x="239" y="501" width="313.2" height="15" rx="2" fill="#0a7a4a" />
+<text x="558.1857614332527" y="512" font-size="11" font-weight="600" fill="#0a7a4a">9.6</text>
+<text x="24" y="539" font-size="11" fill="#222">djev · 26B</text>
+<rect x="239" y="528" width="181.0" height="15" rx="2" fill="#b9b9b9" />
+<text x="425.9722491153379" y="539" font-size="11" font-weight="600" fill="#444">3.7</text>
+<text x="24" y="566" font-size="11" fill="#222">Jev (hosted)</text>
+<rect x="239" y="555" width="120.5" height="15" rx="2" fill="#b9b9b9" />
+<text x="365.51973145198184" y="566" font-size="11" font-weight="600" fill="#444">2.4</text>
+<text x="24" y="593" font-size="11" fill="#222">simple-jev · 27B</text>
+<rect x="239" y="582" width="67.6" height="15" rx="2" fill="#b9b9b9" />
+<text x="312.58175200266055" y="593" font-size="11" font-weight="600" fill="#444">1.6</text>
+<text x="24" y="638" font-size="9" fill="#888">notjev rows: measured by bench/throughput.js against live engines — llama-server Qwen3-8B-Q4_K_M and vLLM Qwen3.8-27B-NVFP4 (2026-09-22), llama-server Phi-4-Q4_K_M and Gemma-3-12B-Q4_K_M (2026-09-26, same machine) — raw in bench/results/. Other rows: their own publications / an independent bench of the hosted services on shared questions (2026-09-20), each on its own engine.</text>
+<text x="24" y="652" font-size="9" fill="#888">The engine is the variable, not the readout: so1's 71.9 q/s is a 4B on an H200, openjev's a purpose-built diffusion model, Jev's their fleet. notjev runs on the model you already serve.</text>
+<text x="24" y="666" font-size="9" fill="#888">Latency panel: shorter bars are faster. Throughput panel: longer bars are faster — hence the opposite sort.</text>
+</svg>

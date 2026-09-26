@@ -92,7 +92,7 @@ diagnosis.
 
 ## Performance, measured
 
-![Latency and throughput](docs/figures/perf-2026-09-22.svg)
+![Latency and throughput](docs/figures/perf-2026-09-26.svg)
 
 Every arm runs the same mechanism on ITS OWN model and hardware — the engine is the variable, not
 the readout. All notjev rows measured by `bench/throughput.js` (2026-09-22, raws committed):
@@ -226,7 +226,7 @@ en argument.
 
 ## Tests
 
-![The suite](docs/figures/tests-2026-09-22.svg)
+![The suite](docs/figures/tests-2026-09-26.svg)
 
 ```sh
 npm test      # node --test: the pure reading, the client against a real socket, the CLI, the README

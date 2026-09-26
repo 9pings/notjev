@@ -25,6 +25,15 @@ const vllm = JSON.parse(fs.readFileSync(
 const v1 = vllm.phases.find(( p ) => p.phase === 'separate' && p.concurrency === 1 );
 const v4 = vllm.phases.find(( p ) => p.phase === 'separate' && p.concurrency === 4 );
 
+/* The 2026-09-26 rows: Gemma-3-12B and Phi-4-14B GGUF, same bench, same machine (RTX 5090),
+ * llama-server, packed arm off (Gemma REFUSES it: the `_` placeholder is not a token of its vocab). */
+const gemma = JSON.parse(fs.readFileSync(
+	path.join(__dirname, '..', 'bench', 'results', 'latency-gemma3-12b-2026-09-26.json'), 'utf8'));
+const g1 = gemma.phases.find(( p ) => p.phase === 'separate' && p.concurrency === 1 );
+const phi4 = JSON.parse(fs.readFileSync(
+	path.join(__dirname, '..', 'bench', 'results', 'latency-phi4-14b-2026-09-26.json'), 'utf8'));
+const p1 = phi4.phases.find(( p ) => p.phase === 'separate' && p.concurrency === 1 );
+
 const esc = ( s ) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const fmt = ( x, d ) => Number(x).toFixed(d === undefined ? 1 : d ).replace(/\.0$/, '');
 
@@ -45,39 +54,45 @@ function panel( x, y, w, title, subtitle, rows, max, scale ) {
 	return s;
 }
 
-const W = 960, H = 560;
+const W = 960, H = 690;
 let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">\n`
 	+ `<rect width="${W}" height="${H}" fill="#fff" />\n`
 	/* Panel 1 — median latency per decision. Sources: bench/results/llama-throughput-2026-09-22.json
-	 * (notjev llama), bench/results/throughput-2026-09-22.json (notjev vLLM 27B), an independent
-	 * same-questions bench of the hosted services and local clones (2026-09-20): jev 0.419 s,
-	 * simplejev-qwen38-27b 0.613, djev-full 0.270, reflex-4b 0.138 — medians. */
+	 * (notjev llama), bench/results/throughput-2026-09-22.json (notjev vLLM 27B),
+	 * bench/results/latency-{phi4-14b,gemma3-12b}-2026-09-26.json (notjev llama, 26/09), an
+	 * independent same-questions bench of the hosted services and local clones (2026-09-20):
+	 * jev 0.419 s, simplejev-qwen38-27b 0.613, djev-full 0.270, reflex-4b 0.138 — medians. */
 	+ panel(24, 10, 912, 'Median latency per decision', 'ms — lower is better; each arm on its own engine (log scale)', [
-		{ label: 'notjev · llama.cpp 8B Q4', value: c1.p50, unit: ' ms', hi: true },
+		{ label: 'notjev · llama Phi-4 14B Q4_K_M', value: p1.p50, unit: ' ms', hi: true },
+		{ label: 'notjev · llama 8B Q4', value: c1.p50, unit: ' ms', hi: true },
 		{ label: 'notjev · vLLM 27B NVFP4', value: v1.p50, unit: ' ms', hi: true },
+		{ label: 'notjev · llama Gemma-3 12B Q4_K_M', value: g1.p50, unit: ' ms', hi: true },
 		{ label: 'reflex-4b · CPU', value: 138, unit: ' ms' },
 		{ label: 'djev · 26B, GPU', value: 270, unit: ' ms' },
 		{ label: 'Jev (hosted)', value: 419, unit: ' ms' },
 		{ label: 'simple-jev · Qwen 27B', value: 613, unit: ' ms' },
 	].sort(( a, b ) => a.value - b.value ), 1000, 'log')
-	/* Panel 2 — throughput. Sources: bench raw (notjev c1/c2), so1 README (71.9 q/s, 4B on vLLM + H200),
-	 * razorback README (10.7 req/s x 3 q at c1), s1bench dec_s (djev 3.7, jev 2.39, simple-jev 1.63). */
-	+ panel(24, 212, 912, 'Throughput', 'decisions/s — higher is better (log scale)', [
+	/* Panel 2 — throughput. Sources: bench raw (notjev c1/c2, 26/09 raws for Gemma/Phi), so1 README
+	 * (71.9 q/s, 4B on vLLM + H200), razorback README (10.7 req/s x 3 q at c1), s1bench dec_s
+	 * (djev 3.7, jev 2.39, simple-jev 1.63). */
+	+ panel(24, 270, 912, 'Throughput', 'decisions/s — higher is better (log scale)', [
 		{ label: 'so1 · 4B, vLLM + H200', value: 71.9 },
-		{ label: 'notjev · llama 8B, c2', value: c2.qps, unit: '', hi: true },
-		{ label: 'notjev · llama 8B, c1', value: c1.qps, hi: true },
+		{ label: 'notjev · llama Phi-4 Q4_K_M, c1', value: p1.qps, hi: true },
+		{ label: 'notjev · llama 8B Q4_K_M, c2', value: c2.qps, unit: '', hi: true },
+		{ label: 'notjev · llama 8B Q4_K_M, c1', value: c1.qps, hi: true },
+		{ label: 'notjev · llama Gemma-3 Q4_K_M, c1', value: g1.qps, hi: true },
 		{ label: 'openjev · DiffGemma', value: 32.1, note: ' ≈10.7 req/s × 3 q' },
-		{ label: 'notjev · vLLM 27B, c4', value: v4.qps, hi: true },
-		{ label: 'notjev · vLLM 27B, c1', value: v1.qps, hi: true },
+		{ label: 'notjev · vLLM 27B NVFP4, c4', value: v4.qps, hi: true },
+		{ label: 'notjev · vLLM 27B NVFP4, c1', value: v1.qps, hi: true },
 		{ label: 'djev · 26B', value: 3.7 },
 		{ label: 'Jev (hosted)', value: 2.39 },
 		{ label: 'simple-jev · 27B', value: 1.63 },
 	].sort(( a, b ) => b.value - a.value ), 100, 'log')
-	+ `<text x="24" y="${H - 52}" font-size="9" fill="#888">notjev rows: measured 2026-09-22 by bench/throughput.js against live engines — llama-server Qwen3-8B-Q4_K_M (n=16/arm) and vLLM Qwen3.8-27B-NVFP4 (n=24/arm, real judge states) — raw in bench/results/. Other rows: their own publications / an independent bench of the hosted services on shared questions (2026-09-20), each on its own engine.</text>\n`
+	+ `<text x="24" y="${H - 52}" font-size="9" fill="#888">notjev rows: measured by bench/throughput.js against live engines — llama-server Qwen3-8B-Q4_K_M and vLLM Qwen3.8-27B-NVFP4 (2026-09-22), llama-server Phi-4-Q4_K_M and Gemma-3-12B-Q4_K_M (2026-09-26, same machine) — raw in bench/results/. Other rows: their own publications / an independent bench of the hosted services on shared questions (2026-09-20), each on its own engine.</text>\n`
 	+ `<text x="24" y="${H - 38}" font-size="9" fill="#888">The engine is the variable, not the readout: so1's 71.9 q/s is a 4B on an H200, openjev's a purpose-built diffusion model, Jev's their fleet. notjev runs on the model you already serve.</text>\n`
 	+ `<text x="24" y="${H - 24}" font-size="9" fill="#888">Latency panel: shorter bars are faster. Throughput panel: longer bars are faster — hence the opposite sort.</text>\n`
 	+ `</svg>\n`;
-fs.writeFileSync(path.join(OUT, 'perf-2026-09-22.svg'), svg);
+fs.writeFileSync(path.join(OUT, 'perf-2026-09-26.svg'), svg);
 
 /* ── The accuracy figure — an independent clones bench on gold-labelled production questions
  * (2026-09-20): readout 27B (the core of this library, as it runs in a production judge) vs the
@@ -117,8 +132,8 @@ const BENCHES = [
 {
 	const W3 = 960, H3 = 120;
 	const stats = [
-		['134', 'tests, 14 suites'], ['0', 'runtime dependency'], ['0', 'failure on Node 20/22'],
-		['3/3', 'in-vivo verifications re-run 2026-09-22'], ['125', 'fingerprinted bytes of prompt'],
+		['192', 'tests, 27 suites'], ['0', 'runtime dependency'], ['0', 'failure on Node 20/22'],
+		['3/3', 'in-vivo verifications (21-22/09)'], ['4', 'model families letter-benched (26/09)'],
 	];
 	let c = `<svg xmlns="http://www.w3.org/2000/svg" width="${W3}" height="${H3}" viewBox="0 0 ${W3} ${H3}" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">\n`
 		+ `<rect width="${W3}" height="${H3}" fill="#f6f6f6" rx="8" />\n`;
@@ -128,7 +143,7 @@ const BENCHES = [
 			+ `<text x="${x + 6}" y="72" font-size="11" fill="#444">${esc(l)}</text>\n`;
 	});
 	c += `</svg>\n`;
-	fs.writeFileSync(path.join(OUT, 'tests-2026-09-22.svg'), c);
+	fs.writeFileSync(path.join(OUT, 'tests-2026-09-26.svg'), c);
 }
 
 console.log('figures ->', OUT);

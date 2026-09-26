@@ -97,7 +97,7 @@ Reading the two tables:
   The K = 2 prior is not the K = 19 prior — every number is per (model, tokenizer, menu size,
   question regime).
 
-| 2026-09-26, GPU, 27B vLLM, `racine` K = 19 (30 production questions, real gold) | value |
+| 2026-09-26, GPU, Qwen3.8-27B NVFP4 (vLLM), `racine` K = 19 (30 production questions, real gold) | value |
 |---|---|
 | flips under menu permutation, before → after LOO | **40.0 %** (48/120) → 41.7 % |
 | accuracy vs gold on the identity arm, before → after | **60.0 %** (unchanged) |
@@ -110,11 +110,11 @@ A-D of the base menu), exact balance needs cyclic rotations; and **the LOO divis
 nothing here** (flips 48 → 50, accuracy unchanged, decided 73 → 74) — at K = 19 the flips live in
 the close top-2 (median margin 0.47), where the correction and theta compete for the same cases.
 
-**Cross-family, same protocol (2026-09-26, GPU; Gemma-3-12B and Phi-4-14B GGUF via llama-server —
-the ChatML envelope is out-of-template for both, labeled; raws `letters-gemma3-12b-*`,
-`letters-phi4-14b-*`):**
+**Cross-family, same protocol (2026-09-26, GPU; Gemma-3-12B-it and Phi-4-14B, both Q4_K_M GGUF,
+via llama-server — the ChatML envelope is out-of-template for both, labeled; raws
+`letters-gemma3-12b-*`, `letters-phi4-14b-*`):**
 
-| production states | Qwen3-8B | Qwen3.8-27B | Gemma-3-12B | Phi-4-14B |
+| production states | Qwen3-8B Q4_K_M | Qwen3.8-27B NVFP4 | Gemma-3-12B Q4_K_M | Phi-4-14B Q4_K_M |
 |---|---|---|---|---|
 | p50 per question (`bench/throughput.js`, llama-server, 2026-09-26) | 23 ms (22/09) | 101 ms (22/09, vLLM) | 61 ms | **19 ms** |
 | `kl`, ancrage K = 2 | 0.0066 | 0.0069 | 0.0089 | 0.0019 |
