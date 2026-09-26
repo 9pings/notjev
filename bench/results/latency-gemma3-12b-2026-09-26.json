@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-26T14:45:30.602Z",
+ "baseUrl": "http://172.22.0.6:8000",
+ "model": "gemma3",
+ "backend": "llama",
+ "n": 16,
+ "phases": [
+  {
+   "phase": "separate",
+   "concurrency": 1,
+   "questions": 12,
+   "wallMs": 741,
+   "qps": 16.194331983805668,
+   "p50": 61,
+   "p95": 71,
+   "meanMs": 61.666666666666664,
+   "errors": 0,
+   "promptTokens": 684
+  }
+ ]
+}

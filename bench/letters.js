@@ -211,4 +211,4 @@ function distinctOrders( options, want ) {
 	};
 	if ( RAW ) { fs.mkdirSync(path.dirname(RAW), { recursive: true }); fs.writeFileSync(RAW, JSON.stringify(out)); console.log('raw → ' + RAW); }
 	await (client.close ? client.close() : null);
-})();
+})().catch(( e ) => { console.error('ERR', e.code || '', e.message); process.exit(1); });
