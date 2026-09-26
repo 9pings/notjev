@@ -95,7 +95,8 @@ diagnosis.
 ![Latency and throughput](docs/figures/perf-2026-09-26.svg)
 
 Every arm runs the same mechanism on ITS OWN model and hardware — the engine is the variable, not
-the readout. All notjev rows measured by `bench/throughput.js` (2026-09-22, raws committed):
+the readout. All notjev rows measured by `bench/throughput.js` on **one RTX 5090 (32 GB)** — 2026-09-22
+for the Qwen rows, 2026-09-26 for Gemma/Phi, raws committed:
 
 | engine | p50 | throughput |
 |---|---|---|

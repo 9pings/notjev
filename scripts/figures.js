@@ -88,7 +88,7 @@ let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" vi
 		{ label: 'Jev (hosted)', value: 2.39 },
 		{ label: 'simple-jev · 27B', value: 1.63 },
 	].sort(( a, b ) => b.value - a.value ), 100, 'log')
-	+ `<text x="24" y="${H - 52}" font-size="9" fill="#888">notjev rows: measured by bench/throughput.js against live engines — llama-server Qwen3-8B-Q4_K_M and vLLM Qwen3.8-27B-NVFP4 (2026-09-22), llama-server Phi-4-Q4_K_M and Gemma-3-12B-Q4_K_M (2026-09-26, same machine) — raw in bench/results/. Other rows: their own publications / an independent bench of the hosted services on shared questions (2026-09-20), each on its own engine.</text>\n`
+	+ `<text x="24" y="${H - 52}" font-size="9" fill="#888">notjev rows: measured by bench/throughput.js against live engines — llama-server Qwen3-8B-Q4_K_M and vLLM Qwen3.8-27B-NVFP4 (2026-09-22), llama-server Phi-4-Q4_K_M and Gemma-3-12B-Q4_K_M (2026-09-26, same RTX 5090 32 GB) — raw in bench/results/. Other rows: their own publications / an independent bench of the hosted services on shared questions (2026-09-20), each on its own engine.</text>\n`
 	+ `<text x="24" y="${H - 38}" font-size="9" fill="#888">The engine is the variable, not the readout: so1's 71.9 q/s is a 4B on an H200, openjev's a purpose-built diffusion model, Jev's their fleet. notjev runs on the model you already serve.</text>\n`
 	+ `<text x="24" y="${H - 24}" font-size="9" fill="#888">Latency panel: shorter bars are faster. Throughput panel: longer bars are faster — hence the opposite sort.</text>\n`
 	+ `</svg>\n`;

@@ -58,9 +58,9 @@ arXiv:2309.03882, PriDe). Since **2026-09-26** the library carries the layer:
 - the applied prior is echoed on the decision (`letterPrior`), and `client`/`logits`/`packed`
   accept it in their spec.
 
-**Measured on the CAMPAIGN'S ENGINES (2026-09-26, GPU, GPUMaster slots: llama-server
-`Qwen3-8B-Q4_K_M.gguf`, vLLM `Qwen3.8-27B-NVFP4`; the 21/09 in-vivo raws reproduced to the
-1e-4 on the same day).** Two question regimes, both K = 2, identity + swap per question,
+**Measured on the CAMPAIGN'S ENGINES (2026-09-26, one RTX 5090 32 GB, GPUMaster slots:
+llama-server `Qwen3-8B-Q4_K_M.gguf`, vLLM `Qwen3.8-27B-NVFP4`; the 21/09 in-vivo raws reproduced
+to the 1e-4 on the same day).** Two question regimes, both K = 2, identity + swap per question,
 leave-one-question-out correction; raws: `bench/results/letters-qwen3-8b-llama-gpu-*` and
 `letters-qwen3.8-27b-vllm-*`, inputs `letters-gold-ancrage-2026-09-26.jsonl` (40 production
 anchoring states, ~3 k chars, REAL teacher labels) and `letters-gold-2026-09-26.jsonl` (40 short
@@ -97,7 +97,7 @@ Reading the two tables:
   The K = 2 prior is not the K = 19 prior — every number is per (model, tokenizer, menu size,
   question regime).
 
-| 2026-09-26, GPU, Qwen3.8-27B NVFP4 (vLLM), `racine` K = 19 (30 production questions, real gold) | value |
+| 2026-09-26, RTX 5090, Qwen3.8-27B NVFP4 (vLLM), `racine` K = 19 (30 production questions, real gold) | value |
 |---|---|
 | flips under menu permutation, before → after LOO | **40.0 %** (48/120) → 41.7 % |
 | accuracy vs gold on the identity arm, before → after | **60.0 %** (unchanged) |
@@ -110,7 +110,7 @@ A-D of the base menu), exact balance needs cyclic rotations; and **the LOO divis
 nothing here** (flips 48 → 50, accuracy unchanged, decided 73 → 74) — at K = 19 the flips live in
 the close top-2 (median margin 0.47), where the correction and theta compete for the same cases.
 
-**Cross-family, same protocol (2026-09-26, GPU; Gemma-3-12B-it and Phi-4-14B, both Q4_K_M GGUF,
+**Cross-family, same protocol (2026-09-26, same RTX 5090 32 GB; Gemma-3-12B-it and Phi-4-14B, both Q4_K_M GGUF,
 via llama-server — the ChatML envelope is out-of-template for both, labeled; raws
 `letters-gemma3-12b-*`, `letters-phi4-14b-*`):**
 
