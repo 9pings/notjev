@@ -163,7 +163,8 @@ at K = 2, 3.5x at K = 5, 2.9x at K = 17, 2.8x at K = 19. The capability statemen
   appear** (flips 13-40 %, prior concentrating to 13-17 effective letters). That is the real
   cost of long menus — not a cliff, a slope, and it starts past ~10 options.
 - The `racine` engine note stands: 60.0 % on vLLM against 46.7 % base on llama-server, same
-  weights and questions — quote the engine with the number.
+  weights and questions (both figures include the 2 `INDECIDABLE` rows — the 13-point GAP is the
+  comparison, not the level) — quote the engine with the number.
 
 **The traps that did NOT make the ladder (and why) — the question-quality catalogue:**
 
