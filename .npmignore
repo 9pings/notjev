@@ -11,3 +11,4 @@ docs/verifications/
 .vscode/
 *.tgz
 .DS_Store
+bench/

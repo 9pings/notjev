@@ -127,12 +127,12 @@ that is the main finding, so the table is by use case, not by model.
 
 **The model sheet, for reference:**
 
-| model | accuracy K=2 / K=19 | flips K=2 / K=19 | p50 | letter prior kl K=2 / K=19 |
+| model | accuracy K=2 / K=19 | flips K=2 / K=19 | p50 | letter prior, effective letters K=2 / K=19 |
 |---|---|---|---|---|
-| `Qwen3.8-27B-NVFP4` | **97.5 %** / **60 %** | **7.5 %** / **40 %** | 101 ms | 0.007 / 0.125 |
-| `Qwen3-8B-Q4_K_M` | 92.5 % / 30 % | 15 % / 71 % | 23 ms | 0.007 / **0.646** |
-| `Phi-4-Q4_K_M` | 90.0 % / 23 % | 27.5 % / 76 % | **19 ms** | 0.002 / 0.455 |
-| `Gemma-3-12B-Q4_K_M` | 87.5 % / 50 % | 32.5 % / 60 % | 61 ms | 0.009 / 0.512 |
+| `Qwen3.8-27B-NVFP4` | **97.5 %** / **60 %** | **7.5 %** / **40 %** | 101 ms | 1.99 / 2 · 16.6 / 19 |
+| `Qwen3-8B-Q4_K_M` | 92.5 % / 30 % | 15 % / 71 % | 23 ms | 1.99 / 2 · **9.4 / 19** |
+| `Phi-4-Q4_K_M` | 90.0 % / 23 % | 27.5 % / 76 % | **19 ms** | 2.00 / 2 · 12.3 / 19 |
+| `Gemma-3-12B-Q4_K_M` | 87.5 % / 50 % | 32.5 % / 60 % | 61 ms | 1.98 / 2 · 14.1 / 19 |
 
 **Where the forms diverge** (all measured, 2026-09-26): **menu size** — going from 2 to 19 options
 concentrates the letter prior 50-300x and multiplies the flips 4-5x in every family; **state

@@ -75,7 +75,7 @@ const inv = await tokenizer.checkSpacedLetters(
 //    by `letterPrior` itself; the estimand is the RAW `mass` of the decision, not the renormalised
 //    probabilities (that average is biased — named test in the suite).
 const fit = harness.letterPrior(permutedDecisions, { split: 'calib-2026-09', tokenizer: 'qwen3' });
-console.log('prior', fit.prior, 'kl', fit.kl.toFixed(4), 'n', fit.n);
+console.log('prior', fit.prior, 'eff', fit.eff.toFixed(2), 'kl', fit.kl.toFixed(4), 'n', fit.n);
 
 // 3. APPLY it per decision — the prior is echoed, and `coverage` never moves.
 const r = await jev.decide({ state, question, options, letterPrior: fit.prior });
@@ -83,6 +83,11 @@ const r = await jev.decide({ state, question, options, letterPrior: fit.prior })
 
 The rules that keep it a measurement and not a setting:
 
+* **`eff` is the reporting unit**: K·e^(−kl), the effective number of letters — a raw kl is
+  NOT comparable across menu sizes (its ceiling is ln K). At K = 19, an eff of 9.4/19 means the
+  prior behaves as if only 9.4 letters existed. Use `--rotate` for the EXACTLY balanced scheme
+  (cyclic rotations: every content visits every letter once — a random seed sweep only
+  approximates it; measured, the approximation inflated Gemma's kl 1.7x).
 * **Balanced orders, raw mass.** The two named biases of the estimator (unbalanced orders → the
   content reads as a prior; renormalised average → a 0.8/0.2 prior reads 0.64/0.36) are paid for
   in `test/harness.test.js` — the recipe is part of the method, not folklore.

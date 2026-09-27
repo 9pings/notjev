@@ -466,11 +466,12 @@ export namespace harness {
 	/** The marginal RAW mass per LETTER, from PERMUTED arms in the presented frame under BALANCED
 	 *  orders (PriDe, arXiv:2309.03882) — label-free; degraded arms are excluded; ragged menus are
 	 *  refused; the estimand is the decision's `mass`, NOT the renormalised probabilities.
-	 *  `kl` = KL(prior || uniform): the concentration that predicts flip rates. A prior is
+	 *  `kl` = KL(prior || uniform); `eff` = K·e^(−kl), the EFFECTIVE number of letters — the unit that
+	 *  is comparable across menu sizes (a raw KL is not: its ceiling is ln K). A prior is
 	 *  published WITH its `split` and its `tokenizer` — carried across, it is a transfer. */
 	function letterPrior(arms: { mass: number[]; degraded?: boolean }[],
 		o?: { split?: string; tokenizer?: string }): {
-		prior: number[]; n: number; kl: number; split: string; tokenizer: string };
+		prior: number[]; n: number; kl: number; eff: number; split: string; tokenizer: string };
 	/** Paired by `id`; `top` is the option CODE — under permutation an index is not an answer. */
 	function flips(a: { id: string | number; top: string }[], b: { id: string | number; top: string }[]):
 		{ n: number; flips: number; rate: number };

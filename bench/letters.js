@@ -50,6 +50,7 @@ const GOLD = arg('gold', null);
 const N = Number(arg('n', 40));
 const ORDERS = Number(arg('orders', 4));
 const THETA = Number(arg('theta', 0.5));
+const ROTATE = process.argv.includes('--rotate') || process.argv.includes('--rotations');
 const TKIND = arg('tokenizer', 'vllm');
 const TNAME = arg('tokenizer-name', 'undeclared');
 const RAW = arg('raw', null);
@@ -58,7 +59,7 @@ const SPLIT = 'letters-bench-' + new Date().toISOString().slice(0, 10);
 if ( (!BASE || !MODEL) && !MODELPATH ) {
 	console.error('usage: node bench/letters.js --base-url http://… --model <name> [--backend chat|llama]'
 		+ '\n       node bench/letters.js --model-path /path/model.gguf'
-		+ '\n   [--gold gold.jsonl] [--n 40] [--orders 4] [--theta 0.5] [--tokenizer vllm|llama-server]'
+		+ '\n   [--gold gold.jsonl] [--n 40] [--orders 4] [--rotate] [--theta 0.5]'
 		+ '\n   [--tokenizer-name <id>] [--raw out.json]');
 	process.exit(1);
 }
@@ -80,9 +81,18 @@ const BUILTIN = [
 	{ id: 'p12', state: 'A: "Q3 revenue" / B: "third-quarter revenue"\n', question: 'verdict', options: ['MEME', 'AUTRE'] },
 ];
 
-/** DISTINCT non-identity orders, found by sweeping seeds (permute stays the source of truth):
- *  at K = 2 this is exactly the swap; the identity is carried by the base arm. */
+/** DISTINCT non-identity orders. `--rotate`: the K−1 CYCLIC rotations — every content visits
+ *  every letter EXACTLY once, the content is washed BY CONSTRUCTION (the balance a random seed
+ *  sweep only approximates at K > 2 — measured 27/09: Gemma's 5-order kl was 1.7x inflated).
+ *  Default: sweep `permute` seeds, skipping duplicates — at K = 2 this is exactly the swap. */
 function distinctOrders( options, want ) {
+	if ( ROTATE ) {
+		const k = options.length, out = [];
+		for ( let j = 1; j < k && out.length < want; j++ )
+			out.push({ order: Array.from({ length: k }, ( _, i ) => (i + j) % k ),
+				options: Array.from({ length: k }, ( _, i ) => options[(i + j) % k] ), seed: j });
+		return out;
+	}
 	const seen = new Set([options.map(( _, i ) => i ).join(',')]);
 	const out = [];
 	for ( let s = 1; s < 1000 && out.length < want; s++ ) {

@@ -45,6 +45,9 @@ test('harness: letterPrior estime la masse marginale par LETTRE et publie split/
 	assert.ok(Math.abs(b.prior[0] - 0.9) < 1e-12 && b.split === 'undeclared' && b.tokenizer === 'undeclared',
 		'sans déclaration, le prior est publié comme UNDECLARED — c\'est un transfert, pas un réglage');
 	assert.ok(b.kl > 0, 'un prior concentré a une concentration positive');
+	assert.ok(Math.abs(b.eff - 2 * Math.exp(-b.kl)) < 1e-12, 'eff = K·e^(−kl) — le nombre EFFECTIF de lettres');
+	assert.ok(Math.abs(p.eff - 2) < 1e-9, 'un prior uniforme se comporte comme si K lettres existaient');
+	assert.ok(b.eff < 2, 'un prior concentré se comporte comme si moins de K lettres existaient');
 });
 test('harness: NEGATIVE CONTROL — à K = 2 les seeds 1..12 de permute donnent TOUS le swap', () => {
 	/* Ce test DOCUMENTE le comportement seedé (rejouable) de permute : à K = 2, chaque seed ≥ 1 rend

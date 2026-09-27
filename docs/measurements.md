@@ -104,11 +104,39 @@ Reading the two tables:
 | letter prior `kl` | 0.125 (A-D carry 2-5x the mass of Q-T) |
 
 The K = 19 row **verifies the campaign's 36.7 %** — same regime, and the accuracy matches the
-campaign's own racine figure (0.643). Two caveats: at K = 19 with 5 orders per question the order
-balance is approximate — part of the A-D excess of the prior may be content (14/30 golds sit in
-A-D of the base menu), exact balance needs cyclic rotations; and **the LOO division buys back
-nothing here** (flips 48 → 50, accuracy unchanged, decided 73 → 74) — at K = 19 the flips live in
-the close top-2 (median margin 0.47), where the correction and theta compete for the same cases.
+campaign's own racine figure (0.643). And **the LOO division buys back nothing here** (flips
+48 → 50, accuracy unchanged, decided 73 → 74) — at K = 19 the flips live in the close top-2
+(median margin 0.47), where the correction and theta compete for the same cases.
+
+**The unit, and the balance (2026-09-27).** Two corrections to the reading, both from the review
+of these numbers: a raw `kl` is NOT comparable across menu sizes — its ceiling is ln K (0.693 at
+K = 2, 2.944 at K = 19); the library now also reports **`eff` = K·e^(−kl), the EFFECTIVE number of
+letters** (a uniform prior renders `eff = K`). And the 5-orders-per-question scheme leaves the
+balance approximate at K = 19, so the priors were re-estimated under **EXACT balance** — 19 cyclic
+rotations per question, every content visiting every letter exactly once, content provably washed
+(`test-8b-rotations`, raws below):
+
+| `racine` K = 19, prior `kl` (eff, effective letters) | 5 orders (26/09) | 19 rotations exactes (27/09) |
+|---|---|---|
+| Qwen3-8B | 0.646 (9.96) | **0.700 (9.43)** — the concentration is REAL |
+| Gemma-3-12B | 0.512 (11.38) | **0.299 (14.09)** — the 5-order estimate was ~1.7x inflated by content leakage |
+| Phi-4-14B | 0.455 (12.05) | **0.435 (12.30)** — holds |
+| Qwen3.8-27B (vLLM / llama-server) | 0.125 (16.77) | **0.137 (16.56)** — the mildest prior of the four |
+
+The exact runs are 570 arms each (30 questions × 19 cyclic rotations; the 27B's exact run went
+through llama-server with the NVFP4 GGUF — its published 5-order prior was vLLM's). Raw:
+`bench/results/letters-*-rotations19-2026-09-27.json`. `bench/letters.js --rotate` now runs the
+exactly-balanced scheme.
+
+**The 8B's −3.3, three tests (2026-09-27, per the review).** The degradation is NOT an estimation
+artifact: (1) on a DISJOINT permutation sample the sign is stable (same −3.3, prior shapes
+correlated at 0.972); (2) the 27B's prior applied to the 8B gives the SAME −3.3 — so it is not the
+8B's own estimate being dirtier; (3) the EXACT-balance prior (content provably washed) still gives
+30.0 % → 26.7 %. The honest reading: at 30 % raw accuracy the 8B barely reads content at K = 19 —
+its letter prior is real (eff 9.4/19, the letter D alone carrying 32 % of the mass) and part of
+what it gets right COMES from that position preference, so dividing the prior out takes those
+points with it. Symmetrically, Phi-4's +13.4 SURVIVES the exact-balance prior (23.3 % → 36.7 %) —
+that gain is genuine, not content leakage.
 
 **Cross-family, same protocol (2026-09-26, same RTX 5090 32 GB; Gemma-3-12B-it and Phi-4-14B, both Q4_K_M GGUF,
 via llama-server — the ChatML envelope is out-of-template for both, labeled; raws
