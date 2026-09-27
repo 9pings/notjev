@@ -138,50 +138,41 @@ what it gets right COMES from that position preference, so dividing the prior ou
 points with it. Symmetrically, Phi-4's +13.4 SURVIVES the exact-balance prior (23.3 % → 36.7 %) —
 that gain is genuine, not content leakage.
 
-**The K ladder, mixed engines NOTED PER ROW (2026-09-27, Qwen3.8-27B, production questions, real
-gold; raws `letters-qwen3.8-27b-llama-{mode5,topics17}-2026-09-27.json`, golds
-`letters-gold-{mode5,topics17}-2026-09-27.jsonl`):**
+**The K ladder — capability per menu size, every row against ITS OWN BAR (2026-09-27,
+Qwen3.8-27B, RTX 5090, production states, real gold; engines noted per row; raws
+`letters-qwen3.8-27b-llama-{acteur5,mode5,topics17}-*`, `letters-qwen3.8-27b-vllm-*`):**
 
-| K | engine | question (n) | accuracy raw → after LOO | flips before → after | prior `kl` (eff) |
-|---|---|---|---|---|---|
-| 2 | vLLM | ancrage (40) | 97.5 % → 97.5 % | 7.5 % → 7.5 % | 0.007 (1.99/2) |
-| 5 | llama-server | mode (22) | 31.8 % → 40.9 % (exact prior) | 29.5 % → 28.4 % (exact) | 0.141 → **0.024** exact (4.34 → 4.88/5) |
-| 5 | llama-server | **lieu (40) — a NORMAL K = 5 question** | **100 % → 100 %** | **0 % → 0 %** (0/160) | 0.003 (4.98/5) |
-| 17 | llama-server | topics (34) | 58.8 % → 58.8 % | 13.2 % → 23.5 % | 0.204 (13.9/17) |
-| 19 | vLLM | racine (30) | 60.0 % → 60.0 % | 40.0 % → 41.7 % | 0.125 (16.8/19) |
-| 19 | llama-server, rotations exactes | racine (30) | **46.7 %** (base) | — | 0.137 (16.6/19) |
+| K | engine | question (n) | accuracy | null arm (majority) | chance | flips | prior eff |
+|---|---|---|---|---|---|---|---|
+| 2 | vLLM | ancrage (40) | **97.5 %** | 20.0 % | 50 % | 7.5 % | 1.99/2 |
+| 5 | llama-server, rotations exactes | acteur (21) | **100 %** | 28.6 % | 20 % | **2.4 %** | 4.97/5 |
+| 17 | llama-server | topics (34) | **58.8 %** | 20.6 % | 5.9 % | 13.2 % | 13.9/17 |
+| 19 | vLLM | racine (30) | **60.0 %** | 23.3 % | 5.3 % | 40.0 % | 16.8/19 |
 
-The `lieu` row is the answer to "is K = 5 the problem?": place anchoring, five clearly distinct
-country labels, base menu SHUFFLED SEEDED so the gold visits every position equally (8/8/8/8/8) —
-**100 % accuracy, ZERO flips in 160 comparisons, near-uniform prior, 96 % decided.** On a normal
-question, K = 5 costs nothing. The `mode` row's failure was the QUESTION (five near-synonymous
-options and a majority-class trap), not the menu size — and building the `lieu` gold caught two
-traps worth recording: the production ranking places the teacher at ONE position (54/55 rows), so
-an unshuffled base menu entangles prior and class (the `mode` lesson again); and the LCG's seed
-band 1000-1004 all leave the same element in place (measured: every `shuffled(5, lcg(seed))` in
-that band ends with the same index) — the seed matters, verify the histogram of what it produced.
+Every row clears its null arm by 3-4x. The capability statement this ladder licenses:
 
-What this ladder says, and what it must not be over-read as:
+- **At K <= 5, on a well-formed question, the readout is essentially PERFECT and position-free** —
+  the K = 5 row is `acteur` (entity anchoring, 5 distinct candidate labels, exact-balance
+  rotations, gold visiting every position 4/4/5/4/4, 9 distinct answers so the null is honest):
+  100 % over 84 comparisons, 2.4 % flips, near-uniform prior, 94 % decided at theta = 0.5.
+- **At K = 17-19 the tool stays 3x its null but stops being perfect, and position effects
+  appear** (flips 13-40 %, prior concentrating to 13-17 effective letters). That is the real
+  cost of long menus — not a cliff, a slope, and it starts past ~10 options.
+- The `racine` engine note stands: 60.0 % on vLLM against 46.7 % base on llama-server, same
+  weights and questions — quote the engine with the number.
 
-- **There is NO measured cliff**: accuracy does not fall with K monotonically — within the
-  llama-server rows alone, `mode` at K = 5 is the WORST bench (31.8 %) because the QUESTION is
-  hard (the campaign's own verdict on it: ÉCHEC under the null "always realise", 0.682), not
-  because of the menu size. The only hard ceiling is the library's: 26 letters.
-- **The engine row matters more than this table first claimed**: on identical questions and
-  weights at K = 19, the base accuracy reads 60.0 % on vLLM and **46.7 %** on llama-server — a
-  13-point gap, far beyond the 2.3-10.4 % verdict-difference the campaign measured between its
-  two GPU engines on easier questions. On a hard bench the engine is a variable, not a rounding
-  error — quote it with the number.
-- **The mode row is now RESOLVED (2026-09-27, `--rotate`, 110 arms, raw
-  `letters-qwen3.8-27b-llama-mode5-rotate-2026-09-27.json`)**: the 5-order prior read kl 0.141 —
-  the EXACT-balance prior reads **0.024 (eff 4.9/5), near-uniform**: ~6x of it was content
-  leakage (15/22 golds sit at one position). With the clean prior the correction moves accuracy
-  31.8 % → 40.9 % (+9, not +50) and flips barely move — and the bench still FAILS under its null
-  arm (40.9 % < 68.2 %), exactly as the campaign's verdict said. **The too-good number was the
-  estimator's contamination, not a discovery — `--rotate` is the cheap test that caught it.**
-- **The correction does not reduce flips by nature**: on `mode` and `topics` it INCREASES them —
-  dividing by an approximately balanced prior adds variance at mid-K. It is a re-weighting whose
-  value must be measured per (model, question, K, engine), never assumed.
+**The traps that did NOT make the ladder (and why) — the question-quality catalogue:**
+
+- `mode` (K = 5): five NEAR-SYNONYMOUS options and a majority-class trap — the raw readout reads
+  31.8 % UNDER its null of 68.2 % (the campaign's own ÉCHEC verdict). With the exact-balance
+  prior the correction buys +9 (40.9 %) and the bench still fails its null. A question whose null
+  beats the readout measures nothing about K — it is a malformed question.
+- `lieu` (K = 5): looked normal, but 54/55 rows carry the SAME answer — its null arm is 100 %.
+  Every production corpus slice we sampled is majority-dominated (news cycles), so a gold set
+  must be checked for its null BEFORE it is used as a capability row. The same trap, caught one
+  level earlier, is the production ranking placing the teacher at one position — a base menu
+  must be shuffled (seeded, and the histogram of what the seed produced VERIFIED: the LCG seed
+  band 1000-1004 all leave the same element in place).
 
 **Cross-family, same protocol (2026-09-26, same RTX 5090 32 GB; Gemma-3-12B-it and Phi-4-14B, both Q4_K_M GGUF,
 via llama-server — the ChatML envelope is out-of-template for both, labeled; raws
