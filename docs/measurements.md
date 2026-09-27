@@ -79,7 +79,7 @@ synthetic pairs — the bench's built-in demo regime):
 | concentration `kl` | 0.119 | 0.022 |
 | flips before → after LOO | 65.0 % → 52.5 % | 22.5 % → 17.5 % |
 | decided at theta = 0.5, before → after | 65/80 → 56/80 | 66/80 → 66/80 |
-| accuracy vs the intended labels, before → after | 54 % → 56 % | 72 % → 74 % |
+| accuracy vs the intended labels, before → after (null = 50 %) | 54 % → 56 % | 72 % → 74 % |
 
 Reading the two tables:
 
@@ -88,7 +88,10 @@ Reading the two tables:
   nothing to divide out.** Neutral-when-uniform is the correct behaviour of the layer.
 - **Short synthetic states: the prior concentrates (8B kl 0.119, flips up to 65 %) — the letter
   prior is a property of the QUESTION REGIME as much as of the model.** The bench's built-in
-  questions are a demo; measure on your own states.
+  questions are a demo; measure on your own states. NB the synthetic set's null is 50 % (20/20
+  intended answers) — its accuracies (54-74 %) sit NEAR that bar, which is the demo's own point:
+  on thin states the models follow the LETTER, and letter-following performs at the
+  position-null, not above it.
 - **The native node-llama-cpp CPU path on this machine is not equivalent to the GPU engines**
   (verdict flips on identical prompts and weights — b36f: MEME 0.9995 GPU vs AUTRE 0.99 CPU;
   CPU raws kept as `letters-qwen3-8b-2026-09-26.json` / `letters-qwen3.8-27b-2026-09-26.json`).
@@ -100,7 +103,7 @@ Reading the two tables:
 | 2026-09-26, RTX 5090, Qwen3.8-27B NVFP4 (vLLM), `racine` K = 19 (30 production questions, real gold) | value |
 |---|---|
 | flips under menu permutation, before → after LOO | **40.0 %** (48/120) → 41.7 % |
-| accuracy vs gold on the identity arm, before → after | **60.0 %** (unchanged) |
+| accuracy vs gold on the identity arm, ANSWERABLE rows (28 of 30) | **64.3 %** (unchanged) |
 | letter prior `kl` | 0.125 (A-D carry 2-5x the mass of Q-T) |
 
 The K = 19 row **verifies the campaign's 36.7 %** — same regime, and the accuracy matches the
@@ -132,10 +135,10 @@ exactly-balanced scheme.
 artifact: (1) on a DISJOINT permutation sample the sign is stable (same −3.3, prior shapes
 correlated at 0.972); (2) the 27B's prior applied to the 8B gives the SAME −3.3 — so it is not the
 8B's own estimate being dirtier; (3) the EXACT-balance prior (content provably washed) still gives
-30.0 % → 26.7 %. The honest reading: at 30 % raw accuracy the 8B barely reads content at K = 19 —
+32.1 % → 28.6 % (answerable rows). The honest reading: at 30 % raw accuracy the 8B barely reads content at K = 19 —
 its letter prior is real (eff 9.4/19, the letter D alone carrying 32 % of the mass) and part of
 what it gets right COMES from that position preference, so dividing the prior out takes those
-points with it. Symmetrically, Phi-4's +13.4 SURVIVES the exact-balance prior (23.3 % → 36.7 %) —
+points with it. Symmetrically, Phi-4's +14.3 SURVIVES the exact-balance prior (25.0 % → 39.3 %) —
 that gain is genuine, not content leakage.
 
 **The K ladder — capability per menu size, every row against ITS OWN BAR (2026-09-27,
@@ -144,12 +147,13 @@ Qwen3.8-27B, RTX 5090, production states, real gold; engines noted per row; raws
 
 | K | engine | question (n) | accuracy | null arm (majority) | chance | flips | prior eff |
 |---|---|---|---|---|---|---|---|
-| 2 | vLLM | ancrage (40) | **97.5 %** | 20.0 % | 50 % | 7.5 % | 1.99/2 |
+| 2 | vLLM | ancrage (40) | **97.5 %** | 20.0 % class · **67.5 % position** (27/40 golds sit at A — production ranking) | 50 % | 7.5 % | 1.99/2 |
 | 5 | llama-server, rotations exactes | acteur (21) | **100 %** | 28.6 % | 20 % | **2.4 %** | 4.97/5 |
 | 17 | llama-server | topics (34) | **58.8 %** | 20.6 % | 5.9 % | 13.2 % | 13.9/17 |
-| 19 | vLLM | racine (30) | **60.0 %** | 23.3 % | 5.3 % | 40.0 % | 16.8/19 |
+| 19 | vLLM | racine (28 answerable of 30) | **64.3 %** | 23.3 % | 5.3 % | 40.0 % | 16.8/19 |
 
-Every row clears its null arm by 3-4x. The capability statement this ladder licenses:
+Every row clears its honest bar — the HIGHEST of its class-null and its position-null: by 30 points
+at K = 2, 3.5x at K = 5, 2.9x at K = 17, 2.8x at K = 19. The capability statement this ladder licenses:
 
 - **At K <= 5, on a well-formed question, the readout is essentially PERFECT and position-free** —
   the K = 5 row is `acteur` (entity anchoring, 5 distinct candidate labels, exact-balance
@@ -163,6 +167,11 @@ Every row clears its null arm by 3-4x. The capability statement this ladder lice
 
 **The traps that did NOT make the ladder (and why) — the question-quality catalogue:**
 
+- `racine` (K = 19): 2 of 30 rows carry the gold `INDECIDABLE` — a legitimate production label
+  that has NO LETTER in the 19-option menu. Top-code accuracy counts them as always-wrong; the
+  honest treatment is to exclude them from accuracy (the answerable-row numbers above) and to
+  expect theta-ABSTENTION on them in production — a gold outside the codomain is unanswerable by
+  design, and the audit that caught it was the gold-position histogram (-1 = not in the menu).
 - `mode` (K = 5): five NEAR-SYNONYMOUS options and a majority-class trap — the raw readout reads
   31.8 % UNDER its null of 68.2 % (the campaign's own ÉCHEC verdict). With the exact-balance
   prior the correction buys +9 (40.9 %) and the bench still fails its null. A question whose null
@@ -186,13 +195,13 @@ via llama-server — the ChatML envelope is out-of-template for both, labeled; r
 | accuracy vs gold, K = 2 | 92.5 % | 97.5 % | 87.5 % | 90.0 % |
 | `kl`, racine K = 19 | **0.646** | 0.125 | **0.512** | **0.455** |
 | flips before → after LOO, K = 19 | 70.8 % → 70.8 % | 40.0 % → 41.7 % | 60.0 % → 60.0 % | **75.8 % → 57.5 %** |
-| accuracy vs gold before → after, K = 19 | 30.0 % → **26.7 %** (0 fixed, 4 broken) | 60.0 % → 60.0 % | 50.0 % → **56.7 %** | 23.3 % → **36.7 %** (20 fixed, 4 broken) |
+| accuracy vs gold before → after, K = 19 (answerable rows, n = 28) | 32.1 % → **28.6 %** | 64.3 % → 64.3 % | 53.6 % → **60.7 %** | 25.0 % → **39.3 %** (20 fixed, 4 broken) |
 
 - **The letter prior concentrates with K in every family measured** — the campaign's "5.6 % →
   36.7 %" shape is family-general — and **the correction pays where the prior is concentrated AND
-  the model reads content**: Phi-4 (kl 0.455, 23.3 % raw accuracy) recovers 18 points of flips
-  and 13.4 points of accuracy at K = 19, Gemma (kl 0.512) 6.7 points; the Qwen 27B (kl 0.125,
-  already 60 %) gains nothing; **the Qwen 8B (kl 0.646, 30 % raw accuracy) LOSES 3.3 points** —
+  the model reads content**: Phi-4 (kl 0.455, 25.0 % raw accuracy) recovers 18 points of flips
+  and 14.3 points of accuracy at K = 19, Gemma (kl 0.512) 7.1 points; the Qwen 27B (kl 0.125,
+  already 60 %) gains nothing; **the Qwen 8B (kl 0.646, 32.1 % raw accuracy) LOSES 3.5 points** —
   dividing by a concentrated prior estimate on a model whose answers barely beat chance amplifies
   the estimation noise (5 orders per question, approximate balance) instead of the signal.
 - **Inventory, measured against the deployed tokenizers**: Gemma-3 is the `single` regime

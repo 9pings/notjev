@@ -121,7 +121,7 @@ that is the main finding, so the table is by use case, not by model.
 |---|---|---|
 | **2 options, rich state** — verdicts, entity anchoring on real content | `Qwen3.8-27B` if you can, `Qwen3-8B` if you need speed | 27B: 97.5 % accuracy, 7.5 % flips, nothing to correct. 8B: 92.5 % at 23 ms — the best speed/accuracy trade-off of the four. |
 | **2 options, minimal state** — one-line pairs, trivial context | `Qwen3.8-27B`, or correct the prior | on thin states the letter prior appears in EVERY model (8B: kl 0.007 → 0.119; flips 15 % → 65 %). Enrich the state, or estimate and divide (`harness.letterPrior`). |
-| **long menus (K ≥ 10)** — classification, typing | `Qwen3.8-27B` or split the question | at K = 19 every model degrades, the small ones collapse (8B: 30 % accuracy, 71 % flips). The `letterPrior` correction only rescues a model that still reads content under the bias: Phi-4 +13.4 pts, Gemma +6.7, 27B nothing to gain, **8B −3.3 (worse)**. |
+| **long menus (K ≥ 10)** — classification, typing | `Qwen3.8-27B` or split the question | at K = 19 every model degrades, the small ones collapse (8B: 30 % accuracy, 71 % flips). The `letterPrior` correction only rescues a model that still reads content under the bias: Phi-4 +14.3 pts, Gemma +7.1, 27B nothing to gain, **8B −3.5 (worse)**. |
 | **maximum throughput** — filtering, first-pass triage | `Phi-4` (19 ms) or `Qwen3-8B` (23 ms) | both stay ≥ 90 % accuracy at K = 2; escalate their abstentions to the 27B. |
 | **nothing measured on your questions yet** | measure first | `node bench/letters.js --backend llama --base-url … --model … --gold your-states.jsonl` — the regime of the question moves the numbers more than the choice of model does. |
 
@@ -129,10 +129,10 @@ that is the main finding, so the table is by use case, not by model.
 
 | model | accuracy K=2 / K=19 | flips K=2 / K=19 | p50 | letter prior, effective letters K=2 / K=19 |
 |---|---|---|---|---|
-| `Qwen3.8-27B-NVFP4` | **97.5 %** / **60 %** | **7.5 %** / **40 %** | 101 ms | 1.99 / 2 · 16.6 / 19 |
-| `Qwen3-8B-Q4_K_M` | 92.5 % / 30 % | 15 % / 71 % | 23 ms | 1.99 / 2 · **9.4 / 19** |
-| `Phi-4-Q4_K_M` | 90.0 % / 23 % | 27.5 % / 76 % | **19 ms** | 2.00 / 2 · 12.3 / 19 |
-| `Gemma-3-12B-Q4_K_M` | 87.5 % / 50 % | 32.5 % / 60 % | 61 ms | 1.98 / 2 · 14.1 / 19 |
+| `Qwen3.8-27B-NVFP4` | **97.5 %** / **64.3 %** | **7.5 %** / **40 %** | 101 ms | 1.99 / 2 · 16.6 / 19 |
+| `Qwen3-8B-Q4_K_M` | 92.5 % / 32.1 % | 15 % / 71 % | 23 ms | 1.99 / 2 · **9.4 / 19** |
+| `Phi-4-Q4_K_M` | 90.0 % / 25.0 % | 27.5 % / 76 % | **19 ms** | 2.00 / 2 · 12.3 / 19 |
+| `Gemma-3-12B-Q4_K_M` | 87.5 % / 53.6 % | 32.5 % / 60 % | 61 ms | 1.98 / 2 · 14.1 / 19 |
 
 **Where the forms diverge** (all measured, 2026-09-26): **menu size** — going from 2 to 19 options
 concentrates the letter prior 50-300x and multiplies the flips 4-5x in every family; **state
