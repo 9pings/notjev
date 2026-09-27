@@ -145,10 +145,21 @@ gold; raws `letters-qwen3.8-27b-llama-{mode5,topics17}-2026-09-27.json`, golds
 | K | engine | question (n) | accuracy raw → after LOO | flips before → after | prior `kl` (eff) |
 |---|---|---|---|---|---|
 | 2 | vLLM | ancrage (40) | 97.5 % → 97.5 % | 7.5 % → 7.5 % | 0.007 (1.99/2) |
-| 5 | llama-server | mode (22) | 31.8 % → **81.8 %** | 29.5 % → 60.2 % | 0.141 (4.34/5) |
+| 5 | llama-server | mode (22) | 31.8 % → 40.9 % (exact prior) | 29.5 % → 28.4 % (exact) | 0.141 → **0.024** exact (4.34 → 4.88/5) |
+| 5 | llama-server | **lieu (40) — a NORMAL K = 5 question** | **100 % → 100 %** | **0 % → 0 %** (0/160) | 0.003 (4.98/5) |
 | 17 | llama-server | topics (34) | 58.8 % → 58.8 % | 13.2 % → 23.5 % | 0.204 (13.9/17) |
 | 19 | vLLM | racine (30) | 60.0 % → 60.0 % | 40.0 % → 41.7 % | 0.125 (16.8/19) |
 | 19 | llama-server, rotations exactes | racine (30) | **46.7 %** (base) | — | 0.137 (16.6/19) |
+
+The `lieu` row is the answer to "is K = 5 the problem?": place anchoring, five clearly distinct
+country labels, base menu SHUFFLED SEEDED so the gold visits every position equally (8/8/8/8/8) —
+**100 % accuracy, ZERO flips in 160 comparisons, near-uniform prior, 96 % decided.** On a normal
+question, K = 5 costs nothing. The `mode` row's failure was the QUESTION (five near-synonymous
+options and a majority-class trap), not the menu size — and building the `lieu` gold caught two
+traps worth recording: the production ranking places the teacher at ONE position (54/55 rows), so
+an unshuffled base menu entangles prior and class (the `mode` lesson again); and the LCG's seed
+band 1000-1004 all leave the same element in place (measured: every `shuffled(5, lcg(seed))` in
+that band ends with the same index) — the seed matters, verify the histogram of what it produced.
 
 What this ladder says, and what it must not be over-read as:
 
