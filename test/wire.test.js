@@ -31,7 +31,7 @@ const REQUEST = { state: 'Everything is down, demo at noon.\n', questions: {
 
 describe('wire — POST /v1/systemone', () => {
 
-	test('the three question types come back grouped, typed, with the instrument attached', async () => {
+	test('the three question types come back FLAT by name, typed, with the instrument attached', async () => {
 		/* decideMany runs in order: urgent (letters A/B), team (A/B/C), tone (A/B/C). */
 		const t = await up(( b, req, n ) => chatResponse(lp(
 			n === 1 ? [['A', 0.9], ['B', 0.1]]
@@ -43,19 +43,25 @@ describe('wire — POST /v1/systemone', () => {
 			const j = await r.json();
 			assert.strictEqual(j.model, 'fake-model');
 			/* noul: P(yes), first option of the pair */
-			assert.ok(Math.abs(j.answers.nouls.urgent.noul - 0.9) < 1e-9);
-			assert.ok(j.answers.nouls.urgent.confidence > 0.3, 'a 0.9/0.1 read is not near-uniform');
+			assert.ok(Math.abs(j.answers.urgent.noul - 0.9) < 1e-9);
+			assert.ok(j.answers.urgent.confidence > 0.3, 'a 0.9/0.1 read is not near-uniform');
 			/* choice: the code in the CALLER's order, probabilities over the criteria names */
-			assert.strictEqual(j.answers.choices.team.choice, 'billing');
-			assert.ok(Math.abs(j.answers.choices.team.probabilities.outage - 0.2) < 1e-9);
-			assert.ok(Math.abs(j.answers.choices.team.probabilities.billing - 0.7) < 1e-9);
+			assert.strictEqual(j.answers.team.choice, 'billing');
+			assert.ok(Math.abs(j.answers.team.probabilities.outage - 0.2) < 1e-9);
+			assert.ok(Math.abs(j.answers.team.probabilities.billing - 0.7) < 1e-9);
 			/* score: the EXPECTED level, 0-indexed — 0·0.3 + 1·0.6 + 2·0.1 = 0.8 */
-			assert.ok(Math.abs(j.answers.scores.tone.score - 0.8) < 1e-9);
-			assert.deepStrictEqual(j.answers.scores.tone.legend, ['calm', 'annoyed', 'furious']);
+			assert.ok(Math.abs(j.answers.tone.score - 0.8) < 1e-9);
+			assert.deepStrictEqual(j.answers.tone.legend, { 0: 'calm', 1: 'annoyed', 2: 'furious' });
+			assert.ok(Math.abs(j.answers.tone.probabilities['1'] - 0.6) < 1e-9, 'keyed by level, like legend');
+			/* the published shape: answers keyed by the CALLER's names, nothing else at that level —
+			 * a grouped `{ nouls, choices, scores }` reads as `undefined` in a typesafe-sdk, silently */
+			assert.deepStrictEqual(Object.keys(j.answers).sort(), ['team', 'tone', 'urgent']);
+			assert.deepStrictEqual([j.answers.urgent.type, j.answers.team.type, j.answers.tone.type],
+				['noul', 'choice', 'score']);
 			/* the notjev block: the fields the wire contract has no room for */
-			assert.ok(j.answers.choices.team.notjev.coverage > 0.99);
-			assert.strictEqual(j.answers.choices.team.notjev.theta, 0, 'the wire default abstains never');
-			assert.ok(j.answers.nouls.urgent.notjev.band);
+			assert.ok(j.answers.team.notjev.coverage > 0.99);
+			assert.strictEqual(j.answers.team.notjev.theta, 0, 'the wire default abstains never');
+			assert.ok(j.answers.urgent.notjev.band);
 			/* usage: summed over the questions, Jev field names */
 			assert.strictEqual(j.usage.input_tokens, 126, '3 questions x 42 prompt tokens');
 			assert.strictEqual(j.usage.output_tokens, 3, '3 questions x 1 token read');
@@ -69,10 +75,10 @@ describe('wire — POST /v1/systemone', () => {
 				q: { type: 'choice', instructions: 'pick', criteria: { a: 'one', b: 'two' } },
 				s: { type: 'score', instructions: 'grade', criteria: ['x', 'y', 'z'] },
 			} })).json();
-			assert.strictEqual(j.answers.choices.q.choice, null);
-			assert.strictEqual(j.answers.choices.q.notjev.degraded, true);
-			assert.strictEqual(j.answers.choices.q.confidence, 0, 'uniform over the options: no information');
-			assert.strictEqual(j.answers.scores.s.score, null, 'no option mass, no expectation — 0 would lie');
+			assert.strictEqual(j.answers.q.choice, null);
+			assert.strictEqual(j.answers.q.notjev.degraded, true);
+			assert.strictEqual(j.answers.q.confidence, 0, 'uniform over the options: no information');
+			assert.strictEqual(j.answers.s.score, null, 'no option mass, no expectation — 0 would lie');
 		} finally { await t.down(); }
 	});
 
@@ -82,9 +88,9 @@ describe('wire — POST /v1/systemone', () => {
 			const j = await (await post(t.url, { state: 'S\n', theta: 0.99, questions: {
 				q: { type: 'choice', instructions: 'pick', criteria: { a: 'one', b: 'two' } },
 			} })).json();
-			assert.strictEqual(j.answers.choices.q.choice, null);
-			assert.strictEqual(j.answers.choices.q.notjev.undecided, true);
-			assert.ok(Math.abs(j.answers.choices.q.probabilities.a - 0.55) < 1e-9,
+			assert.strictEqual(j.answers.q.choice, null);
+			assert.strictEqual(j.answers.q.notjev.undecided, true);
+			assert.ok(Math.abs(j.answers.q.probabilities.a - 0.55) < 1e-9,
 				'the abstention is about the verdict, not the mass: the distribution stays');
 		} finally { await t.down(); }
 	});
@@ -148,7 +154,10 @@ describe('wire — POST /v1/systemone', () => {
 	test('GET /v1/models lists the served engine and the aliases an SDK defaults to', async () => {
 		const t = await up(() => chatResponse(lp([['A', 1]])));
 		try {
-			const ids = (await (await fetch(t.url + '/v1/models')).json()).data.map(( m ) => m.id );
+			const body = await (await fetch(t.url + '/v1/models')).json();
+			const ids = body.data.map(( m ) => m.id );
+			/* the Jev shape too — a typesafe-sdk throws on a list without `models` */
+			assert.deepStrictEqual(body.models.map(( m ) => m.name ), ids);
 			assert.ok(ids.indexOf('fake-model') >= 0);
 			assert.ok(ids.indexOf('jev-latest') >= 0, 'a typesafe-sdk default must resolve');
 			assert.ok(ids.indexOf('jev-preview') >= 0);

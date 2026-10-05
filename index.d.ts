@@ -270,13 +270,16 @@ export interface WireExtension {
 	degraded: boolean; undecided: boolean; theta: number; top: string;
 }
 
-export interface WireAnswers {
-	nouls: Record<string, { type: 'noul'; noul: number; confidence: number; notjev: WireExtension }>;
-	choices: Record<string, { type: 'choice'; choice: string | null;
-		probabilities: Record<string, number>; confidence: number; notjev: WireExtension }>;
-	scores: Record<string, { type: 'score'; score: number | null; legend: string[];
-		probabilities: Record<string, number>; confidence: number; notjev: WireExtension }>;
-}
+/** One answer of a `/v1/systemone` response — `type` says which kind (the published spec). */
+export type WireAnswer =
+	| { type: 'noul'; noul: number; confidence: number; notjev: WireExtension }
+	| { type: 'choice'; choice: string | null;
+		probabilities: Record<string, number>; confidence: number; notjev: WireExtension }
+	| { type: 'score'; score: number | null; legend: Record<string, string>;
+		probabilities: Record<string, number>; confidence: number; notjev: WireExtension };
+
+/** Answers keyed FLAT by the caller's question names — what a `typesafe-sdk` reads. */
+export type WireAnswers = Record<string, WireAnswer>;
 
 export namespace wire {
 	/** The wire request -> the library's questions. Throws `NOTJEV_WIRE_422` with a FastAPI
@@ -285,7 +288,7 @@ export namespace wire {
 		questions: Record<string, WireQuestion> }): {
 		state: string; theta: number; questions: Question[];
 		specs: { name: string; type: 'noul' | 'choice' | 'score'; criteria: unknown; ids: string[] }[] };
-	/** The decideMany rows -> the grouped answers. Throws `NOTJEV_WIRE_UPSTREAM` when any
+	/** The decideMany rows -> the answers, keyed by question name. Throws `NOTJEV_WIRE_UPSTREAM` when any
 	 *  question failed — every name answered or none, never a half-filled response. */
 	function toAnswers(specs: { name: string; type: 'noul' | 'choice' | 'score';
 		criteria: unknown; ids: string[] }[], results: Decision[]): {

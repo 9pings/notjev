@@ -47,8 +47,12 @@ curl -s localhost:8788/v1/systemone -H 'content-type: application/json' -d '{
 kill %1
 ```
 
-Answers come back grouped as `{ nouls, choices, scores }` with `confidence = 1 − H(p)/ln K`, `usage`
-in Jev field names, `GET /v1/models` resolving `jev-latest`, and FastAPI-shaped `422` detail lists.
+Answers come back keyed by question name (`answers.policy`, `answers.kind` — each with its `type`), as
+the published spec says; a `score` carries `legend` and `probabilities` keyed by level (`"0"`, `"1"`, …).
+`confidence = 1 − H(p)/ln K` is notjev's own formula: certain = 1, uniform = 0, but NOT the formula
+TypeSafe documents for Jev, so the two numbers are not comparable. `usage` comes in Jev field names,
+`GET /v1/models` resolves `jev-latest` (in both the OpenAI `data` and the Jev `models` shapes), and
+`422`s are FastAPI-shaped detail lists.
 Every answer also carries a `notjev` block — `margin`, `band`, `coverage`, `degraded` — the
 instrument fields the contract has no room for. Two things are REFUSED rather than degraded: a
 choice with more than 26 options (the letter regime; Jev allows 255) comes back `422` with a named

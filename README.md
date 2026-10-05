@@ -175,8 +175,9 @@ kill %1
 ```
 
 `/v1/decide` is the native route (every Decision field on the wire). `/v1/systemone` is the Jev wire
-contract — a `typesafe-sdk` works unchanged against ANY engine you configure, answers grouped as
-`{nouls, choices, scores}` with `confidence = 1 − H(p)/ln K`, FastAPI-shaped `422`s, and a `notjev`
+contract — a `typesafe-sdk` works unchanged against ANY engine you configure, answers keyed by
+question name as the published spec says, with `confidence = 1 − H(p)/ln K` (notjev's own formula —
+not comparable with Jev's numbers), FastAPI-shaped `422`s, and a `notjev`
 block per answer carrying the instrument (`margin`, `band`, `coverage`, `degraded`). Engines and
 details: [docs/servers.md](docs/servers.md).
 
